@@ -1,0 +1,39 @@
+# SRP Meeting notes Thursday, 25.01.2024
+
+## Members present:
+Diego, Alex, Abin, Apurv, Brhanu, Steve
+
+## Meeting Content
+
+### Administration
+
+* Presentation:
+    1. Presentation: We should have the baseline implemented and some first ideas on what we want to improve on
+        * This and the proposal are basically to get feedback from Lars and his approval on our ideas
+    2. Presentation: Some first experiments should be running
+    3. Presentation: Everything should be done and implemented
+* Final submission:
+    1. Paper: If results are good and we do ablation studies we can submit a paper and if we get accepted to a conference, we get an instant 1.0
+    2. Report: Should be 30-40 papes containing all experiments, even the ones that failed
+* We asked Diego how the presentations are graded, he will get back to us
+* Diego wants to only communicate over email, no WhatsApp group
+    * We can also reach out to him in the DL tutorials next semester
+* Meeting frequency:
+    * At least once a month with Diego 
+    * Can have two meetings if we need, but not more
+    * Meeting should be on Mondays 10:15 (MOT??)
+* Alex will get acces to the cluster
+    * She is responsible, but she will share the login information with the others (approved by Diego)
+
+### Techincal stuff about KD
+* Diego gave a basic intro into KD, presenting the basic approach and the approach in our baseline paper
+* We probably want to stay in the image domain, since Diego is also more of a computer vision guy and can help us better
+    * However we have to find something new in this already well explored domain
+* Using CIFAR-10/100 is recommended so we don't overload the cluster
+* We should always check if the student model is at least smaller than 10% of the teacher model
+
+## TODO until next meeting with Diego (12.02.2024, 10:15)
+* Go over material and get comfortable with the domain
+* Come up with first ideas on how to improve on the baseline
+* Look up vision transformers
+* Apurv: Send email to Diego so he knows who to contact

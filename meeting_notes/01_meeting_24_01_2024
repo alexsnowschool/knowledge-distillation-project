@@ -1,0 +1,23 @@
+# SRP Meeting notes Wednesday, 24.01.2024
+
+## Members present:
+Alex, Abin, Apurv, Brhanu, Steve
+
+## Meeting Content
+* First general talk about the project
+* We did not go into detail on KD but rather talked about the meeting with Diego the day after (25.01.2024)
+* Diego sent us an email with bullet points on things he wants to discuss with us in the metting, so we went over the email and exchanged some thoughts
+* Email in question is: "Fwd: Re: Fwd: Discussion for SRP Proposal Draft: Knowledge Distillation in Encoders" sent Monday, January 22, 2024
+* Topic direction:
+    * We were all not really into the topic yet, so we did not have any specific idea in mind on were our research in the realm of KD will go
+    * We first wanted to meet with Diego and see if he has an idea in mind, since he picked the topic and probably has his own thoughts on it
+    * We did however agree on a preference on image data over text data
+* Cluster:
+    * We want to ask Diego about the cluster and how we can access it
+    * We probably want to train our large model on the cluster and use google colab for testing/debugging and evaluation
+* Meeting frequency:
+    * We agreed on varying the meeting frequency depending on how much time we have to work in the project. During the semester, we are not gonna meet weekly on even bi-weekly, however in our breaks we want to meet more often
+    * We also want to agree on a next meeting date at the end of every meeting
+    * Meetings with Diego will also depend on if we have thoughts or questions towards him
+* Arpuv agreed to take on the role as communicator between Diego and the group
+* However we also want to ask Diego if he wants to join a WhatsApp group with us, so we don't have to exhange over email
