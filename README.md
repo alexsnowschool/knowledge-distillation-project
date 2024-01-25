@@ -6,6 +6,7 @@ Knowledge distillation is a model compression technique in which a smaller and m
 1. [Alex](https://github.com/alexsnow348)
 2. [Stroeber](https://github.com/Stroeber)
 3. [Brhaung](https://github.com/brhanug)
+4. [Abin](https://github.com/abinbaby98)
 
 ## Paper and Article Resources
 [Drive Folder](https://drive.google.com/drive/folders/1HIyQyMKAGG8HS33Sl6IZQJ8RiNRtOjle) 
