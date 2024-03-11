@@ -3,11 +3,11 @@
 Knowledge distillation is a model compression technique in which a smaller and more efficient model is trained from a performant large/ensemble model.
 
 ## Members
-1. [Alex](https://github.com/alexsnow348)
-2. [Stroeber](https://github.com/Stroeber)
-3. [Brhaung](https://github.com/brhanug)
-4. [Abin](https://github.com/abinbaby98)
-5. [Apurv](https://github.com/Apurv505)
+1. [Alex](https://github.com/alexsnow348) - Wut Hmone Hnin Hlaing - 1748517
+2. [Stroeber](https://github.com/Stroeber) - Steffen Roeber - 1748613
+3. [Apurv](https://github.com/Apurv505) - Apurv Kumar  - 1748394
+4. [Abin](https://github.com/abinbaby98) - Abin Baby - 1748437
+5. [Brhaung](https://github.com/brhanug) - Brhanu Atsbaha - 1748398
 
 ## Paper and Article Resources
 [Drive Folder](https://drive.google.com/drive/folders/1HIyQyMKAGG8HS33Sl6IZQJ8RiNRtOjle) 
