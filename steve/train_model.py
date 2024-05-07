@@ -34,7 +34,7 @@ print(f"Using {device} device")
 
 model = torch.hub.load('pytorch/vision:v0.10.0', 'wide_resnet50_2', weights='Wide_ResNet50_2_Weights.IMAGENET1K_V1').to(device)
 
-freeze_layers(model, num_flex_layers=30)
+freeze_layers(model, num_flex_layers=30) 
 
 
 loss_fn = torch.nn.CrossEntropyLoss()
@@ -45,6 +45,6 @@ optimizer = torch.optim.Adam(model.parameters())
 epochs = 5
 for t in range(epochs):
     print(f"Epoch {t+1}\n-------------------------------")
-    train(train_dataloader, model, loss_fn, optimizer)
-    test(test_dataloader, model, loss_fn)
+    train(train_dataloader, model, loss_fn, optimizer, device)
+    test(test_dataloader, model, loss_fn, device)
 print("Done!")
