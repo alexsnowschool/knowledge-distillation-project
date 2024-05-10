@@ -31,7 +31,7 @@ from helper.util import save_dict_to_json, reduce_tensor, adjust_learning_rate
 from crd.criterion import CRDLoss
 from distiller_zoo import DistillKL, HintLoss, Attention, Similarity, VIDLoss, SemCKDLoss
 
-split_symbol = '~' if os.name == 'nt' else ':'
+split_symbol = '~' if os.name == 'nt' else '_'
 
 def parse_option():
 
