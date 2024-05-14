@@ -42,5 +42,7 @@
     "tb_folder": "./save/students/tensorboard/S:resnet8x4_T:resnet38x2_cifar100_kd_r:1.0_a:1.0_b:0.0_0",
     "save_folder": "./save/students/models/S:resnet8x4_T:resnet38x2_cifar100_kd_r:1.0_a:1.0_b:0.0_0",
     "ngpus_per_node": 1,
-    "gpu": 0
+    "gpu": 0,
+    "Total params": 1.23354,
+    "Total time": 1.0595205465952555
 }
