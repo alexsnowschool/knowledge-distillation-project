@@ -1,0 +1,802 @@
+Running: python train_student.py --path_t ./save/teachers/models/resnet38x2_vanilla_cifar100_trial_1/resnet38x2_best.pth --epochs 120 --learning_rate 0.01 --distill kd --model_s resnet8x4 -c 1 -d 1 -b 0 --trial 0 --gpu_id 0
+2024-05-14 12:32:12.493790: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-05-14 12:32:13.232136: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Use GPU: 0 for training
+==> loading teacher model
+==> done
+Files already downloaded and verified
+Files already downloaded and verified
+/home/wut/.conda/envs/sim-kd/lib/python3.10/site-packages/_distutils_hack/__init__.py:26: UserWarning: Setuptools is replacing distutils.
+  warnings.warn("Setuptools is replacing distutils.")
+Test: [0/313]	GPU: 0	Time: 0.207	Loss 0.9604	Acc@1 81.250	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 1.103	Loss 1.0121	Acc@1 76.150	Acc@5 93.532
+teacher accuracy:  76.3
+==> training...
+Epoch: [1][0/782]	GPU 0	Time: 0.595	Loss 17.4397	Acc@1 6.250	Acc@5 10.938
+Epoch: [1][200/782]	GPU 0	Time: 4.273	Loss 16.2700	Acc@1 6.576	Acc@5 21.922
+Epoch: [1][400/782]	GPU 0	Time: 7.798	Loss 15.6867	Acc@1 8.459	Acc@5 27.237
+Epoch: [1][600/782]	GPU 0	Time: 11.335	Loss 15.2703	Acc@1 10.134	Acc@5 30.837
+ * Epoch 1, GPU 0, Acc@1 11.568, Acc@5 33.936, Time 28.56
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.204	Loss 4.0515	Acc@1 21.875	Acc@5 43.750
+Test: [200/313]	GPU: 0	Time: 0.650	Loss 3.6571	Acc@1 17.102	Acc@5 43.797
+ ** Acc@1 16.930, Acc@5 44.180
+saving the best model!
+==> training...
+Epoch: [2][0/782]	GPU 0	Time: 0.305	Loss 13.8665	Acc@1 20.312	Acc@5 56.250
+Epoch: [2][200/782]	GPU 0	Time: 3.925	Loss 13.1339	Acc@1 20.141	Acc@5 50.000
+Epoch: [2][400/782]	GPU 0	Time: 7.491	Loss 12.7921	Acc@1 21.965	Acc@5 52.248
+Epoch: [2][600/782]	GPU 0	Time: 11.065	Loss 12.5486	Acc@1 23.136	Acc@5 53.837
+ * Epoch 2, GPU 0, Acc@1 24.196, Acc@5 55.284, Time 28.35
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.144	Loss 3.5435	Acc@1 15.625	Acc@5 59.375
+Test: [200/313]	GPU: 0	Time: 0.612	Loss 3.2615	Acc@1 25.311	Acc@5 58.489
+ ** Acc@1 25.610, Acc@5 57.950
+saving the best model!
+==> training...
+Epoch: [3][0/782]	GPU 0	Time: 0.304	Loss 12.1596	Acc@1 39.062	Acc@5 62.500
+Epoch: [3][200/782]	GPU 0	Time: 3.938	Loss 11.2687	Acc@1 30.364	Acc@5 63.122
+Epoch: [3][400/782]	GPU 0	Time: 7.536	Loss 11.0285	Acc@1 31.398	Acc@5 64.604
+Epoch: [3][600/782]	GPU 0	Time: 11.140	Loss 10.8558	Acc@1 32.126	Acc@5 65.615
+ * Epoch 3, GPU 0, Acc@1 33.040, Acc@5 66.504, Time 28.58
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.139	Loss 2.9725	Acc@1 37.500	Acc@5 65.625
+Test: [200/313]	GPU: 0	Time: 0.586	Loss 3.1263	Acc@1 30.084	Acc@5 62.345
+ ** Acc@1 29.660, Acc@5 61.820
+saving the best model!
+==> training...
+Epoch: [4][0/782]	GPU 0	Time: 0.309	Loss 10.2417	Acc@1 32.812	Acc@5 62.500
+Epoch: [4][200/782]	GPU 0	Time: 3.954	Loss 9.7310	Acc@1 38.410	Acc@5 72.536
+Epoch: [4][400/782]	GPU 0	Time: 7.573	Loss 9.7483	Acc@1 38.544	Acc@5 72.670
+Epoch: [4][600/782]	GPU 0	Time: 11.194	Loss 9.6254	Acc@1 39.309	Acc@5 73.063
+ * Epoch 4, GPU 0, Acc@1 39.752, Acc@5 73.590, Time 28.68
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.150	Loss 2.2602	Acc@1 43.750	Acc@5 65.625
+Test: [200/313]	GPU: 0	Time: 0.601	Loss 2.4686	Acc@1 40.190	Acc@5 73.072
+ ** Acc@1 40.370, Acc@5 73.090
+saving the best model!
+==> training...
+Epoch: [5][0/782]	GPU 0	Time: 0.306	Loss 8.4022	Acc@1 48.438	Acc@5 84.375
+Epoch: [5][200/782]	GPU 0	Time: 3.987	Loss 8.9008	Acc@1 43.828	Acc@5 76.508
+Epoch: [5][400/782]	GPU 0	Time: 7.616	Loss 8.7858	Acc@1 44.588	Acc@5 77.046
+Epoch: [5][600/782]	GPU 0	Time: 11.250	Loss 8.6818	Acc@1 45.159	Acc@5 77.571
+ * Epoch 5, GPU 0, Acc@1 45.562, Acc@5 78.022, Time 28.82
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.190	Loss 2.0865	Acc@1 59.375	Acc@5 78.125
+Test: [200/313]	GPU: 0	Time: 0.648	Loss 2.2694	Acc@1 44.403	Acc@5 77.892
+ ** Acc@1 44.430, Acc@5 77.820
+saving the best model!
+==> training...
+Epoch: [6][0/782]	GPU 0	Time: 0.308	Loss 7.2142	Acc@1 51.562	Acc@5 82.812
+Epoch: [6][200/782]	GPU 0	Time: 4.000	Loss 8.1223	Acc@1 48.507	Acc@5 80.162
+Epoch: [6][400/782]	GPU 0	Time: 7.633	Loss 8.0394	Acc@1 48.913	Acc@5 80.607
+Epoch: [6][600/782]	GPU 0	Time: 11.261	Loss 7.9694	Acc@1 49.379	Acc@5 81.120
+ * Epoch 6, GPU 0, Acc@1 49.852, Acc@5 81.426, Time 28.79
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.143	Loss 2.0934	Acc@1 59.375	Acc@5 75.000
+Test: [200/313]	GPU: 0	Time: 0.583	Loss 2.2247	Acc@1 46.642	Acc@5 79.011
+ ** Acc@1 46.890, Acc@5 79.320
+saving the best model!
+==> training...
+Epoch: [7][0/782]	GPU 0	Time: 0.309	Loss 7.5185	Acc@1 54.688	Acc@5 82.812
+Epoch: [7][200/782]	GPU 0	Time: 3.985	Loss 7.5035	Acc@1 52.697	Acc@5 83.450
+Epoch: [7][400/782]	GPU 0	Time: 7.611	Loss 7.4511	Acc@1 53.133	Acc@5 83.526
+Epoch: [7][600/782]	GPU 0	Time: 11.237	Loss 7.3936	Acc@1 53.440	Acc@5 83.566
+ * Epoch 7, GPU 0, Acc@1 53.646, Acc@5 83.632, Time 28.73
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.141	Loss 2.0636	Acc@1 59.375	Acc@5 71.875
+Test: [200/313]	GPU: 0	Time: 0.585	Loss 2.0441	Acc@1 50.762	Acc@5 81.266
+ ** Acc@1 51.030, Acc@5 81.410
+saving the best model!
+==> training...
+Epoch: [8][0/782]	GPU 0	Time: 0.315	Loss 6.2404	Acc@1 56.250	Acc@5 84.375
+Epoch: [8][200/782]	GPU 0	Time: 3.982	Loss 6.9518	Acc@1 55.651	Acc@5 85.347
+Epoch: [8][400/782]	GPU 0	Time: 7.602	Loss 6.9397	Acc@1 55.973	Acc@5 85.571
+Epoch: [8][600/782]	GPU 0	Time: 11.219	Loss 6.9330	Acc@1 55.873	Acc@5 85.566
+ * Epoch 8, GPU 0, Acc@1 56.006, Acc@5 85.632, Time 28.69
+GPU 0 validating
+2024/05/14 12:37:11 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.141	Loss 2.1056	Acc@1 56.250	Acc@5 78.125
+Test: [200/313]	GPU: 0	Time: 0.588	Loss 2.0405	Acc@1 51.119	Acc@5 82.229
+ ** Acc@1 51.930, Acc@5 82.210
+saving the best model!
+==> training...
+Epoch: [9][0/782]	GPU 0	Time: 0.313	Loss 6.1531	Acc@1 60.938	Acc@5 92.188
+Epoch: [9][200/782]	GPU 0	Time: 3.997	Loss 6.6023	Acc@1 57.673	Acc@5 87.026
+Epoch: [9][400/782]	GPU 0	Time: 7.616	Loss 6.5478	Acc@1 58.354	Acc@5 86.873
+Epoch: [9][600/782]	GPU 0	Time: 11.231	Loss 6.5398	Acc@1 58.587	Acc@5 87.053
+ * Epoch 9, GPU 0, Acc@1 58.804, Acc@5 87.058, Time 28.67
+GPU 0 validating
+2024/05/14 12:37:46 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.139	Loss 1.3954	Acc@1 65.625	Acc@5 84.375
+Test: [200/313]	GPU: 0	Time: 0.590	Loss 1.7655	Acc@1 55.488	Acc@5 85.183
+ ** Acc@1 56.000, Acc@5 85.170
+saving the best model!
+==> training...
+Epoch: [10][0/782]	GPU 0	Time: 0.323	Loss 7.0213	Acc@1 54.688	Acc@5 90.625
+Epoch: [10][200/782]	GPU 0	Time: 3.971	Loss 6.2387	Acc@1 60.494	Acc@5 88.355
+Epoch: [10][400/782]	GPU 0	Time: 7.581	Loss 6.2016	Acc@1 60.443	Acc@5 88.342
+Epoch: [10][600/782]	GPU 0	Time: 11.189	Loss 6.1871	Acc@1 60.493	Acc@5 88.389
+ * Epoch 10, GPU 0, Acc@1 60.682, Acc@5 88.328, Time 28.63
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.143	Loss 1.7492	Acc@1 65.625	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 0.587	Loss 1.9330	Acc@1 54.555	Acc@5 84.017
+ ** Acc@1 55.100, Acc@5 83.940
+==> training...
+Epoch: [11][0/782]	GPU 0	Time: 0.307	Loss 6.4569	Acc@1 54.688	Acc@5 85.938
+Epoch: [11][200/782]	GPU 0	Time: 3.916	Loss 5.9618	Acc@1 62.811	Acc@5 89.405
+Epoch: [11][400/782]	GPU 0	Time: 7.528	Loss 5.9338	Acc@1 62.625	Acc@5 89.312
+Epoch: [11][600/782]	GPU 0	Time: 11.138	Loss 5.9440	Acc@1 62.347	Acc@5 89.179
+ * Epoch 11, GPU 0, Acc@1 62.268, Acc@5 89.220, Time 28.57
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.148	Loss 1.7205	Acc@1 68.750	Acc@5 81.250
+Test: [200/313]	GPU: 0	Time: 0.594	Loss 1.8667	Acc@1 55.908	Acc@5 84.655
+ ** Acc@1 55.980, Acc@5 84.780
+==> training...
+Epoch: [12][0/782]	GPU 0	Time: 0.303	Loss 5.5488	Acc@1 60.938	Acc@5 89.062
+Epoch: [12][200/782]	GPU 0	Time: 3.915	Loss 5.7125	Acc@1 64.218	Acc@5 89.879
+Epoch: [12][400/782]	GPU 0	Time: 7.529	Loss 5.6651	Acc@1 64.207	Acc@5 90.161
+Epoch: [12][600/782]	GPU 0	Time: 11.143	Loss 5.6633	Acc@1 64.234	Acc@5 89.959
+ * Epoch 12, GPU 0, Acc@1 64.074, Acc@5 89.862, Time 28.57
+GPU 0 validating
+2024/05/14 12:39:22 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 1.9215	Acc@1 53.125	Acc@5 81.250
+Test: [200/313]	GPU: 0	Time: 0.596	Loss 1.7925	Acc@1 57.090	Acc@5 85.665
+ ** Acc@1 57.580, Acc@5 85.760
+saving the best model!
+==> training...
+Epoch: [13][0/782]	GPU 0	Time: 0.312	Loss 5.3849	Acc@1 64.062	Acc@5 90.625
+Epoch: [13][200/782]	GPU 0	Time: 3.966	Loss 5.4588	Acc@1 65.563	Acc@5 90.400
+Epoch: [13][400/782]	GPU 0	Time: 7.572	Loss 5.4833	Acc@1 65.142	Acc@5 90.469
+Epoch: [13][600/782]	GPU 0	Time: 11.182	Loss 5.4756	Acc@1 65.412	Acc@5 90.526
+ * Epoch 13, GPU 0, Acc@1 65.360, Acc@5 90.462, Time 28.60
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.141	Loss 1.7771	Acc@1 59.375	Acc@5 84.375
+Test: [200/313]	GPU: 0	Time: 0.587	Loss 1.7799	Acc@1 57.105	Acc@5 85.728
+ ** Acc@1 57.480, Acc@5 85.990
+==> training...
+Epoch: [14][0/782]	GPU 0	Time: 0.306	Loss 5.1129	Acc@1 64.062	Acc@5 82.812
+Epoch: [14][200/782]	GPU 0	Time: 3.910	Loss 5.2813	Acc@1 66.768	Acc@5 91.737
+Epoch: [14][400/782]	GPU 0	Time: 7.517	Loss 5.2711	Acc@1 66.642	Acc@5 91.467
+Epoch: [14][600/782]	GPU 0	Time: 11.128	Loss 5.3006	Acc@1 66.517	Acc@5 91.285
+ * Epoch 14, GPU 0, Acc@1 66.438, Acc@5 91.158, Time 28.53
+GPU 0 validating
+2024/05/14 12:40:28 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 1.3982	Acc@1 71.875	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 0.585	Loss 1.6027	Acc@1 60.417	Acc@5 87.298
+ ** Acc@1 60.630, Acc@5 87.270
+saving the best model!
+==> training...
+Epoch: [15][0/782]	GPU 0	Time: 0.340	Loss 4.3580	Acc@1 76.562	Acc@5 93.750
+Epoch: [15][200/782]	GPU 0	Time: 4.022	Loss 5.1027	Acc@1 67.794	Acc@5 91.892
+Epoch: [15][400/782]	GPU 0	Time: 7.625	Loss 5.1539	Acc@1 67.421	Acc@5 91.658
+Epoch: [15][600/782]	GPU 0	Time: 11.228	Loss 5.1635	Acc@1 67.460	Acc@5 91.675
+ * Epoch 15, GPU 0, Acc@1 67.430, Acc@5 91.672, Time 28.61
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.146	Loss 1.5367	Acc@1 68.750	Acc@5 84.375
+Test: [200/313]	GPU: 0	Time: 0.608	Loss 1.9280	Acc@1 57.463	Acc@5 84.981
+ ** Acc@1 57.650, Acc@5 85.170
+==> training...
+Epoch: [16][0/782]	GPU 0	Time: 0.315	Loss 4.3239	Acc@1 82.812	Acc@5 93.750
+Epoch: [16][200/782]	GPU 0	Time: 3.930	Loss 4.9766	Acc@1 69.660	Acc@5 92.195
+Epoch: [16][400/782]	GPU 0	Time: 7.543	Loss 4.9951	Acc@1 69.221	Acc@5 92.113
+Epoch: [16][600/782]	GPU 0	Time: 11.154	Loss 5.0294	Acc@1 68.638	Acc@5 92.029
+ * Epoch 16, GPU 0, Acc@1 68.404, Acc@5 91.922, Time 28.54
+GPU 0 validating
+2024/05/14 12:41:33 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.138	Loss 1.2221	Acc@1 65.625	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 0.589	Loss 1.5723	Acc@1 60.992	Acc@5 88.029
+ ** Acc@1 60.820, Acc@5 88.060
+saving the best model!
+==> training...
+Epoch: [17][0/782]	GPU 0	Time: 0.345	Loss 5.7140	Acc@1 71.875	Acc@5 96.875
+Epoch: [17][200/782]	GPU 0	Time: 3.987	Loss 4.8437	Acc@1 69.691	Acc@5 92.817
+Epoch: [17][400/782]	GPU 0	Time: 7.579	Loss 4.8649	Acc@1 69.670	Acc@5 92.604
+Epoch: [17][600/782]	GPU 0	Time: 11.174	Loss 4.8967	Acc@1 69.423	Acc@5 92.567
+ * Epoch 17, GPU 0, Acc@1 69.086, Acc@5 92.504, Time 28.55
+GPU 0 validating
+2024/05/14 12:42:08 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.148	Loss 1.6216	Acc@1 62.500	Acc@5 81.250
+Test: [200/313]	GPU: 0	Time: 0.616	Loss 1.5723	Acc@1 60.868	Acc@5 87.702
+ ** Acc@1 60.910, Acc@5 87.890
+saving the best model!
+==> training...
+Epoch: [18][0/782]	GPU 0	Time: 0.316	Loss 4.2538	Acc@1 67.188	Acc@5 92.188
+Epoch: [18][200/782]	GPU 0	Time: 3.975	Loss 4.6890	Acc@1 71.377	Acc@5 93.043
+Epoch: [18][400/782]	GPU 0	Time: 7.569	Loss 4.7551	Acc@1 71.002	Acc@5 93.263
+Epoch: [18][600/782]	GPU 0	Time: 11.167	Loss 4.7995	Acc@1 70.211	Acc@5 92.892
+ * Epoch 18, GPU 0, Acc@1 69.974, Acc@5 92.716, Time 28.53
+GPU 0 validating
+2024/05/14 12:42:44 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.139	Loss 1.5998	Acc@1 62.500	Acc@5 84.375
+Test: [200/313]	GPU: 0	Time: 0.586	Loss 1.6173	Acc@1 61.629	Acc@5 87.718
+ ** Acc@1 61.560, Acc@5 87.450
+saving the best model!
+==> training...
+Epoch: [19][0/782]	GPU 0	Time: 0.311	Loss 4.8779	Acc@1 70.312	Acc@5 95.312
+Epoch: [19][200/782]	GPU 0	Time: 3.954	Loss 4.6676	Acc@1 71.269	Acc@5 93.206
+Epoch: [19][400/782]	GPU 0	Time: 7.550	Loss 4.7028	Acc@1 70.866	Acc@5 93.033
+Epoch: [19][600/782]	GPU 0	Time: 11.147	Loss 4.7025	Acc@1 70.973	Acc@5 93.027
+ * Epoch 19, GPU 0, Acc@1 70.538, Acc@5 93.016, Time 28.49
+GPU 0 validating
+2024/05/14 12:43:19 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.146	Loss 1.5310	Acc@1 68.750	Acc@5 81.250
+Test: [200/313]	GPU: 0	Time: 0.600	Loss 1.5252	Acc@1 62.298	Acc@5 88.169
+ ** Acc@1 62.580, Acc@5 88.560
+saving the best model!
+==> training...
+Epoch: [20][0/782]	GPU 0	Time: 0.303	Loss 4.1112	Acc@1 75.000	Acc@5 98.438
+Epoch: [20][200/782]	GPU 0	Time: 3.933	Loss 4.6092	Acc@1 72.023	Acc@5 93.369
+Epoch: [20][400/782]	GPU 0	Time: 7.523	Loss 4.5992	Acc@1 71.731	Acc@5 93.415
+Epoch: [20][600/782]	GPU 0	Time: 11.118	Loss 4.6489	Acc@1 71.295	Acc@5 93.118
+ * Epoch 20, GPU 0, Acc@1 71.212, Acc@5 93.112, Time 28.45
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 1.7624	Acc@1 59.375	Acc@5 84.375
+Test: [200/313]	GPU: 0	Time: 0.593	Loss 1.5806	Acc@1 61.225	Acc@5 88.557
+ ** Acc@1 61.670, Acc@5 88.680
+==> training...
+Epoch: [21][0/782]	GPU 0	Time: 0.316	Loss 4.4195	Acc@1 73.438	Acc@5 95.312
+Epoch: [21][200/782]	GPU 0	Time: 3.925	Loss 4.5213	Acc@1 72.093	Acc@5 93.602
+Epoch: [21][400/782]	GPU 0	Time: 7.521	Loss 4.5523	Acc@1 71.844	Acc@5 93.684
+Epoch: [21][600/782]	GPU 0	Time: 11.118	Loss 4.5694	Acc@1 71.716	Acc@5 93.633
+ * Epoch 21, GPU 0, Acc@1 71.582, Acc@5 93.566, Time 28.46
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 1.5611	Acc@1 68.750	Acc@5 84.375
+Test: [200/313]	GPU: 0	Time: 0.578	Loss 1.6748	Acc@1 60.370	Acc@5 87.251
+ ** Acc@1 60.280, Acc@5 87.390
+==> training...
+Epoch: [22][0/782]	GPU 0	Time: 0.309	Loss 4.6313	Acc@1 67.188	Acc@5 92.188
+Epoch: [22][200/782]	GPU 0	Time: 3.914	Loss 4.4654	Acc@1 72.831	Acc@5 93.929
+Epoch: [22][400/782]	GPU 0	Time: 7.517	Loss 4.4783	Acc@1 72.693	Acc@5 93.695
+Epoch: [22][600/782]	GPU 0	Time: 11.117	Loss 4.5048	Acc@1 72.301	Acc@5 93.659
+ * Epoch 22, GPU 0, Acc@1 72.214, Acc@5 93.670, Time 28.48
+GPU 0 validating
+2024/05/14 12:44:54 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.147	Loss 1.3282	Acc@1 68.750	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 0.590	Loss 1.5042	Acc@1 63.433	Acc@5 89.381
+ ** Acc@1 63.390, Acc@5 89.110
+saving the best model!
+==> training...
+Epoch: [23][0/782]	GPU 0	Time: 0.325	Loss 4.4925	Acc@1 75.000	Acc@5 92.188
+Epoch: [23][200/782]	GPU 0	Time: 3.984	Loss 4.3342	Acc@1 73.694	Acc@5 94.551
+Epoch: [23][400/782]	GPU 0	Time: 7.593	Loss 4.3784	Acc@1 72.939	Acc@5 94.167
+Epoch: [23][600/782]	GPU 0	Time: 11.198	Loss 4.4152	Acc@1 72.902	Acc@5 94.072
+ * Epoch 23, GPU 0, Acc@1 72.734, Acc@5 93.996, Time 28.58
+GPU 0 validating
+2024/05/14 12:45:30 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.140	Loss 1.8564	Acc@1 59.375	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.584	Loss 1.4891	Acc@1 63.635	Acc@5 88.806
+ ** Acc@1 63.640, Acc@5 89.060
+saving the best model!
+==> training...
+Epoch: [24][0/782]	GPU 0	Time: 0.329	Loss 4.0659	Acc@1 82.812	Acc@5 92.188
+Epoch: [24][200/782]	GPU 0	Time: 3.984	Loss 4.2716	Acc@1 74.269	Acc@5 94.115
+Epoch: [24][400/782]	GPU 0	Time: 7.578	Loss 4.3405	Acc@1 73.399	Acc@5 94.206
+Epoch: [24][600/782]	GPU 0	Time: 11.178	Loss 4.3686	Acc@1 73.120	Acc@5 94.049
+ * Epoch 24, GPU 0, Acc@1 73.044, Acc@5 94.006, Time 28.57
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.145	Loss 1.7917	Acc@1 65.625	Acc@5 84.375
+Test: [200/313]	GPU: 0	Time: 0.595	Loss 1.5264	Acc@1 63.122	Acc@5 88.946
+ ** Acc@1 63.530, Acc@5 89.130
+==> training...
+Epoch: [25][0/782]	GPU 0	Time: 0.325	Loss 3.8898	Acc@1 76.562	Acc@5 95.312
+Epoch: [25][200/782]	GPU 0	Time: 3.944	Loss 4.2415	Acc@1 74.806	Acc@5 94.551
+Epoch: [25][400/782]	GPU 0	Time: 7.556	Loss 4.2848	Acc@1 74.135	Acc@5 94.416
+Epoch: [25][600/782]	GPU 0	Time: 11.161	Loss 4.3047	Acc@1 74.025	Acc@5 94.356
+ * Epoch 25, GPU 0, Acc@1 73.740, Acc@5 94.266, Time 28.55
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 1.6199	Acc@1 68.750	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.586	Loss 1.5727	Acc@1 62.236	Acc@5 88.619
+ ** Acc@1 62.660, Acc@5 88.450
+==> training...
+Epoch: [26][0/782]	GPU 0	Time: 0.303	Loss 4.4676	Acc@1 79.688	Acc@5 95.312
+Epoch: [26][200/782]	GPU 0	Time: 3.909	Loss 4.2207	Acc@1 74.433	Acc@5 94.885
+Epoch: [26][400/782]	GPU 0	Time: 7.516	Loss 4.2526	Acc@1 74.162	Acc@5 94.814
+Epoch: [26][600/782]	GPU 0	Time: 11.120	Loss 4.2642	Acc@1 73.957	Acc@5 94.527
+ * Epoch 26, GPU 0, Acc@1 73.830, Acc@5 94.420, Time 28.50
+GPU 0 validating
+2024/05/14 12:47:05 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 0.9590	Acc@1 78.125	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.592	Loss 1.4481	Acc@1 64.614	Acc@5 89.443
+ ** Acc@1 64.840, Acc@5 89.460
+saving the best model!
+==> training...
+Epoch: [27][0/782]	GPU 0	Time: 0.305	Loss 3.9247	Acc@1 73.438	Acc@5 93.750
+Epoch: [27][200/782]	GPU 0	Time: 3.971	Loss 4.1586	Acc@1 75.225	Acc@5 94.846
+Epoch: [27][400/782]	GPU 0	Time: 7.578	Loss 4.1903	Acc@1 74.669	Acc@5 94.810
+Epoch: [27][600/782]	GPU 0	Time: 11.184	Loss 4.2248	Acc@1 74.319	Acc@5 94.621
+ * Epoch 27, GPU 0, Acc@1 74.156, Acc@5 94.504, Time 28.57
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.140	Loss 1.5833	Acc@1 65.625	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 0.577	Loss 1.5177	Acc@1 63.790	Acc@5 88.868
+ ** Acc@1 63.940, Acc@5 88.860
+==> training...
+Epoch: [28][0/782]	GPU 0	Time: 0.311	Loss 3.7246	Acc@1 67.188	Acc@5 96.875
+Epoch: [28][200/782]	GPU 0	Time: 3.908	Loss 4.1199	Acc@1 75.459	Acc@5 94.854
+Epoch: [28][400/782]	GPU 0	Time: 7.499	Loss 4.1474	Acc@1 75.121	Acc@5 94.658
+Epoch: [28][600/782]	GPU 0	Time: 11.099	Loss 4.1933	Acc@1 74.724	Acc@5 94.548
+ * Epoch 28, GPU 0, Acc@1 74.496, Acc@5 94.512, Time 28.50
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.147	Loss 1.6193	Acc@1 68.750	Acc@5 81.250
+Test: [200/313]	GPU: 0	Time: 0.599	Loss 1.5372	Acc@1 63.790	Acc@5 89.117
+ ** Acc@1 63.650, Acc@5 88.830
+==> training...
+Epoch: [29][0/782]	GPU 0	Time: 0.312	Loss 3.7832	Acc@1 78.125	Acc@5 93.750
+Epoch: [29][200/782]	GPU 0	Time: 3.907	Loss 4.0995	Acc@1 75.466	Acc@5 94.986
+Epoch: [29][400/782]	GPU 0	Time: 7.503	Loss 4.1112	Acc@1 75.358	Acc@5 95.005
+Epoch: [29][600/782]	GPU 0	Time: 11.098	Loss 4.1297	Acc@1 75.073	Acc@5 94.886
+ * Epoch 29, GPU 0, Acc@1 74.864, Acc@5 94.770, Time 28.47
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.141	Loss 1.3787	Acc@1 62.500	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.593	Loss 1.5055	Acc@1 64.537	Acc@5 89.801
+ ** Acc@1 64.670, Acc@5 89.590
+==> training...
+Epoch: [30][0/782]	GPU 0	Time: 0.296	Loss 3.1674	Acc@1 78.125	Acc@5 98.438
+Epoch: [30][200/782]	GPU 0	Time: 3.908	Loss 3.9916	Acc@1 76.329	Acc@5 95.725
+Epoch: [30][400/782]	GPU 0	Time: 7.511	Loss 4.0621	Acc@1 75.483	Acc@5 95.281
+Epoch: [30][600/782]	GPU 0	Time: 11.112	Loss 4.0998	Acc@1 75.195	Acc@5 95.079
+ * Epoch 30, GPU 0, Acc@1 75.010, Acc@5 94.974, Time 28.50
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.143	Loss 1.1845	Acc@1 75.000	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.590	Loss 1.4657	Acc@1 64.646	Acc@5 89.288
+ ** Acc@1 64.480, Acc@5 89.140
+==> training...
+Epoch: [31][0/782]	GPU 0	Time: 0.298	Loss 4.1694	Acc@1 79.688	Acc@5 98.438
+Epoch: [31][200/782]	GPU 0	Time: 3.896	Loss 3.5307	Acc@1 79.820	Acc@5 96.276
+Epoch: [31][400/782]	GPU 0	Time: 7.500	Loss 3.4543	Acc@1 80.440	Acc@5 96.466
+Epoch: [31][600/782]	GPU 0	Time: 11.102	Loss 3.4079	Acc@1 80.631	Acc@5 96.547
+ * Epoch 31, GPU 0, Acc@1 80.696, Acc@5 96.550, Time 28.48
+GPU 0 validating
+2024/05/14 12:49:41 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.150	Loss 0.9513	Acc@1 75.000	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.651	Loss 1.1324	Acc@1 70.864	Acc@5 92.755
+ ** Acc@1 70.760, Acc@5 92.540
+saving the best model!
+==> training...
+Epoch: [32][0/782]	GPU 0	Time: 0.309	Loss 3.5600	Acc@1 78.125	Acc@5 96.875
+Epoch: [32][200/782]	GPU 0	Time: 3.950	Loss 3.2458	Acc@1 81.903	Acc@5 96.992
+Epoch: [32][400/782]	GPU 0	Time: 7.553	Loss 3.2215	Acc@1 82.255	Acc@5 96.969
+Epoch: [32][600/782]	GPU 0	Time: 11.159	Loss 3.2264	Acc@1 82.022	Acc@5 96.919
+ * Epoch 32, GPU 0, Acc@1 82.024, Acc@5 96.906, Time 28.57
+GPU 0 validating
+2024/05/14 12:50:16 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.160	Loss 0.8712	Acc@1 78.125	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.641	Loss 1.1095	Acc@1 71.315	Acc@5 92.926
+ ** Acc@1 71.220, Acc@5 92.810
+saving the best model!
+==> training...
+Epoch: [33][0/782]	GPU 0	Time: 0.320	Loss 3.4282	Acc@1 81.250	Acc@5 95.312
+Epoch: [33][200/782]	GPU 0	Time: 3.959	Loss 3.1600	Acc@1 82.618	Acc@5 97.287
+Epoch: [33][400/782]	GPU 0	Time: 7.553	Loss 3.1524	Acc@1 82.598	Acc@5 97.284
+Epoch: [33][600/782]	GPU 0	Time: 11.146	Loss 3.1659	Acc@1 82.360	Acc@5 97.205
+ * Epoch 33, GPU 0, Acc@1 82.408, Acc@5 97.122, Time 28.48
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.138	Loss 0.9213	Acc@1 78.125	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.583	Loss 1.1122	Acc@1 71.160	Acc@5 92.957
+ ** Acc@1 71.040, Acc@5 92.790
+==> training...
+Epoch: [34][0/782]	GPU 0	Time: 0.300	Loss 2.9828	Acc@1 87.500	Acc@5 96.875
+Epoch: [34][200/782]	GPU 0	Time: 3.895	Loss 3.1261	Acc@1 82.610	Acc@5 97.155
+Epoch: [34][400/782]	GPU 0	Time: 7.494	Loss 3.1381	Acc@1 82.563	Acc@5 97.163
+Epoch: [34][600/782]	GPU 0	Time: 11.099	Loss 3.1358	Acc@1 82.706	Acc@5 97.200
+ * Epoch 34, GPU 0, Acc@1 82.778, Acc@5 97.230, Time 28.47
+GPU 0 validating
+2024/05/14 12:51:21 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.143	Loss 0.8947	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.594	Loss 1.1124	Acc@1 71.455	Acc@5 92.957
+ ** Acc@1 71.330, Acc@5 92.750
+saving the best model!
+==> training...
+Epoch: [35][0/782]	GPU 0	Time: 0.307	Loss 2.9515	Acc@1 85.938	Acc@5 100.000
+Epoch: [35][200/782]	GPU 0	Time: 3.941	Loss 3.0869	Acc@1 83.232	Acc@5 97.427
+Epoch: [35][400/782]	GPU 0	Time: 7.536	Loss 3.0786	Acc@1 83.077	Acc@5 97.276
+Epoch: [35][600/782]	GPU 0	Time: 11.135	Loss 3.0853	Acc@1 83.174	Acc@5 97.356
+ * Epoch 35, GPU 0, Acc@1 83.018, Acc@5 97.300, Time 28.49
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.187	Loss 0.8873	Acc@1 78.125	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.649	Loss 1.1204	Acc@1 71.082	Acc@5 92.988
+ ** Acc@1 71.110, Acc@5 92.800
+==> training...
+Epoch: [36][0/782]	GPU 0	Time: 0.321	Loss 2.9504	Acc@1 85.938	Acc@5 98.438
+Epoch: [36][200/782]	GPU 0	Time: 3.926	Loss 3.0795	Acc@1 83.699	Acc@5 97.349
+Epoch: [36][400/782]	GPU 0	Time: 7.538	Loss 3.0644	Acc@1 83.448	Acc@5 97.276
+Epoch: [36][600/782]	GPU 0	Time: 11.151	Loss 3.0708	Acc@1 83.327	Acc@5 97.392
+ * Epoch 36, GPU 0, Acc@1 83.352, Acc@5 97.326, Time 28.54
+GPU 0 validating
+2024/05/14 12:52:27 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.137	Loss 1.0216	Acc@1 75.000	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.575	Loss 1.1148	Acc@1 71.253	Acc@5 92.910
+ ** Acc@1 71.370, Acc@5 92.790
+saving the best model!
+==> training...
+Epoch: [37][0/782]	GPU 0	Time: 0.312	Loss 3.3693	Acc@1 79.688	Acc@5 96.875
+Epoch: [37][200/782]	GPU 0	Time: 3.967	Loss 3.0281	Acc@1 84.080	Acc@5 97.388
+Epoch: [37][400/782]	GPU 0	Time: 7.571	Loss 3.0380	Acc@1 83.993	Acc@5 97.432
+Epoch: [37][600/782]	GPU 0	Time: 11.174	Loss 3.0461	Acc@1 83.881	Acc@5 97.390
+ * Epoch 37, GPU 0, Acc@1 83.636, Acc@5 97.370, Time 28.55
+GPU 0 validating
+2024/05/14 12:53:02 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.145	Loss 0.9403	Acc@1 71.875	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.605	Loss 1.1063	Acc@1 71.409	Acc@5 93.066
+ ** Acc@1 71.440, Acc@5 92.980
+saving the best model!
+==> training...
+Epoch: [38][0/782]	GPU 0	Time: 0.327	Loss 2.5129	Acc@1 90.625	Acc@5 100.000
+Epoch: [38][200/782]	GPU 0	Time: 4.001	Loss 3.0357	Acc@1 83.800	Acc@5 97.520
+Epoch: [38][400/782]	GPU 0	Time: 7.609	Loss 3.0383	Acc@1 83.728	Acc@5 97.522
+Epoch: [38][600/782]	GPU 0	Time: 11.219	Loss 3.0439	Acc@1 83.780	Acc@5 97.478
+ * Epoch 38, GPU 0, Acc@1 83.804, Acc@5 97.462, Time 28.58
+GPU 0 validating
+2024/05/14 12:53:38 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.141	Loss 0.8871	Acc@1 78.125	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.591	Loss 1.1045	Acc@1 71.533	Acc@5 93.128
+ ** Acc@1 71.540, Acc@5 93.010
+saving the best model!
+==> training...
+Epoch: [39][0/782]	GPU 0	Time: 0.320	Loss 3.1988	Acc@1 76.562	Acc@5 96.875
+Epoch: [39][200/782]	GPU 0	Time: 3.949	Loss 3.0141	Acc@1 83.862	Acc@5 97.629
+Epoch: [39][400/782]	GPU 0	Time: 7.536	Loss 3.0005	Acc@1 84.094	Acc@5 97.557
+Epoch: [39][600/782]	GPU 0	Time: 11.126	Loss 3.0135	Acc@1 84.016	Acc@5 97.512
+ * Epoch 39, GPU 0, Acc@1 83.866, Acc@5 97.500, Time 28.44
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.150	Loss 0.9166	Acc@1 78.125	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.594	Loss 1.1089	Acc@1 71.346	Acc@5 93.097
+ ** Acc@1 71.440, Acc@5 92.850
+==> training...
+Epoch: [40][0/782]	GPU 0	Time: 0.323	Loss 2.8041	Acc@1 89.062	Acc@5 98.438
+Epoch: [40][200/782]	GPU 0	Time: 3.940	Loss 2.9764	Acc@1 84.507	Acc@5 97.676
+Epoch: [40][400/782]	GPU 0	Time: 7.544	Loss 2.9873	Acc@1 84.523	Acc@5 97.728
+Epoch: [40][600/782]	GPU 0	Time: 11.148	Loss 2.9831	Acc@1 84.508	Acc@5 97.704
+ * Epoch 40, GPU 0, Acc@1 84.342, Acc@5 97.602, Time 28.54
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.147	Loss 0.8690	Acc@1 78.125	Acc@5 96.875
+Test: [200/313]	GPU: 0	Time: 0.592	Loss 1.1110	Acc@1 71.424	Acc@5 93.190
+ ** Acc@1 71.470, Acc@5 92.990
+==> training...
+Epoch: [41][0/782]	GPU 0	Time: 0.329	Loss 3.5398	Acc@1 78.125	Acc@5 92.188
+Epoch: [41][200/782]	GPU 0	Time: 3.944	Loss 2.9697	Acc@1 84.453	Acc@5 97.559
+Epoch: [41][400/782]	GPU 0	Time: 7.551	Loss 2.9648	Acc@1 84.414	Acc@5 97.537
+Epoch: [41][600/782]	GPU 0	Time: 11.153	Loss 2.9653	Acc@1 84.378	Acc@5 97.603
+ * Epoch 41, GPU 0, Acc@1 84.268, Acc@5 97.604, Time 28.53
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.137	Loss 0.8706	Acc@1 78.125	Acc@5 96.875
+Test: [200/313]	GPU: 0	Time: 0.580	Loss 1.1168	Acc@1 71.144	Acc@5 93.097
+ ** Acc@1 71.440, Acc@5 92.910
+==> training...
+Epoch: [42][0/782]	GPU 0	Time: 0.309	Loss 2.8907	Acc@1 92.188	Acc@5 98.438
+Epoch: [42][200/782]	GPU 0	Time: 3.911	Loss 2.9427	Acc@1 84.336	Acc@5 97.637
+Epoch: [42][400/782]	GPU 0	Time: 7.517	Loss 2.9481	Acc@1 84.484	Acc@5 97.615
+Epoch: [42][600/782]	GPU 0	Time: 11.119	Loss 2.9490	Acc@1 84.583	Acc@5 97.632
+ * Epoch 42, GPU 0, Acc@1 84.448, Acc@5 97.614, Time 28.48
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.144	Loss 0.9213	Acc@1 78.125	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.601	Loss 1.1079	Acc@1 71.315	Acc@5 92.926
+ ** Acc@1 71.370, Acc@5 92.770
+==> training...
+Epoch: [43][0/782]	GPU 0	Time: 0.332	Loss 2.6946	Acc@1 81.250	Acc@5 98.438
+Epoch: [43][200/782]	GPU 0	Time: 3.929	Loss 2.9286	Acc@1 84.593	Acc@5 97.715
+Epoch: [43][400/782]	GPU 0	Time: 7.526	Loss 2.9423	Acc@1 84.472	Acc@5 97.584
+Epoch: [43][600/782]	GPU 0	Time: 11.128	Loss 2.9482	Acc@1 84.557	Acc@5 97.702
+ * Epoch 43, GPU 0, Acc@1 84.560, Acc@5 97.690, Time 28.49
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.148	Loss 0.9923	Acc@1 78.125	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.618	Loss 1.1162	Acc@1 71.440	Acc@5 92.910
+ ** Acc@1 71.460, Acc@5 92.760
+==> training...
+Epoch: [44][0/782]	GPU 0	Time: 0.311	Loss 2.7159	Acc@1 87.500	Acc@5 98.438
+Epoch: [44][200/782]	GPU 0	Time: 3.927	Loss 2.8821	Acc@1 85.595	Acc@5 97.963
+Epoch: [44][400/782]	GPU 0	Time: 7.530	Loss 2.9117	Acc@1 85.166	Acc@5 97.845
+Epoch: [44][600/782]	GPU 0	Time: 11.135	Loss 2.9382	Acc@1 84.778	Acc@5 97.759
+ * Epoch 44, GPU 0, Acc@1 84.574, Acc@5 97.710, Time 28.51
+GPU 0 validating
+2024/05/14 12:56:43 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.150	Loss 0.8862	Acc@1 78.125	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.603	Loss 1.0971	Acc@1 71.720	Acc@5 93.190
+ ** Acc@1 71.870, Acc@5 92.910
+saving the best model!
+==> training...
+Epoch: [45][0/782]	GPU 0	Time: 0.331	Loss 2.6806	Acc@1 90.625	Acc@5 100.000
+Epoch: [45][200/782]	GPU 0	Time: 3.967	Loss 2.8774	Acc@1 84.779	Acc@5 97.831
+Epoch: [45][400/782]	GPU 0	Time: 7.560	Loss 2.9090	Acc@1 84.718	Acc@5 97.837
+Epoch: [45][600/782]	GPU 0	Time: 11.163	Loss 2.9185	Acc@1 84.788	Acc@5 97.811
+ * Epoch 45, GPU 0, Acc@1 84.794, Acc@5 97.782, Time 28.54
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.146	Loss 0.9717	Acc@1 75.000	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.612	Loss 1.1092	Acc@1 71.082	Acc@5 93.159
+ ** Acc@1 71.500, Acc@5 92.880
+==> training...
+Epoch: [46][0/782]	GPU 0	Time: 0.344	Loss 3.0240	Acc@1 93.750	Acc@5 100.000
+Epoch: [46][200/782]	GPU 0	Time: 3.943	Loss 2.8957	Acc@1 85.044	Acc@5 97.917
+Epoch: [46][400/782]	GPU 0	Time: 7.544	Loss 2.9009	Acc@1 84.722	Acc@5 97.818
+Epoch: [46][600/782]	GPU 0	Time: 11.145	Loss 2.9004	Acc@1 84.583	Acc@5 97.824
+ * Epoch 46, GPU 0, Acc@1 84.742, Acc@5 97.832, Time 28.53
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.143	Loss 0.9664	Acc@1 78.125	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.596	Loss 1.1302	Acc@1 71.409	Acc@5 93.019
+ ** Acc@1 71.450, Acc@5 92.760
+==> training...
+Epoch: [47][0/782]	GPU 0	Time: 0.305	Loss 3.0452	Acc@1 87.500	Acc@5 100.000
+Epoch: [47][200/782]	GPU 0	Time: 3.903	Loss 2.8739	Acc@1 85.028	Acc@5 97.738
+Epoch: [47][400/782]	GPU 0	Time: 7.504	Loss 2.8939	Acc@1 84.784	Acc@5 97.662
+Epoch: [47][600/782]	GPU 0	Time: 11.107	Loss 2.8893	Acc@1 85.085	Acc@5 97.759
+ * Epoch 47, GPU 0, Acc@1 85.182, Acc@5 97.766, Time 28.49
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.145	Loss 0.9527	Acc@1 81.250	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.598	Loss 1.1053	Acc@1 71.315	Acc@5 92.879
+ ** Acc@1 71.560, Acc@5 92.870
+==> training...
+Epoch: [48][0/782]	GPU 0	Time: 0.307	Loss 2.7412	Acc@1 76.562	Acc@5 98.438
+Epoch: [48][200/782]	GPU 0	Time: 3.915	Loss 2.8384	Acc@1 85.152	Acc@5 97.777
+Epoch: [48][400/782]	GPU 0	Time: 7.527	Loss 2.8569	Acc@1 85.298	Acc@5 97.763
+Epoch: [48][600/782]	GPU 0	Time: 11.140	Loss 2.8834	Acc@1 85.119	Acc@5 97.782
+ * Epoch 48, GPU 0, Acc@1 85.038, Acc@5 97.720, Time 28.57
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 0.9367	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.610	Loss 1.1124	Acc@1 71.580	Acc@5 92.988
+ ** Acc@1 71.710, Acc@5 92.790
+==> training...
+Epoch: [49][0/782]	GPU 0	Time: 0.310	Loss 2.7956	Acc@1 87.500	Acc@5 100.000
+Epoch: [49][200/782]	GPU 0	Time: 3.928	Loss 2.8557	Acc@1 85.611	Acc@5 97.816
+Epoch: [49][400/782]	GPU 0	Time: 7.547	Loss 2.8680	Acc@1 85.217	Acc@5 97.771
+Epoch: [49][600/782]	GPU 0	Time: 11.158	Loss 2.8776	Acc@1 85.108	Acc@5 97.790
+ * Epoch 49, GPU 0, Acc@1 85.064, Acc@5 97.750, Time 28.56
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.153	Loss 0.9832	Acc@1 75.000	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.634	Loss 1.1292	Acc@1 71.409	Acc@5 92.724
+ ** Acc@1 71.550, Acc@5 92.600
+==> training...
+Epoch: [50][0/782]	GPU 0	Time: 0.305	Loss 3.2751	Acc@1 84.375	Acc@5 96.875
+Epoch: [50][200/782]	GPU 0	Time: 3.921	Loss 2.8356	Acc@1 85.471	Acc@5 98.111
+Epoch: [50][400/782]	GPU 0	Time: 7.539	Loss 2.8599	Acc@1 85.326	Acc@5 98.063
+Epoch: [50][600/782]	GPU 0	Time: 11.151	Loss 2.8735	Acc@1 85.246	Acc@5 98.009
+ * Epoch 50, GPU 0, Acc@1 85.308, Acc@5 97.928, Time 28.59
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.175	Loss 0.9470	Acc@1 75.000	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.631	Loss 1.1184	Acc@1 71.440	Acc@5 92.910
+ ** Acc@1 71.330, Acc@5 92.870
+==> training...
+Epoch: [51][0/782]	GPU 0	Time: 0.338	Loss 3.0017	Acc@1 85.938	Acc@5 95.312
+Epoch: [51][200/782]	GPU 0	Time: 3.956	Loss 2.8431	Acc@1 85.906	Acc@5 98.033
+Epoch: [51][400/782]	GPU 0	Time: 7.577	Loss 2.8453	Acc@1 85.832	Acc@5 97.986
+Epoch: [51][600/782]	GPU 0	Time: 11.202	Loss 2.8556	Acc@1 85.701	Acc@5 97.897
+ * Epoch 51, GPU 0, Acc@1 85.624, Acc@5 97.926, Time 28.73
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.149	Loss 0.8579	Acc@1 78.125	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.642	Loss 1.0966	Acc@1 71.549	Acc@5 92.957
+ ** Acc@1 71.580, Acc@5 92.780
+==> training...
+Epoch: [52][0/782]	GPU 0	Time: 0.334	Loss 2.8637	Acc@1 82.812	Acc@5 98.438
+Epoch: [52][200/782]	GPU 0	Time: 3.950	Loss 2.7962	Acc@1 85.743	Acc@5 97.956
+Epoch: [52][400/782]	GPU 0	Time: 7.556	Loss 2.8169	Acc@1 85.560	Acc@5 98.005
+Epoch: [52][600/782]	GPU 0	Time: 11.161	Loss 2.8257	Acc@1 85.527	Acc@5 98.009
+ * Epoch 52, GPU 0, Acc@1 85.502, Acc@5 98.002, Time 28.54
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.155	Loss 0.9132	Acc@1 78.125	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.602	Loss 1.1141	Acc@1 71.315	Acc@5 93.113
+ ** Acc@1 71.330, Acc@5 92.760
+==> training...
+Epoch: [53][0/782]	GPU 0	Time: 0.326	Loss 2.5227	Acc@1 81.250	Acc@5 100.000
+Epoch: [53][200/782]	GPU 0	Time: 3.924	Loss 2.7944	Acc@1 86.000	Acc@5 97.948
+Epoch: [53][400/782]	GPU 0	Time: 7.519	Loss 2.8200	Acc@1 85.778	Acc@5 97.954
+Epoch: [53][600/782]	GPU 0	Time: 11.119	Loss 2.8317	Acc@1 85.670	Acc@5 98.001
+ * Epoch 53, GPU 0, Acc@1 85.552, Acc@5 97.960, Time 28.49
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.149	Loss 0.9163	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.623	Loss 1.1142	Acc@1 71.440	Acc@5 92.864
+ ** Acc@1 71.700, Acc@5 92.790
+==> training...
+Epoch: [54][0/782]	GPU 0	Time: 0.300	Loss 2.9089	Acc@1 87.500	Acc@5 93.750
+Epoch: [54][200/782]	GPU 0	Time: 3.904	Loss 2.8064	Acc@1 86.233	Acc@5 98.057
+Epoch: [54][400/782]	GPU 0	Time: 7.508	Loss 2.8069	Acc@1 86.058	Acc@5 98.028
+Epoch: [54][600/782]	GPU 0	Time: 11.108	Loss 2.8158	Acc@1 85.821	Acc@5 98.040
+ * Epoch 54, GPU 0, Acc@1 85.794, Acc@5 98.068, Time 28.49
+GPU 0 validating
+2024/05/14 13:01:51 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 0.9849	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.587	Loss 1.1252	Acc@1 71.844	Acc@5 92.615
+ ** Acc@1 71.910, Acc@5 92.520
+saving the best model!
+==> training...
+Epoch: [55][0/782]	GPU 0	Time: 0.309	Loss 3.0450	Acc@1 84.375	Acc@5 98.438
+Epoch: [55][200/782]	GPU 0	Time: 3.957	Loss 2.8150	Acc@1 85.759	Acc@5 98.025
+Epoch: [55][400/782]	GPU 0	Time: 7.558	Loss 2.8175	Acc@1 85.637	Acc@5 98.056
+Epoch: [55][600/782]	GPU 0	Time: 11.164	Loss 2.8181	Acc@1 85.722	Acc@5 98.042
+ * Epoch 55, GPU 0, Acc@1 85.698, Acc@5 98.026, Time 28.56
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.145	Loss 0.8903	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.615	Loss 1.1218	Acc@1 71.129	Acc@5 92.879
+ ** Acc@1 71.340, Acc@5 92.800
+==> training...
+Epoch: [56][0/782]	GPU 0	Time: 0.303	Loss 2.8966	Acc@1 82.812	Acc@5 96.875
+Epoch: [56][200/782]	GPU 0	Time: 3.904	Loss 2.7738	Acc@1 85.860	Acc@5 98.103
+Epoch: [56][400/782]	GPU 0	Time: 7.512	Loss 2.8034	Acc@1 85.914	Acc@5 98.044
+Epoch: [56][600/782]	GPU 0	Time: 11.116	Loss 2.8123	Acc@1 85.815	Acc@5 98.048
+ * Epoch 56, GPU 0, Acc@1 85.854, Acc@5 98.004, Time 28.48
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.141	Loss 0.9022	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.599	Loss 1.1233	Acc@1 71.595	Acc@5 93.035
+ ** Acc@1 71.690, Acc@5 92.730
+==> training...
+Epoch: [57][0/782]	GPU 0	Time: 0.302	Loss 2.8434	Acc@1 87.500	Acc@5 98.438
+Epoch: [57][200/782]	GPU 0	Time: 3.918	Loss 2.7894	Acc@1 86.489	Acc@5 98.119
+Epoch: [57][400/782]	GPU 0	Time: 7.519	Loss 2.7886	Acc@1 86.132	Acc@5 98.118
+Epoch: [57][600/782]	GPU 0	Time: 11.123	Loss 2.8067	Acc@1 85.930	Acc@5 98.118
+ * Epoch 57, GPU 0, Acc@1 85.820, Acc@5 98.116, Time 28.48
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.147	Loss 0.9468	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.600	Loss 1.1164	Acc@1 71.377	Acc@5 92.957
+ ** Acc@1 71.540, Acc@5 92.820
+==> training...
+Epoch: [58][0/782]	GPU 0	Time: 0.305	Loss 2.7501	Acc@1 87.500	Acc@5 96.875
+Epoch: [58][200/782]	GPU 0	Time: 3.903	Loss 2.7658	Acc@1 86.303	Acc@5 98.158
+Epoch: [58][400/782]	GPU 0	Time: 7.499	Loss 2.7718	Acc@1 86.393	Acc@5 98.075
+Epoch: [58][600/782]	GPU 0	Time: 11.107	Loss 2.7877	Acc@1 86.262	Acc@5 98.071
+ * Epoch 58, GPU 0, Acc@1 86.126, Acc@5 98.032, Time 28.48
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.150	Loss 1.0081	Acc@1 75.000	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.604	Loss 1.1058	Acc@1 71.471	Acc@5 93.113
+ ** Acc@1 71.510, Acc@5 92.820
+==> training...
+Epoch: [59][0/782]	GPU 0	Time: 0.298	Loss 3.1609	Acc@1 82.812	Acc@5 98.438
+Epoch: [59][200/782]	GPU 0	Time: 3.904	Loss 2.7612	Acc@1 86.280	Acc@5 98.204
+Epoch: [59][400/782]	GPU 0	Time: 7.515	Loss 2.7675	Acc@1 86.312	Acc@5 98.157
+Epoch: [59][600/782]	GPU 0	Time: 11.120	Loss 2.7804	Acc@1 86.117	Acc@5 98.157
+ * Epoch 59, GPU 0, Acc@1 86.068, Acc@5 98.094, Time 28.49
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.139	Loss 0.9155	Acc@1 75.000	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 0.582	Loss 1.1144	Acc@1 71.502	Acc@5 92.802
+ ** Acc@1 71.780, Acc@5 92.740
+==> training...
+Epoch: [60][0/782]	GPU 0	Time: 0.313	Loss 2.4365	Acc@1 89.062	Acc@5 98.438
+Epoch: [60][200/782]	GPU 0	Time: 3.905	Loss 2.7522	Acc@1 86.264	Acc@5 98.282
+Epoch: [60][400/782]	GPU 0	Time: 7.506	Loss 2.7749	Acc@1 86.082	Acc@5 98.102
+Epoch: [60][600/782]	GPU 0	Time: 11.105	Loss 2.7838	Acc@1 86.036	Acc@5 98.126
+ * Epoch 60, GPU 0, Acc@1 86.050, Acc@5 98.144, Time 28.49
+GPU 0 validating
+2024/05/14 13:04:57 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.151	Loss 0.9290	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.615	Loss 1.1013	Acc@1 71.859	Acc@5 93.113
+ ** Acc@1 71.930, Acc@5 92.950
+saving the best model!
+==> training...
+Epoch: [61][0/782]	GPU 0	Time: 0.322	Loss 3.1532	Acc@1 85.938	Acc@5 96.875
+Epoch: [61][200/782]	GPU 0	Time: 3.969	Loss 2.7116	Acc@1 86.692	Acc@5 98.173
+Epoch: [61][400/782]	GPU 0	Time: 7.580	Loss 2.6922	Acc@1 86.958	Acc@5 98.270
+Epoch: [61][600/782]	GPU 0	Time: 11.184	Loss 2.7022	Acc@1 86.993	Acc@5 98.230
+ * Epoch 61, GPU 0, Acc@1 87.128, Acc@5 98.308, Time 28.58
+GPU 0 validating
+2024/05/14 13:05:32 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.143	Loss 0.9095	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.586	Loss 1.0829	Acc@1 71.906	Acc@5 93.144
+ ** Acc@1 72.090, Acc@5 92.910
+saving the best model!
+==> training...
+Epoch: [62][0/782]	GPU 0	Time: 0.312	Loss 2.7330	Acc@1 81.250	Acc@5 98.438
+Epoch: [62][200/782]	GPU 0	Time: 3.968	Loss 2.6517	Acc@1 87.088	Acc@5 98.531
+Epoch: [62][400/782]	GPU 0	Time: 7.573	Loss 2.6526	Acc@1 87.438	Acc@5 98.547
+Epoch: [62][600/782]	GPU 0	Time: 11.171	Loss 2.6625	Acc@1 87.365	Acc@5 98.440
+ * Epoch 62, GPU 0, Acc@1 87.252, Acc@5 98.354, Time 28.56
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.145	Loss 0.8734	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.600	Loss 1.0932	Acc@1 71.953	Acc@5 93.019
+ ** Acc@1 72.050, Acc@5 92.800
+==> training...
+Epoch: [63][0/782]	GPU 0	Time: 0.306	Loss 2.8970	Acc@1 81.250	Acc@5 100.000
+Epoch: [63][200/782]	GPU 0	Time: 3.907	Loss 2.6515	Acc@1 87.275	Acc@5 98.251
+Epoch: [63][400/782]	GPU 0	Time: 7.513	Loss 2.6632	Acc@1 87.364	Acc@5 98.309
+Epoch: [63][600/782]	GPU 0	Time: 11.124	Loss 2.6686	Acc@1 87.287	Acc@5 98.326
+ * Epoch 63, GPU 0, Acc@1 87.328, Acc@5 98.374, Time 28.52
+GPU 0 validating
+2024/05/14 13:06:37 WARNING mlflow.models.model: Logging model metadata to the tracking server has failed. The model artifacts have been logged successfully under mlflow-artifacts:/2/3cbb12b449a44dd98bef135eb071446d/artifacts. Set logging level to DEBUG via `logging.getLogger("mlflow").setLevel(logging.DEBUG)` to see the full traceback.
+Test: [0/313]	GPU: 0	Time: 0.149	Loss 0.9357	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.600	Loss 1.0925	Acc@1 72.124	Acc@5 93.237
+ ** Acc@1 72.310, Acc@5 92.940
+saving the best model!
+==> training...
+Epoch: [64][0/782]	GPU 0	Time: 0.313	Loss 2.8600	Acc@1 87.500	Acc@5 98.438
+Epoch: [64][200/782]	GPU 0	Time: 3.971	Loss 2.6457	Acc@1 87.539	Acc@5 98.500
+Epoch: [64][400/782]	GPU 0	Time: 7.565	Loss 2.6540	Acc@1 87.562	Acc@5 98.293
+Epoch: [64][600/782]	GPU 0	Time: 11.154	Loss 2.6469	Acc@1 87.477	Acc@5 98.328
+ * Epoch 64, GPU 0, Acc@1 87.322, Acc@5 98.294, Time 28.49
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.141	Loss 0.9064	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.585	Loss 1.0921	Acc@1 72.030	Acc@5 93.066
+ ** Acc@1 72.070, Acc@5 92.930
+==> training...
+Epoch: [65][0/782]	GPU 0	Time: 0.314	Loss 2.6533	Acc@1 85.938	Acc@5 100.000
+Epoch: [65][200/782]	GPU 0	Time: 3.919	Loss 2.6420	Acc@1 87.539	Acc@5 98.266
+Epoch: [65][400/782]	GPU 0	Time: 7.530	Loss 2.6537	Acc@1 87.325	Acc@5 98.344
+Epoch: [65][600/782]	GPU 0	Time: 11.144	Loss 2.6512	Acc@1 87.308	Acc@5 98.331
+ * Epoch 65, GPU 0, Acc@1 87.284, Acc@5 98.326, Time 28.56
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.148	Loss 0.9191	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.602	Loss 1.0890	Acc@1 72.093	Acc@5 93.175
+ ** Acc@1 72.180, Acc@5 92.990
+==> training...
+Epoch: [66][0/782]	GPU 0	Time: 0.313	Loss 2.6109	Acc@1 96.875	Acc@5 100.000
+Epoch: [66][200/782]	GPU 0	Time: 3.905	Loss 2.6508	Acc@1 87.640	Acc@5 98.352
+Epoch: [66][400/782]	GPU 0	Time: 7.501	Loss 2.6476	Acc@1 87.586	Acc@5 98.375
+Epoch: [66][600/782]	GPU 0	Time: 11.102	Loss 2.6570	Acc@1 87.328	Acc@5 98.336
+ * Epoch 66, GPU 0, Acc@1 87.480, Acc@5 98.382, Time 28.48
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.147	Loss 0.9026	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.591	Loss 1.0911	Acc@1 72.015	Acc@5 93.097
+ ** Acc@1 72.110, Acc@5 92.940
+==> training...
+Epoch: [67][0/782]	GPU 0	Time: 0.314	Loss 2.5454	Acc@1 85.938	Acc@5 100.000
+Epoch: [67][200/782]	GPU 0	Time: 3.933	Loss 2.6377	Acc@1 87.586	Acc@5 98.298
+Epoch: [67][400/782]	GPU 0	Time: 7.537	Loss 2.6363	Acc@1 87.566	Acc@5 98.332
+Epoch: [67][600/782]	GPU 0	Time: 11.137	Loss 2.6407	Acc@1 87.513	Acc@5 98.349
+ * Epoch 67, GPU 0, Acc@1 87.440, Acc@5 98.326, Time 28.49
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.142	Loss 0.8994	Acc@1 81.250	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.585	Loss 1.0791	Acc@1 72.295	Acc@5 93.144
+ ** Acc@1 72.310, Acc@5 92.980
+==> training...
+Epoch: [68][0/782]	GPU 0	Time: 0.304	Loss 2.9166	Acc@1 87.500	Acc@5 95.312
+Epoch: [68][200/782]	GPU 0	Time: 3.907	Loss 2.6490	Acc@1 87.694	Acc@5 98.531
+Epoch: [68][400/782]	GPU 0	Time: 7.521	Loss 2.6371	Acc@1 87.519	Acc@5 98.508
+Epoch: [68][600/782]	GPU 0	Time: 11.132	Loss 2.6465	Acc@1 87.633	Acc@5 98.440
+ * Epoch 68, GPU 0, Acc@1 87.574, Acc@5 98.460, Time 28.56
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.157	Loss 0.8842	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.621	Loss 1.0933	Acc@1 72.093	Acc@5 93.019
+ ** Acc@1 72.050, Acc@5 92.910
+==> training...
+Epoch: [69][0/782]	GPU 0	Time: 0.317	Loss 2.0529	Acc@1 95.312	Acc@5 100.000
+Epoch: [69][200/782]	GPU 0	Time: 3.930	Loss 2.6391	Acc@1 87.298	Acc@5 98.406
+Epoch: [69][400/782]	GPU 0	Time: 7.550	Loss 2.6374	Acc@1 87.368	Acc@5 98.430
+Epoch: [69][600/782]	GPU 0	Time: 11.173	Loss 2.6395	Acc@1 87.516	Acc@5 98.463
+ * Epoch 69, GPU 0, Acc@1 87.450, Acc@5 98.410, Time 28.64
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.151	Loss 0.9183	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.613	Loss 1.0895	Acc@1 72.030	Acc@5 93.081
+ ** Acc@1 72.040, Acc@5 92.910
+==> training...
+Epoch: [70][0/782]	GPU 0	Time: 0.326	Loss 3.0238	Acc@1 81.250	Acc@5 100.000
+Epoch: [70][200/782]	GPU 0	Time: 3.956	Loss 2.6301	Acc@1 87.640	Acc@5 98.360
+Epoch: [70][400/782]	GPU 0	Time: 7.574	Loss 2.6301	Acc@1 87.492	Acc@5 98.406
+Epoch: [70][600/782]	GPU 0	Time: 11.188	Loss 2.6403	Acc@1 87.417	Acc@5 98.375
+ * Epoch 70, GPU 0, Acc@1 87.336, Acc@5 98.350, Time 28.58
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.144	Loss 0.8955	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.590	Loss 1.0873	Acc@1 72.093	Acc@5 93.159
+ ** Acc@1 72.180, Acc@5 92.920
+==> training...
+Epoch: [71][0/782]	GPU 0	Time: 0.308	Loss 3.2813	Acc@1 84.375	Acc@5 96.875
+Epoch: [71][200/782]	GPU 0	Time: 3.922	Loss 2.6175	Acc@1 88.176	Acc@5 98.259
+Epoch: [71][400/782]	GPU 0	Time: 7.531	Loss 2.6392	Acc@1 87.562	Acc@5 98.282
+Epoch: [71][600/782]	GPU 0	Time: 11.136	Loss 2.6439	Acc@1 87.523	Acc@5 98.341
+ * Epoch 71, GPU 0, Acc@1 87.524, Acc@5 98.384, Time 28.52
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.138	Loss 0.8782	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.581	Loss 1.0818	Acc@1 71.922	Acc@5 92.988
+ ** Acc@1 72.070, Acc@5 92.830
+==> training...
+Epoch: [72][0/782]	GPU 0	Time: 0.296	Loss 2.4959	Acc@1 87.500	Acc@5 96.875
+Epoch: [72][200/782]	GPU 0	Time: 3.894	Loss 2.6094	Acc@1 87.352	Acc@5 98.406
+Epoch: [72][400/782]	GPU 0	Time: 7.499	Loss 2.6288	Acc@1 87.691	Acc@5 98.387
+Epoch: [72][600/782]	GPU 0	Time: 11.102	Loss 2.6392	Acc@1 87.698	Acc@5 98.373
+ * Epoch 72, GPU 0, Acc@1 87.700, Acc@5 98.390, Time 28.50
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.168	Loss 0.8804	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.633	Loss 1.0787	Acc@1 72.108	Acc@5 93.299
+ ** Acc@1 72.180, Acc@5 93.100
+==> training...
+Epoch: [73][0/782]	GPU 0	Time: 0.300	Loss 2.1923	Acc@1 87.500	Acc@5 100.000
+Epoch: [73][200/782]	GPU 0	Time: 3.905	Loss 2.5958	Acc@1 87.819	Acc@5 98.476
+Epoch: [73][400/782]	GPU 0	Time: 7.512	Loss 2.6261	Acc@1 87.734	Acc@5 98.434
+Epoch: [73][600/782]	GPU 0	Time: 11.124	Loss 2.6334	Acc@1 87.583	Acc@5 98.461
+ * Epoch 73, GPU 0, Acc@1 87.460, Acc@5 98.428, Time 28.55
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 0.146	Loss 0.8606	Acc@1 84.375	Acc@5 93.750
+Test: [200/313]	GPU: 0	Time: 0.601	Loss 1.0907	Acc@1 71.953	Acc@5 93.066
+ ** Acc@1 72.100, Acc@5 92.850
+==> training...
+Epoch: [74][0/782]	GPU 0	Time: 0.306	Loss 2.7431	Acc@1 85.938	Acc@5 100.000
+Epoch: [74][200/782]	GPU 0	Time: 3.914	Loss 2.6294	Acc@1 87.733	Acc@5 98.461
+Epoch: [74][400/782]	GPU 0	Time: 7.519	Loss 2.6187	Acc@1 87.617	Acc@5 98.426
+Epoch: [74][600/782]	GPU 0	Time: 11.131	Loss 2.6304	Acc@1 87.414	Acc@5 98.453
+ * Epoch 74, GPU 0, Acc@1 87.406, Acc@5 98.426, Time 28.59
+GPU 0 validating

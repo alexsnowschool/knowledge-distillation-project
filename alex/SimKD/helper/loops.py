@@ -4,6 +4,7 @@ from cProfile import label
 import sys
 import time
 import torch
+import mlflow
 from .util import AverageMeter, accuracy, reduce_tensor
 
 def train_vanilla(epoch, train_loader, model, criterion, optimizer, opt):
@@ -167,7 +168,6 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()        
-
         # print info
         if idx % opt.print_freq == 0:
             print('Epoch: [{0}][{1}/{2}]\t'
