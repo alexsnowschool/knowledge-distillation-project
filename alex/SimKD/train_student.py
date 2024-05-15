@@ -68,13 +68,18 @@ def parse_option():
     parser.add_argument(
         "--learning_rate", type=float, default=0.05, help="learning rate"
     )
-    # parser.add_argument('--lr_decay_epochs', type=str, default='150,180,210', help='where to decay lr, can be a list')
     parser.add_argument(
         "--lr_decay_epochs",
         type=str,
-        default="30,60,90",
+        default="150,180,210",
         help="where to decay lr, can be a list",
     )
+    # parser.add_argument(
+    #     "--lr_decay_epochs",
+    #     type=str,
+    #     default="30,60,90",
+    #     help="where to decay lr, can be a list",
+    # )
     parser.add_argument(
         "--lr_decay_rate", type=float, default=0.1, help="decay rate for learning rate"
     )
@@ -191,7 +196,7 @@ def parse_option():
     # set the path of model and tensorboard
     opt.model_path = "./save/students/models"
     opt.tb_path = "./save/students/tensorboard"
-
+    lr_decay_epochs_str = opt.lr_decay_epochs.replace(",", "_")
     iterations = opt.lr_decay_epochs.split(",")
     opt.lr_decay_epochs = list([])
     for it in iterations:
@@ -207,6 +212,7 @@ def parse_option():
             "{}_weight_div",
             "{}_weight_other",
             "{}_learning_rate",
+            "{}_lr_decay_epochs",
             "{}_trial_{}",
         ]
     )
@@ -219,6 +225,7 @@ def parse_option():
         opt.div,
         opt.beta,
         opt.learning_rate,
+        lr_decay_epochs_str,
         opt.trial,
     )
 
