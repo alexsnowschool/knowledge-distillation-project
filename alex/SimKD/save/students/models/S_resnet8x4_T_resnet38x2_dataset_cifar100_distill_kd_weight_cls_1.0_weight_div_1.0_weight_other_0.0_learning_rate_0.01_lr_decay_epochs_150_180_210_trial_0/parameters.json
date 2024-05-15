@@ -42,5 +42,7 @@
     "tb_folder": "./save/students/tensorboard/S_resnet8x4_T_resnet38x2_dataset_cifar100_distill_kd_weight_cls_1.0_weight_div_1.0_weight_other_0.0_learning_rate_0.01_lr_decay_epochs_150_180_210_trial_0",
     "save_folder": "./save/students/models/S_resnet8x4_T_resnet38x2_dataset_cifar100_distill_kd_weight_cls_1.0_weight_div_1.0_weight_other_0.0_learning_rate_0.01_lr_decay_epochs_150_180_210_trial_0",
     "ngpus_per_node": 1,
-    "gpu": 0
+    "gpu": 0,
+    "Total params": 1.23354,
+    "Total time": 1.9577878001001146
 }
