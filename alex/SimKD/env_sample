@@ -1,0 +1,2 @@
+MLFLOW_TRACKING_URI=<your-tracking-uri>
+MLFLOW_EXPERIMENT_NAME=<your-experiment-name>
