@@ -44,7 +44,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-split_symbol = "~" if os.name == "nt" else ":"
+split_symbol = "~" if os.name == "nt" else "_"
 
 
 def parse_option():
