@@ -13,6 +13,9 @@ class Similarity(nn.Module):
     def forward(self, g_s, g_t):
         return [self.similarity_loss(f_s, f_t) for f_s, f_t in zip(g_s, g_t)]
 
+    def dot(self,A,B): 
+        return (sum(a*b for a,b in zip(A,B)))
+
     def similarity_loss(self, f_s, f_t):
         bsz = f_s.shape[0]
         f_s = f_s.view(bsz, -1)
@@ -25,6 +28,7 @@ class Similarity(nn.Module):
         # G_t = G_t / G_t.norm(2)
         G_t = torch.nn.functional.normalize(G_t, dim=1)
 
-        G_diff = G_t - G_s
+        # G_diff = G_t - G_s
+        G_diff = self.dot(G_t,G_s)/(G_t.norm(2)*G_s.norm(2))
         loss = (G_diff * G_diff).view(-1, 1).sum(0) / (bsz * bsz)
         return loss
