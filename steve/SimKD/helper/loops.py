@@ -66,8 +66,8 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
     # set modules as train()
     # print(module_list[0])
     # print(module_list[1])
-    print(module_list)
-    exit()
+    # print(module_list[0])
+    # exit()
     for module in module_list:
         module.train()
     # set teacher as eval()
@@ -165,10 +165,20 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
         #multiple projectors
         elif opt.distill == "simkd_mp":
-            pass
+            # print('usual projector:')
+            trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+            loss_kd_1 = criterion_kd(trans_feat_s, trans_feat_t)
+            logit_s = pred_feat_s #use logits from last layers
+            # print('second projector:')
+            trans_feat_s_2, trans_feat_t_2, _ = module_list[2](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
+            loss_kd_2 = criterion_kd(trans_feat_s_2, trans_feat_t_2)
+
+            # loss_kd = (loss_kd_1 + loss_kd_2) / 2
+            loss_kd = loss_kd_1 * opt.mp_ratio + loss_kd_2 * (1 - opt.mp_ratio)
+            
         else:
             raise NotImplementedError(opt.distill)
-        exit()
+        # exit()
         loss = opt.cls * loss_cls + opt.div * loss_div + opt.beta * loss_kd
         losses.update(loss.item(), images.size(0))
 

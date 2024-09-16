@@ -119,6 +119,7 @@ def parse_option():
             "semckd",
             "srrl",
             "simkd",
+            "simkd_mp"
         ],
     )
     parser.add_argument(
@@ -175,6 +176,10 @@ def parse_option():
     parser.add_argument(
         "--skip-validation", action="store_true", help="Skip validation of teacher"
     )
+    parser.add_argument(
+        "--mp_ratio", default=0.5, type=float, help="Ratio of how much the last projectors loss is weighted"
+    )
+
 
     opt = parser.parse_args()
 
@@ -185,14 +190,15 @@ def parse_option():
     # mlflow.set_experiment(experiment_name)
 
     # set different learning rates for these MobileNet/ShuffleNet models
-    if opt.model_s in [
-        "MobileNetV2",
-        "MobileNetV2_1_0",
-        "ShuffleV1",
-        "ShuffleV2",
-        "ShuffleV2_1_5",
-    ]:
-        opt.learning_rate = 0.01
+    #Why?
+    # if opt.model_s in [
+    #     "MobileNetV2",
+    #     "MobileNetV2_1_0",
+    #     "ShuffleV1",
+    #     "ShuffleV2",
+    #     "ShuffleV2_1_5",
+    # ]:
+    #     opt.learning_rate = 0.01
 
     # set the path of model and tensorboard
     opt.model_path = "./save/students/models"
@@ -210,6 +216,7 @@ def parse_option():
             "S",
             "{}_T",
             "{}_dataset_{}_distill_{}_weight_cls",
+            "{}_mp_ratio",
             "{}_weight_div",
             "{}_weight_other",
             "{}_learning_rate",
@@ -223,6 +230,7 @@ def parse_option():
         opt.dataset,
         opt.distill,
         opt.cls,
+        opt.mp_ratio,
         opt.div,
         opt.beta,
         opt.learning_rate,
@@ -402,6 +410,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         criterion_kd = nn.MSELoss()
         module_list.append(model_simkd)
         trainable_list.append(model_simkd)
+
     #multiple projectors
     elif opt.distill == "simkd_mp":
         #Last Projector (original)
@@ -419,7 +428,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         module_list.append(model_simkd_2)
         trainable_list.append(model_simkd_2)
 
-        pass
+        
     else:
         raise NotImplementedError(opt.distill)
 
@@ -469,7 +478,7 @@ def main_worker(gpu, ngpus_per_node, opt):
                 num_workers=opt.num_workers,
                 k=opt.nce_k,
                 mode=opt.mode,
-                percent=0.1 ##Only load 10% of the data ############################################################
+                percent=0.1 # 1 = load 100% of the data ############################################################
             )
         else:
             train_loader, val_loader = get_cifar100_dataloaders(
@@ -580,8 +589,8 @@ def main_worker(gpu, ngpus_per_node, opt):
                     "best_acc": best_acc,
                 }
                 if opt.distill == "simkd":
-                    print(trainable_list)
-                    print(trainable_list[-1])
+                    # print(trainable_list)
+                    # print(trainable_list[-1])
                     state["proj"] = trainable_list[-1].state_dict()
                 save_file = os.path.join(
                     opt.save_folder, "{}_best.pth".format(opt.model_s)
