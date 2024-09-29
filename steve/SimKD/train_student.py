@@ -39,6 +39,8 @@ from distiller_zoo import (
     SemCKDLoss,
 )
 
+import wandb
+
 # import mlflow
 # import mlflow.pytorch
 # from dotenv import load_dotenv
@@ -177,11 +179,27 @@ def parse_option():
         "--skip-validation", action="store_true", help="Skip validation of teacher"
     )
     parser.add_argument(
-        "--mp_ratio", default=0.5, type=float, help="Ratio of how much the last projectors loss is weighted"
+        "--mp_ratio", default=0.66, type=float, help="Ratio of how much the last projectors loss is weighted"
     )
 
 
     opt = parser.parse_args()
+
+    wandb.init(
+        # set the wandb project where this run will be logged
+        project="SRP_MP",
+
+        # track hyperparameters and run metadata
+        config={
+        "learning_rate": opt.learning_rate,
+        "student_architecture": opt.model_s,
+        "teacher_architecture": get_teacher_name(opt.path_t),
+        "distill": opt.distill,
+        "epochs": opt.epochs,
+        "mp_ratio": opt.mp_ratio,
+        "trial": opt.trial
+        }
+    )
 
     # tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
     # experiment_name = os.environ.get("MLFLOW_EXPERIMENT_NAME")
@@ -478,7 +496,7 @@ def main_worker(gpu, ngpus_per_node, opt):
                 num_workers=opt.num_workers,
                 k=opt.nce_k,
                 mode=opt.mode,
-                percent=0.1 # 1 = load 100% of the data ############################################################
+                percent=1 # 1 = load 100% of the data ############################################################
             )
         else:
             train_loader, val_loader = get_cifar100_dataloaders(
@@ -580,6 +598,16 @@ def main_worker(gpu, ngpus_per_node, opt):
             logger.log_value("test_loss", test_loss, epoch)
             logger.log_value("test_acc_top5", test_acc_top5, epoch)
 
+            # log with weights and biases
+            wandb.log({
+                    "train_acc": train_acc,
+                    "train_loss": train_loss,
+                    "test_acc": test_acc,
+                    "test_loss": test_loss,
+                    "test_acc_top5": test_acc_top5
+                })
+ 
+
             # save the best model
             if test_acc > best_acc:
                 best_acc = test_acc
@@ -607,15 +635,15 @@ def main_worker(gpu, ngpus_per_node, opt):
                 )
                 save_dict_to_json(test_merics, params_json_path)
                 print("saving the best model!")
-                # torch.save(state, save_file)
+                torch.save(state, save_file)
                 # mlflow.log_artifact(params_json_path)
                 # mlflow.pytorch.log_model(model_s, "student_model")
                 # mlflow.log_metrics(test_merics)
-                # save_state = {k: v for k, v in opt._get_kwargs()}
-                # params_json_path = os.path.join(opt.save_folder, "parameters.json")
-                # save_dict_to_json(save_state, params_json_path)
+                save_state = {k: v for k, v in opt._get_kwargs()}
+                params_json_path = os.path.join(opt.save_folder, "parameters.json")
+                save_dict_to_json(save_state, params_json_path)
                 # mlflow.log_params(save_state)
-
+                
     if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
         # This best accuracy is only for printing purpose.
         print("best accuracy:", best_acc)
