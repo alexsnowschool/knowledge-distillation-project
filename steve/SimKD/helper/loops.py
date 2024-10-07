@@ -7,6 +7,8 @@ import torch
 # import mlflow
 from .util import AverageMeter, accuracy, reduce_tensor
 
+import numpy as np
+
 def train_vanilla(epoch, train_loader, model, criterion, optimizer, opt):
     """vanilla training"""
     model.train()
@@ -113,7 +115,7 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
         with torch.no_grad():
             feat_t, logit_t = model_t(images, is_feat=True)
             feat_t = [f.detach() for f in feat_t]
-
+            
         #Reusing the classifier here!!!!!!!!!!!!!
         cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
         # print(f'cls_t: {cls_t}')
@@ -154,7 +156,7 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
         elif opt.distill == 'srrl':
             trans_feat_s, pred_feat_s = module_list[1](feat_s[-1], cls_t)
             loss_kd = criterion_kd(trans_feat_s, feat_t[-1]) + criterion_kd(pred_feat_s, logit_t)
-        elif opt.distill == 'simkd':
+        elif (opt.distill == 'simkd') and not opt.use_labels:
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
             # print(f"trans_feat_s: {trans_feat_s}")
             # print(f"trans_feat_t: {trans_feat_t}")
@@ -168,19 +170,39 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             # print('usual projector:')
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
             loss_kd_1 = criterion_kd(trans_feat_s, trans_feat_t)
-            logit_s = pred_feat_s #use logits from last layers
+            # logit_s = pred_feat_s #use logits from last layers ########################################## Using model output logits (Not as in original code)
             # print('second projector:')
             trans_feat_s_2, trans_feat_t_2, _ = module_list[2](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
             loss_kd_2 = criterion_kd(trans_feat_s_2, trans_feat_t_2)
 
             # loss_kd = (loss_kd_1 + loss_kd_2) / 2
             loss_kd = loss_kd_1 * opt.mp_ratio + loss_kd_2 * (1 - opt.mp_ratio)
+
+        elif (opt.distill == 'simkd') and opt.use_labels:
+            trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+            
+            logit_s = pred_feat_s
+            #Set loss to zero where teacher made a wrong prediction
+            output = torch.argmax(model_t(images), dim=1)
+            bool_tensor = labels == output
+            trans_feat_s = torch.where(bool_tensor == True, trans_feat_s, 0)
+            trans_feat_t = torch.where(bool_tensor == True, trans_feat_t, 0)
+            loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
             
         else:
             raise NotImplementedError(opt.distill)
         # exit()
+        
         loss = opt.cls * loss_cls + opt.div * loss_div + opt.beta * loss_kd
         losses.update(loss.item(), images.size(0))
+
+        #Set loss to zero where teacher made a wrong prediction
+        # if opt.use_labels:
+        #     output = torch.argmax(model_t(images), dim=1)
+        #     bool_tensor = labels == output
+        #     print(loss)
+        #     loss = torch.where(bool_tensor == True, loss, 0)
+        #     print(loss)
 
         # ===================Metrics=====================
         metrics = accuracy(logit_s, labels, topk=(1, 5))

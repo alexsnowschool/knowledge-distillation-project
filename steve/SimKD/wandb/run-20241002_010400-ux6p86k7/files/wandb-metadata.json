@@ -1,0 +1,56 @@
+{
+  "os": "Windows-10-10.0.19045-SP0",
+  "python": "3.10.14",
+  "startedAt": "2024-10-01T23:04:00.101429Z",
+  "args": [
+    "--path_t",
+    "./save/teachers/models/resnet38x2_vanilla_cifar100_trial_1/resnet38x2_best.pth",
+    "--epochs",
+    "240",
+    "--learning_rate",
+    "0.01",
+    "--distill",
+    "simkd_mp",
+    "--model_s",
+    "MobileNetV2",
+    "-c",
+    "1",
+    "-d",
+    "1",
+    "-b",
+    "0",
+    "--trial",
+    "0",
+    "--gpu_id",
+    "0",
+    "--num_workers",
+    "4"
+  ],
+  "program": "C:\\Users\\Steffen\\Desktop\\Uni\\Master\\student-research-project\\steve\\SimKD\\train_student.py",
+  "codePath": "steve\\SimKD\\train_student.py",
+  "git": {
+    "remote": "https://github.com/alexsnowschool/knowledge-distillation-student-research-project.git",
+    "commit": "7d4824bd9f5c09737e3d6a29de75b39e08e0b881"
+  },
+  "email": "steffenrober@gmail.com",
+  "root": "C:\\Users\\Steffen\\Desktop\\Uni\\Master\\student-research-project\\steve\\SimKD",
+  "host": "DESKTOP-ESC2O57",
+  "username": "Steffen",
+  "executable": "F:\\Anaconda\\envs\\SRP_steve\\python.exe",
+  "codePathLocal": "train_student.py",
+  "cpu_count": 4,
+  "cpu_count_logical": 4,
+  "disk": {
+    "/": {
+      "total": "248966045696",
+      "used": "207476748288"
+    }
+  },
+  "memory": {
+    "total": "17113026560"
+  },
+  "cpu": {
+    "count": 4,
+    "countLogical": 4
+  }
+}

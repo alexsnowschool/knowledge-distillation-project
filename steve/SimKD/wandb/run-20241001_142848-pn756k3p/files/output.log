@@ -1,0 +1,67 @@
+Use GPU: 0 for training
+==> loading teacher model
+==> done
+6 0.5
+Files already downloaded and verified
+Files already downloaded and verified
+Test: [0/313]	GPU: 0	Time: 37.864	Loss 0.9604	Acc@1 81.250	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 39.291	Loss 1.0121	Acc@1 76.150	Acc@5 93.532
+teacher accuracy:  76.3
+==> training...
+Epoch: [1][0/782]	GPU 0	Time: 80.414	Loss 18.2027	Acc@1 1.562	Acc@5 9.375
+Epoch: [1][200/782]	GPU 0	Time: 90.678	Loss 17.1219	Acc@1 1.189	Acc@5 5.131
+Epoch: [1][400/782]	GPU 0	Time: 97.714	Loss 16.6432	Acc@1 1.083	Acc@5 4.726
+Epoch: [1][600/782]	GPU 0	Time: 104.256	Loss 16.3779	Acc@1 1.069	Acc@5 4.594
+ * Epoch 1, GPU 0, Acc@1 1.030, Acc@5 4.510, Time 139.73
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 30.558	Loss 3.8369	Acc@1 12.500	Acc@5 34.375
+Test: [200/313]	GPU: 0	Time: 32.283	Loss 3.8562	Acc@1 9.375	Acc@5 31.887
+ ** Acc@1 9.420, Acc@5 31.700
+==> training...
+Epoch: [2][0/782]	GPU 0	Time: 77.158	Loss 14.0353	Acc@1 0.000	Acc@5 1.562
+Epoch: [2][200/782]	GPU 0	Time: 84.935	Loss 15.2898	Acc@1 0.871	Acc@5 4.182
+Epoch: [2][400/782]	GPU 0	Time: 91.658	Loss 15.0915	Acc@1 0.935	Acc@5 4.271
+Epoch: [2][600/782]	GPU 0	Time: 98.529	Loss 14.9316	Acc@1 0.975	Acc@5 4.326
+ * Epoch 2, GPU 0, Acc@1 0.980, Acc@5 4.340, Time 133.40
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 33.454	Loss 3.4141	Acc@1 25.000	Acc@5 53.125
+Test: [200/313]	GPU: 0	Time: 35.064	Loss 3.7179	Acc@1 12.904	Acc@5 39.614
+ ** Acc@1 12.990, Acc@5 39.390
+==> training...
+Epoch: [3][0/782]	GPU 0	Time: 89.964	Loss 14.1674	Acc@1 3.125	Acc@5 10.938
+Traceback (most recent call last):
+  File "C:\Users\Steffen\Desktop\Uni\Master\student-research-project\steve\SimKD\train_student.py", line 665, in <module>
+    main()
+  File "C:\Users\Steffen\Desktop\Uni\Master\student-research-project\steve\SimKD\train_student.py", line 322, in main
+    main_worker(None if ngpus_per_node > 1 else opt.gpu_id, ngpus_per_node, opt)
+  File "C:\Users\Steffen\Desktop\Uni\Master\student-research-project\steve\SimKD\train_student.py", line 562, in main_worker
+    train_acc, train_acc_top5, train_loss = train(
+  File "C:\Users\Steffen\Desktop\Uni\Master\student-research-project\steve\SimKD\helper\loops.py", line 114, in train_distill
+    feat_t, logit_t = model_t(images, is_feat=True)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\Steffen\Desktop\Uni\Master\student-research-project\steve\SimKD\models\resnet.py", line 173, in forward
+    x = self.layer2(x)  # 16x16
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\container.py", line 217, in forward
+    input = module(input)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\Steffen\Desktop\Uni\Master\student-research-project\steve\SimKD\models\resnet.py", line 58, in forward
+    out = self.conv2(out)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "F:\Anaconda\envs\SRP_steve\lib\site-packages\torch\nn\modules\conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+KeyboardInterrupt

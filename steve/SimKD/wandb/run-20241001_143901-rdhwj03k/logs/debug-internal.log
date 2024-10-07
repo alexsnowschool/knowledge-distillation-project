@@ -1,0 +1,22 @@
+{"time":"2024-10-01T14:39:01.4253986+02:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-01T14:39:01.4253986+02:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\Steffen\\Desktop\\Uni\\Master\\student-research-project\\steve\\SimKD\\wandb\\run-20241001_143901-rdhwj03k\\logs\\debug-core.log"}
+{"time":"2024-10-01T14:39:01.444284+02:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-01T14:39:01.524258+02:00","level":"INFO","msg":"created new stream","id":"rdhwj03k"}
+{"time":"2024-10-01T14:39:01.5245138+02:00","level":"INFO","msg":"stream: started","id":"rdhwj03k"}
+{"time":"2024-10-01T14:39:01.5245138+02:00","level":"INFO","msg":"handler: started","stream_id":{"value":"rdhwj03k"}}
+{"time":"2024-10-01T14:39:01.5245138+02:00","level":"INFO","msg":"sender: started","stream_id":{"value":"rdhwj03k"}}
+{"time":"2024-10-01T14:39:01.5245138+02:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"rdhwj03k"}}
+{"time":"2024-10-01T14:39:01.8131511+02:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-01T14:39:01.8147317+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-01T20:26:56.4249562+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2024-10-01T20:56:17.0893428+02:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_MP/rdhwj03k/file_stream"}
+{"time":"2024-10-01T21:27:37.3280964+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2024-10-02T00:40:48.2442039+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2024-10-02T00:57:14.6595961+02:00","level":"INFO","msg":"stream: closing","id":"rdhwj03k"}
+{"time":"2024-10-02T00:57:14.6600979+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-02T00:57:14.6600979+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-02T00:57:15.5502947+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-02T00:57:15.7587173+02:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"rdhwj03k"}}
+{"time":"2024-10-02T00:57:15.7587173+02:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"rdhwj03k"}}
+{"time":"2024-10-02T00:57:15.7587173+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"rdhwj03k"}}
+{"time":"2024-10-02T00:57:15.7636575+02:00","level":"INFO","msg":"stream: closed","id":"rdhwj03k"}

@@ -2,7 +2,7 @@
     "print_freq": 200,
     "batch_size": 64,
     "num_workers": 4,
-    "epochs": 5,
+    "epochs": 2,
     "gpu_id": 0,
     "learning_rate": 0.01,
     "lr_decay_epochs": [
@@ -34,7 +34,7 @@
     "multiprocessing_distributed": false,
     "dist_url": "tcp://127.0.0.1:23451",
     "deterministic": false,
-    "skip_validation": true,
+    "skip_validation": false,
     "mp_ratio": 0.66,
     "model_path": "./save/students/models",
     "tb_path": "./save/students/tensorboard",
@@ -45,5 +45,5 @@
     "ngpus_per_node": 1,
     "gpu": 0,
     "Total params": 0.812836,
-    "Total time": 0.20930740899509853
+    "Total time": 0.10381690932644738
 }

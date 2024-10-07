@@ -40,6 +40,7 @@ from distiller_zoo import (
 )
 
 import wandb
+from torchsummary import summary
 
 # import mlflow
 # import mlflow.pytorch
@@ -179,16 +180,19 @@ def parse_option():
         "--skip-validation", action="store_true", help="Skip validation of teacher"
     )
     parser.add_argument(
-        "--mp_ratio", default=0.66, type=float, help="Ratio of how much the last projectors loss is weighted"
+        "--mp_ratio", default=2/3, type=float, help="Ratio of how much the last projectors loss is weighted"
     )
-
+    parser.add_argument(
+        "--use_labels", action="store_true", help="Use True labels. Student will only learn from teacher, if the teacher made the correct prediction"
+    )
 
     opt = parser.parse_args()
 
     wandb.init(
         # set the wandb project where this run will be logged
         project="SRP_MP",
-
+        name=f'use_labels: {opt.use_labels}; LR: {opt.learning_rate}; Trial: {opt.trial}; Student: {opt.model_s}; Teacher: {get_teacher_name(opt.path_t)}',
+        # name = 'test',
         # track hyperparameters and run metadata
         config={
         "learning_rate": opt.learning_rate,
@@ -543,7 +547,7 @@ def main_worker(gpu, ngpus_per_node, opt):
     else:
         print("Skipping teacher validation.")
 
-    run_name = opt.model_name
+    # run_name = opt.model_name
     # mlflow.pytorch.autolog()
     # with mlflow.start_run(run_name=run_name) as run:
     #     mlflow.pytorch.log_model(model_t, "teacher_model")
@@ -559,9 +563,24 @@ def main_worker(gpu, ngpus_per_node, opt):
         adjust_learning_rate(epoch, opt, optimizer)
         print("==> training...")
         time1 = time.time()
+
+        # for name, param in module_list.named_parameters():
+        #     if param.requires_grad:
+        #         print(name, param.data)
+        # print(module_list[-1])
+        # print('++++++++++++++++++++++++++++++++++++++++')
+        # print(module_list[0])
+        # for name, param in module_list[0].named_parameters():
+        #     if param.requires_grad:
+        #         print(name, param.data)
+        # summary(module_list[0], (3, 32, 32))
+        # break
+        # mobilenetV2x2 =  '2,353,060'
+        # resnet32x4 = '7,433,860'
         train_acc, train_acc_top5, train_loss = train(
             epoch, train_loader, module_list, criterion_list, optimizer, opt
         )
+        
         time2 = time.time()
         if opt.multiprocessing_distributed:
             metrics = torch.tensor([train_acc, train_acc_top5, train_loss]).cuda(
@@ -583,6 +602,8 @@ def main_worker(gpu, ngpus_per_node, opt):
             logger.log_value("train_loss", train_loss, epoch)
 
         print("GPU %d validating" % (opt.gpu))
+        # print(f'Using GPU: {torch.cuda.is_available()}')
+        # print(f'GPU: {torch.cuda.get_device_name(0)}')
         test_acc, test_acc_top5, test_loss = validate_distill(
             val_loader, module_list, criterion_cls, opt
         )
@@ -609,54 +630,54 @@ def main_worker(gpu, ngpus_per_node, opt):
  
 
             # save the best model
-            if test_acc > best_acc:
-                best_acc = test_acc
-                state = {
-                    "epoch": epoch,
-                    "model": model_s.state_dict(),
-                    "best_acc": best_acc,
-                }
-                if opt.distill == "simkd":
-                    # print(trainable_list)
-                    # print(trainable_list[-1])
-                    state["proj"] = trainable_list[-1].state_dict()
-                save_file = os.path.join(
-                    opt.save_folder, "{}_best.pth".format(opt.model_s)
-                )
+            # if test_acc > best_acc:
+            #     best_acc = test_acc
+            #     state = {
+            #         "epoch": epoch,
+            #         "model": model_s.state_dict(),
+            #         "best_acc": best_acc,
+            #     }
+            #     if opt.distill == "simkd":
+            #         # print(trainable_list)
+            #         # print(trainable_list[-1])
+            #         state["proj"] = trainable_list[-1].state_dict()
+            #     save_file = os.path.join(
+            #         opt.save_folder, "{}_best.pth".format(opt.model_s)
+            #     )
 
-                test_merics = {
-                    "test_loss": test_loss,
-                    "test_acc": test_acc,
-                    "test_acc_top5": test_acc_top5,
-                    "epoch": epoch,
-                }
-                params_json_path = os.path.join(
-                    opt.save_folder, "test_best_metrics.json"
-                )
-                save_dict_to_json(test_merics, params_json_path)
-                print("saving the best model!")
-                torch.save(state, save_file)
-                # mlflow.log_artifact(params_json_path)
-                # mlflow.pytorch.log_model(model_s, "student_model")
-                # mlflow.log_metrics(test_merics)
-                save_state = {k: v for k, v in opt._get_kwargs()}
-                params_json_path = os.path.join(opt.save_folder, "parameters.json")
-                save_dict_to_json(save_state, params_json_path)
-                # mlflow.log_params(save_state)
+            #     test_merics = {
+            #         "test_loss": test_loss,
+            #         "test_acc": test_acc,
+            #         "test_acc_top5": test_acc_top5,
+            #         "epoch": epoch,
+            #     }
+            #     params_json_path = os.path.join(
+            #         opt.save_folder, "test_best_metrics.json"
+            #     )
+            #     save_dict_to_json(test_merics, params_json_path)
+            #     print("saving the best model!")
+            #     torch.save(state, save_file)
+            #     # mlflow.log_artifact(params_json_path)
+            #     # mlflow.pytorch.log_model(model_s, "student_model")
+            #     # mlflow.log_metrics(test_merics)
+            #     save_state = {k: v for k, v in opt._get_kwargs()}
+            #     params_json_path = os.path.join(opt.save_folder, "parameters.json")
+            #     save_dict_to_json(save_state, params_json_path)
+            #     # mlflow.log_params(save_state)
                 
     if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
         # This best accuracy is only for printing purpose.
         print("best accuracy:", best_acc)
 
-        # save parameters
-        save_state = {k: v for k, v in opt._get_kwargs()}
-        # No. parameters(M)
-        num_params = sum(p.numel() for p in model_s.parameters()) / 1000000.0
-        save_state["Total params"] = num_params
-        save_state["Total time"] = (time.time() - total_time) / 3600.0
-        params_json_path = os.path.join(opt.save_folder, "parameters.json")
-        save_dict_to_json(save_state, params_json_path)
-        # mlflow.log_params(save_state)
+        # # save parameters
+        # save_state = {k: v for k, v in opt._get_kwargs()}
+        # # No. parameters(M)
+        # num_params = sum(p.numel() for p in model_s.parameters()) / 1000000.0
+        # save_state["Total params"] = num_params
+        # save_state["Total time"] = (time.time() - total_time) / 3600.0
+        # params_json_path = os.path.join(opt.save_folder, "parameters.json")
+        # save_dict_to_json(save_state, params_json_path)
+        # # mlflow.log_params(save_state)
 
 
 if __name__ == "__main__":
