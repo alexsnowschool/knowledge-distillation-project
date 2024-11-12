@@ -1,0 +1,195 @@
+Use GPU: 0 for training
+==> loading teacher model
+D:\Uni\student-research-project\steve\SimKD\train_student.py:300: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(model_path, map_location=map_location)["model"])
+==> done
+6 1.0
+Files already downloaded and verified
+Files already downloaded and verified
+Test: [0/313]	GPU: 0	Time: 10.852	Loss 0.7333	Acc@1 81.250	Acc@5 90.625
+Test: [200/313]	GPU: 0	Time: 11.865	Loss 0.8817	Acc@1 79.260	Acc@5 94.527
+teacher accuracy:  79.42
+==> training...
+Epoch: [1][0/782]	GPU 0	Time: 25.492	Loss 0.7846	Acc@1 1.562	Acc@5 4.688
+Epoch: [1][200/782]	GPU 0	Time: 30.189	Loss 0.5886	Acc@1 1.391	Acc@5 5.659
+Epoch: [1][400/782]	GPU 0	Time: 33.036	Loss 0.5484	Acc@1 1.294	Acc@5 5.599
+Epoch: [1][600/782]	GPU 0	Time: 35.937	Loss 0.5344	Acc@1 1.300	Acc@5 5.665
+ * Epoch 1, GPU 0, Acc@1 1.274, Acc@5 5.740, Time 60.43
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.928	Loss 4.6744	Acc@1 0.000	Acc@5 0.000
+Test: [200/313]	GPU: 0	Time: 13.083	Loss 4.6312	Acc@1 1.026	Acc@5 4.695
+ ** Acc@1 1.010, Acc@5 4.980
+==> training...
+Epoch: [2][0/782]	GPU 0	Time: 25.927	Loss 0.5174	Acc@1 0.000	Acc@5 0.000
+Epoch: [2][200/782]	GPU 0	Time: 31.287	Loss 0.4983	Acc@1 1.290	Acc@5 5.581
+Epoch: [2][400/782]	GPU 0	Time: 34.815	Loss 0.4991	Acc@1 1.227	Acc@5 5.814
+Epoch: [2][600/782]	GPU 0	Time: 38.082	Loss 0.4985	Acc@1 1.204	Acc@5 5.896
+ * Epoch 2, GPU 0, Acc@1 1.220, Acc@5 6.052, Time 55.99
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.768	Loss 4.6396	Acc@1 3.125	Acc@5 3.125
+Test: [200/313]	GPU: 0	Time: 12.672	Loss 4.5982	Acc@1 1.368	Acc@5 6.141
+ ** Acc@1 1.360, Acc@5 6.390
+==> training...
+Epoch: [3][0/782]	GPU 0	Time: 25.178	Loss 0.5098	Acc@1 0.000	Acc@5 9.375
+Epoch: [3][200/782]	GPU 0	Time: 31.886	Loss 0.4933	Acc@1 1.407	Acc@5 6.988
+Epoch: [3][400/782]	GPU 0	Time: 37.098	Loss 0.4921	Acc@1 1.656	Acc@5 7.641
+Epoch: [3][600/782]	GPU 0	Time: 41.379	Loss 0.4912	Acc@1 1.835	Acc@5 8.241
+ * Epoch 3, GPU 0, Acc@1 1.962, Acc@5 8.682, Time 59.34
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 11.432	Loss 4.5224	Acc@1 3.125	Acc@5 9.375
+Test: [200/313]	GPU: 0	Time: 12.897	Loss 4.4890	Acc@1 2.565	Acc@5 10.432
+ ** Acc@1 2.650, Acc@5 10.870
+==> training...
+Epoch: [4][0/782]	GPU 0	Time: 32.041	Loss 0.4909	Acc@1 4.688	Acc@5 15.625
+Epoch: [4][200/782]	GPU 0	Time: 46.611	Loss 0.4882	Acc@1 2.907	Acc@5 12.057
+Epoch: [4][400/782]	GPU 0	Time: 56.777	Loss 0.4879	Acc@1 2.841	Acc@5 12.138
+Epoch: [4][600/782]	GPU 0	Time: 63.308	Loss 0.4866	Acc@1 2.894	Acc@5 12.401
+ * Epoch 4, GPU 0, Acc@1 2.978, Acc@5 12.810, Time 88.90
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 14.121	Loss 4.3895	Acc@1 0.000	Acc@5 9.375
+Test: [200/313]	GPU: 0	Time: 15.532	Loss 4.3954	Acc@1 3.467	Acc@5 14.428
+ ** Acc@1 3.420, Acc@5 14.780
+==> training...
+Epoch: [5][0/782]	GPU 0	Time: 24.052	Loss 0.4793	Acc@1 3.125	Acc@5 20.312
+Epoch: [5][200/782]	GPU 0	Time: 30.620	Loss 0.4834	Acc@1 3.490	Acc@5 14.568
+Epoch: [5][400/782]	GPU 0	Time: 36.124	Loss 0.4836	Acc@1 3.522	Acc@5 15.200
+Epoch: [5][600/782]	GPU 0	Time: 41.595	Loss 0.4823	Acc@1 3.601	Acc@5 15.469
+ * Epoch 5, GPU 0, Acc@1 3.808, Acc@5 15.928, Time 70.16
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.450	Loss 4.3455	Acc@1 3.125	Acc@5 15.625
+Test: [200/313]	GPU: 0	Time: 12.535	Loss 4.3171	Acc@1 4.151	Acc@5 16.713
+ ** Acc@1 4.130, Acc@5 17.120
+==> training...
+Epoch: [6][0/782]	GPU 0	Time: 24.368	Loss 0.4751	Acc@1 6.250	Acc@5 17.188
+Epoch: [6][200/782]	GPU 0	Time: 31.620	Loss 0.4786	Acc@1 4.244	Acc@5 17.848
+Epoch: [6][400/782]	GPU 0	Time: 38.075	Loss 0.4782	Acc@1 4.356	Acc@5 17.971
+Epoch: [6][600/782]	GPU 0	Time: 44.501	Loss 0.4778	Acc@1 4.344	Acc@5 18.181
+ * Epoch 6, GPU 0, Acc@1 4.310, Acc@5 18.348, Time 77.51
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 11.013	Loss 4.2110	Acc@1 9.375	Acc@5 25.000
+Test: [200/313]	GPU: 0	Time: 12.892	Loss 4.2328	Acc@1 4.944	Acc@5 19.481
+ ** Acc@1 4.960, Acc@5 19.760
+==> training...
+Epoch: [7][0/782]	GPU 0	Time: 24.070	Loss 0.4938	Acc@1 6.250	Acc@5 17.188
+Epoch: [7][200/782]	GPU 0	Time: 28.437	Loss 0.4757	Acc@1 4.703	Acc@5 19.799
+Epoch: [7][400/782]	GPU 0	Time: 33.382	Loss 0.4747	Acc@1 4.929	Acc@5 20.051
+Epoch: [7][600/782]	GPU 0	Time: 39.109	Loss 0.4739	Acc@1 4.999	Acc@5 20.128
+ * Epoch 7, GPU 0, Acc@1 5.114, Acc@5 20.442, Time 71.24
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.385	Loss 4.0978	Acc@1 12.500	Acc@5 18.750
+Test: [200/313]	GPU: 0	Time: 11.884	Loss 4.1570	Acc@1 5.271	Acc@5 21.362
+ ** Acc@1 5.550, Acc@5 21.570
+==> training...
+Epoch: [8][0/782]	GPU 0	Time: 24.606	Loss 0.4769	Acc@1 9.375	Acc@5 26.562
+Epoch: [8][200/782]	GPU 0	Time: 27.352	Loss 0.4730	Acc@1 5.683	Acc@5 22.186
+Epoch: [8][400/782]	GPU 0	Time: 30.063	Loss 0.4716	Acc@1 5.728	Acc@5 22.456
+Epoch: [8][600/782]	GPU 0	Time: 33.961	Loss 0.4710	Acc@1 5.930	Acc@5 22.764
+ * Epoch 8, GPU 0, Acc@1 5.974, Acc@5 23.024, Time 60.74
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.439	Loss 4.0481	Acc@1 9.375	Acc@5 21.875
+Test: [200/313]	GPU: 0	Time: 12.743	Loss 4.0865	Acc@1 6.685	Acc@5 24.611
+ ** Acc@1 6.870, Acc@5 24.830
+==> training...
+Epoch: [9][0/782]	GPU 0	Time: 24.345	Loss 0.4892	Acc@1 6.250	Acc@5 21.875
+Epoch: [9][200/782]	GPU 0	Time: 27.847	Loss 0.4690	Acc@1 6.748	Acc@5 24.743
+Epoch: [9][400/782]	GPU 0	Time: 30.651	Loss 0.4683	Acc@1 7.025	Acc@5 25.203
+Epoch: [9][600/782]	GPU 0	Time: 33.785	Loss 0.4680	Acc@1 7.027	Acc@5 25.130
+ * Epoch 9, GPU 0, Acc@1 7.116, Acc@5 25.268, Time 48.95
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.567	Loss 3.9739	Acc@1 15.625	Acc@5 21.875
+Test: [200/313]	GPU: 0	Time: 12.554	Loss 4.0236	Acc@1 7.292	Acc@5 26.337
+ ** Acc@1 7.690, Acc@5 26.720
+==> training...
+Epoch: [10][0/782]	GPU 0	Time: 23.302	Loss 0.4851	Acc@1 7.812	Acc@5 26.562
+Epoch: [10][200/782]	GPU 0	Time: 31.076	Loss 0.4665	Acc@1 7.743	Acc@5 26.555
+Epoch: [10][400/782]	GPU 0	Time: 37.914	Loss 0.4650	Acc@1 7.836	Acc@5 26.722
+Epoch: [10][600/782]	GPU 0	Time: 43.279	Loss 0.4648	Acc@1 8.000	Acc@5 27.101
+ * Epoch 10, GPU 0, Acc@1 8.062, Acc@5 27.396, Time 63.21
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.469	Loss 3.9019	Acc@1 12.500	Acc@5 21.875
+Test: [200/313]	GPU: 0	Time: 12.123	Loss 3.9655	Acc@1 7.882	Acc@5 28.312
+ ** Acc@1 8.310, Acc@5 28.790
+==> training...
+Epoch: [11][0/782]	GPU 0	Time: 23.974	Loss 0.4417	Acc@1 7.812	Acc@5 28.125
+Epoch: [11][200/782]	GPU 0	Time: 31.128	Loss 0.4634	Acc@1 8.706	Acc@5 28.047
+Epoch: [11][400/782]	GPU 0	Time: 38.473	Loss 0.4617	Acc@1 8.646	Acc@5 28.608
+Epoch: [11][600/782]	GPU 0	Time: 44.507	Loss 0.4616	Acc@1 8.686	Acc@5 28.970
+ * Epoch 11, GPU 0, Acc@1 8.718, Acc@5 29.336, Time 67.97
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.511	Loss 3.8239	Acc@1 18.750	Acc@5 28.125
+Test: [200/313]	GPU: 0	Time: 12.075	Loss 3.9060	Acc@1 8.924	Acc@5 30.535
+ ** Acc@1 9.180, Acc@5 30.840
+==> training...
+Epoch: [12][0/782]	GPU 0	Time: 24.417	Loss 0.4349	Acc@1 7.812	Acc@5 23.438
+Epoch: [12][200/782]	GPU 0	Time: 32.164	Loss 0.4592	Acc@1 9.391	Acc@5 30.480
+Epoch: [12][400/782]	GPU 0	Time: 38.810	Loss 0.4583	Acc@1 9.278	Acc@5 30.923
+Epoch: [12][600/782]	GPU 0	Time: 44.653	Loss 0.4579	Acc@1 9.539	Acc@5 31.237
+ * Epoch 12, GPU 0, Acc@1 9.734, Acc@5 31.466, Time 74.37
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.533	Loss 3.7957	Acc@1 18.750	Acc@5 31.250
+Test: [200/313]	GPU: 0	Time: 12.062	Loss 3.8612	Acc@1 9.966	Acc@5 32.447
+ ** Acc@1 10.310, Acc@5 32.750
+==> training...
+Epoch: [13][0/782]	GPU 0	Time: 24.049	Loss 0.4445	Acc@1 9.375	Acc@5 21.875
+Epoch: [13][200/782]	GPU 0	Time: 29.981	Loss 0.4557	Acc@1 9.701	Acc@5 31.880
+Epoch: [13][400/782]	GPU 0	Time: 35.078	Loss 0.4561	Acc@1 10.213	Acc@5 32.653
+Epoch: [13][600/782]	GPU 0	Time: 41.594	Loss 0.4556	Acc@1 10.467	Acc@5 33.033
+ * Epoch 13, GPU 0, Acc@1 10.618, Acc@5 33.260, Time 71.52
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.425	Loss 3.7662	Acc@1 9.375	Acc@5 34.375
+Test: [200/313]	GPU: 0	Time: 12.712	Loss 3.7914	Acc@1 11.660	Acc@5 34.873
+ ** Acc@1 11.840, Acc@5 35.430
+==> training...
+Epoch: [14][0/782]	GPU 0	Time: 24.225	Loss 0.4176	Acc@1 12.500	Acc@5 32.812
+Epoch: [14][200/782]	GPU 0	Time: 30.016	Loss 0.4520	Acc@1 11.000	Acc@5 34.367
+Epoch: [14][400/782]	GPU 0	Time: 35.837	Loss 0.4522	Acc@1 11.261	Acc@5 34.745
+Epoch: [14][600/782]	GPU 0	Time: 42.452	Loss 0.4522	Acc@1 11.421	Acc@5 34.989
+ * Epoch 14, GPU 0, Acc@1 11.660, Acc@5 35.228, Time 77.23
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.323	Loss 3.6646	Acc@1 12.500	Acc@5 31.250
+Test: [200/313]	GPU: 0	Time: 12.293	Loss 3.7120	Acc@1 13.184	Acc@5 37.702
+ ** Acc@1 13.290, Acc@5 38.020
+==> training...
+Epoch: [15][0/782]	GPU 0	Time: 24.380	Loss 0.4454	Acc@1 12.500	Acc@5 31.250
+Epoch: [15][200/782]	GPU 0	Time: 28.885	Loss 0.4500	Acc@1 12.593	Acc@5 36.132
+Epoch: [15][400/782]	GPU 0	Time: 34.051	Loss 0.4497	Acc@1 12.753	Acc@5 36.693
+Epoch: [15][600/782]	GPU 0	Time: 40.813	Loss 0.4496	Acc@1 12.724	Acc@5 36.928
+ * Epoch 15, GPU 0, Acc@1 12.794, Acc@5 37.290, Time 76.44
+GPU 0 validating
+Test: [0/313]	GPU: 0	Time: 10.729	Loss 3.6265	Acc@1 15.625	Acc@5 37.500
+Traceback (most recent call last):
+  File "D:\programming\miniconda3\envs\SRP_steve\Lib\site-packages\torch\utils\data\dataloader.py", line 1131, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\programming\miniconda3\envs\SRP_steve\Lib\multiprocessing\queues.py", line 122, in get
+    return _ForkingPickler.loads(res)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\programming\miniconda3\envs\SRP_steve\Lib\site-packages\torch\multiprocessing\reductions.py", line 515, in rebuild_storage_filename
+    storage = torch.UntypedStorage._new_shared_filename_cpu(manager, handle, size)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Couldn't open shared event: <torch_25100_1886657762_94_event>, error code: <2>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Uni\student-research-project\steve\SimKD\train_student.py", line 683, in <module>
+    main()
+  File "D:\Uni\student-research-project\steve\SimKD\train_student.py", line 327, in main
+    main_worker(None if ngpus_per_node > 1 else opt.gpu_id, ngpus_per_node, opt)
+  File "D:\Uni\student-research-project\steve\SimKD\train_student.py", line 606, in main_worker
+    test_acc, test_acc_top5, test_loss = validate_distill(
+                                         ^^^^^^^^^^^^^^^^^
+  File "D:\Uni\student-research-project\steve\SimKD\helper\loops.py", line 311, in validate_distill
+    for idx, batch_data in enumerate(val_loader):
+  File "D:\programming\miniconda3\envs\SRP_steve\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "D:\programming\miniconda3\envs\SRP_steve\Lib\site-packages\torch\utils\data\dataloader.py", line 1327, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "D:\programming\miniconda3\envs\SRP_steve\Lib\site-packages\torch\utils\data\dataloader.py", line 1293, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "D:\programming\miniconda3\envs\SRP_steve\Lib\site-packages\torch\utils\data\dataloader.py", line 1144, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 25100) exited unexpectedly

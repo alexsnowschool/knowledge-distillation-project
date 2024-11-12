@@ -1,0 +1,22 @@
+{"time":"2024-10-31T11:48:14.7466472+01:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-10-31T11:48:14.7466472+01:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241031_114814-ej3leexz\\logs\\debug-core.log"}
+{"time":"2024-10-31T11:48:14.7471563+01:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-10-31T11:48:14.7471563+01:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241031_114814-ej3leexz\\logs\\debug-core.log"}
+{"time":"2024-10-31T11:48:14.7497038+01:00","level":"INFO","msg":"created new stream","id":"ej3leexz"}
+{"time":"2024-10-31T11:48:14.7497038+01:00","level":"INFO","msg":"stream: started","id":"ej3leexz"}
+{"time":"2024-10-31T11:48:14.7497038+01:00","level":"INFO","msg":"handler: started","stream_id":{"value":"ej3leexz"}}
+{"time":"2024-10-31T11:48:14.7497038+01:00","level":"INFO","msg":"sender: started","stream_id":{"value":"ej3leexz"}}
+{"time":"2024-10-31T11:48:14.7497038+01:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"ej3leexz"}}
+{"time":"2024-10-31T11:48:15.0405663+01:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-31T11:48:15.0415897+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-31T13:28:34.0033501+01:00","level":"INFO","msg":"api: retrying HTTP request, no error or response"}
+{"time":"2024-10-31T16:52:51.5966516+01:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_use_labels/ej3leexz/file_stream"}
+{"time":"2024-10-31T20:00:07.994221+01:00","level":"INFO","msg":"api: retrying HTTP request, no error or response"}
+{"time":"2024-10-31T20:04:08.3879884+01:00","level":"INFO","msg":"api: retrying HTTP request, no error or response"}
+{"time":"2024-11-01T01:16:57.3393953+01:00","level":"INFO","msg":"stream: closing","id":"ej3leexz"}
+{"time":"2024-11-01T01:16:57.3393953+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-01T01:16:57.3393953+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-01T01:16:58.4775038+01:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"ej3leexz"}}
+{"time":"2024-11-01T01:16:58.4775038+01:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"ej3leexz"}}
+{"time":"2024-11-01T01:16:58.4775038+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"ej3leexz"}}
+{"time":"2024-11-01T01:16:58.4775038+01:00","level":"INFO","msg":"stream: closed","id":"ej3leexz"}

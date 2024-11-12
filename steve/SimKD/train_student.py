@@ -40,7 +40,7 @@ from distiller_zoo import (
 )
 
 import wandb
-from torchsummary import summary
+# from torchsummary import summary
 
 # import mlflow
 # import mlflow.pytorch
@@ -122,7 +122,8 @@ def parse_option():
             "semckd",
             "srrl",
             "simkd",
-            "simkd_mp"
+            "simkd_mp",
+            "unb_proj"
         ],
     )
     parser.add_argument(
@@ -188,22 +189,23 @@ def parse_option():
 
     opt = parser.parse_args()
 
-    wandb.init(
-        # set the wandb project where this run will be logged
-        project="SRP_MP",
-        name=f'use_labels: {opt.use_labels}; LR: {opt.learning_rate}; Trial: {opt.trial}; Student: {opt.model_s}; Teacher: {get_teacher_name(opt.path_t)}',
-        # name = 'test',
-        # track hyperparameters and run metadata
-        config={
-        "learning_rate": opt.learning_rate,
-        "student_architecture": opt.model_s,
-        "teacher_architecture": get_teacher_name(opt.path_t),
-        "distill": opt.distill,
-        "epochs": opt.epochs,
-        "mp_ratio": opt.mp_ratio,
-        "trial": opt.trial
-        }
-    )
+    # wandb.init(
+    #     # set the wandb project where this run will be logged
+    #     project="SRP_use_labels",
+    #     # name=f'use_labels: {opt.use_labels}; LR: {opt.learning_rate}; Trial: {opt.trial}; Student: {opt.model_s}; Teacher: {get_teacher_name(opt.path_t)}',
+    #     name=f'LR: {opt.learning_rate}; Trial: {opt.trial}',
+    #     # name = 'Test',
+    #     # track hyperparameters and run metadata
+    #     config={
+    #     "learning_rate": opt.learning_rate,
+    #     "student_architecture": opt.model_s,
+    #     "teacher_architecture": get_teacher_name(opt.path_t),
+    #     "distill": opt.distill,
+    #     "epochs": opt.epochs,
+    #     "mp_ratio": opt.mp_ratio,
+    #     "trial": opt.trial
+    #     }
+    # )
 
     # tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
     # experiment_name = os.environ.get("MLFLOW_EXPERIMENT_NAME")
@@ -372,8 +374,8 @@ def main_worker(gpu, ngpus_per_node, opt):
 
     model_t.eval()
     model_s.eval()
-    feat_t, _ = model_t(data, is_feat=True)
-    feat_s, _ = model_s(data, is_feat=True)
+    feat_t, featt_t, _ = model_t(data, is_feat=True)
+    feat_s, featt_s, _ = model_s(data, is_feat=True)
 
     module_list = nn.ModuleList([])
     module_list.append(model_s)
@@ -450,15 +452,28 @@ def main_worker(gpu, ngpus_per_node, opt):
         module_list.append(model_simkd_2)
         trainable_list.append(model_simkd_2)
 
+    elif opt.distill == "unb_proj":
+        s_n = feat_s[-2].shape[1]
+        t_n = feat_t[-2].shape[1]
+        deb1 = featt_t[0].shape[1]
+        deb2 = featt_s[3].shape[1]
+        for t, s in zip(featt_t, featt_s[2:]):
+            model_simkd = SimKD(s_n=s.shape[1], t_n=t.shape[1], factor=opt.factor)
+            module_list.append(model_simkd)
+            trainable_list.append(model_simkd)
+            criterion_kd = nn.MSELoss()
+
+    # if opt.loss == "MSE":
+    #     criterion_kd = nn.MSELoss()
+    # elif opt.loss == "KL":
+    #     ...
         
     else:
         raise NotImplementedError(opt.distill)
 
     criterion_list = nn.ModuleList([])
     criterion_list.append(criterion_cls)  # classification loss (cross-entropy)
-    criterion_list.append(
-        criterion_div
-    )  # KL divergence loss, original knowledge distillation
+    criterion_list.append(criterion_div)  # KL divergence loss, original knowledge distillation
     criterion_list.append(criterion_kd)  # other knowledge distillation loss
 
     module_list.append(model_t)
@@ -620,13 +635,13 @@ def main_worker(gpu, ngpus_per_node, opt):
             logger.log_value("test_acc_top5", test_acc_top5, epoch)
 
             # log with weights and biases
-            wandb.log({
-                    "train_acc": train_acc,
-                    "train_loss": train_loss,
-                    "test_acc": test_acc,
-                    "test_loss": test_loss,
-                    "test_acc_top5": test_acc_top5
-                })
+            # wandb.log({
+            #         "train_acc": train_acc,
+            #         "train_loss": train_loss,
+            #         "test_acc": test_acc,
+            #         "test_loss": test_loss,
+            #         "test_acc_top5": test_acc_top5
+            #     })
  
 
             # save the best model

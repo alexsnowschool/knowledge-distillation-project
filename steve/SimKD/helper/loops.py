@@ -111,10 +111,11 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
                 contrast_idx = contrast_idx.cuda()
 
         # ===================forward=====================
-        feat_s, logit_s = model_s(images, is_feat=True)
+        feat_s, featt_s, logit_s = model_s(images, is_feat=True)
         with torch.no_grad():
-            feat_t, logit_t = model_t(images, is_feat=True)
+            feat_t, featt_t, logit_t = model_t(images, is_feat=True)
             feat_t = [f.detach() for f in feat_t]
+            featt_t = [f.detach() for f in featt_t]
             
         #Reusing the classifier here!!!!!!!!!!!!!
         cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
@@ -158,10 +159,6 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             loss_kd = criterion_kd(trans_feat_s, feat_t[-1]) + criterion_kd(pred_feat_s, logit_t)
         elif (opt.distill == 'simkd') and not opt.use_labels:
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
-            # print(f"trans_feat_s: {trans_feat_s}")
-            # print(f"trans_feat_t: {trans_feat_t}")
-            # print(f"pred_feat_s: {pred_feat_s}")
-            # print(f"criterion_kd: {criterion_kd}")
             
             logit_s = pred_feat_s
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
@@ -169,8 +166,10 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
         elif opt.distill == "simkd_mp":
             # print('usual projector:')
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+            logit_s = pred_feat_s #use logits from last layers ########################################## Using model output logits (Not as in original code)
             loss_kd_1 = criterion_kd(trans_feat_s, trans_feat_t)
-            # logit_s = pred_feat_s #use logits from last layers ########################################## Using model output logits (Not as in original code)
+            
+
             # print('second projector:')
             trans_feat_s_2, trans_feat_t_2, _ = module_list[2](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
             loss_kd_2 = criterion_kd(trans_feat_s_2, trans_feat_t_2)
@@ -180,29 +179,46 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
 
         elif (opt.distill == 'simkd') and opt.use_labels:
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
-            
             logit_s = pred_feat_s
+
             #Set loss to zero where teacher made a wrong prediction
             output = torch.argmax(model_t(images), dim=1)
             bool_tensor = labels == output
-            trans_feat_s = torch.where(bool_tensor == True, trans_feat_s, 0)
-            trans_feat_t = torch.where(bool_tensor == True, trans_feat_t, 0)
+
+            #clone is necessary to avoid in-place operation which would lose the gradient for backprop
+            temp = trans_feat_s.clone()
+            temp[bool_tensor==False] = 0
+            trans_feat_s = temp
+            
+            trans_feat_t[bool_tensor==False] = 0
+
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
+        
+        elif opt.distill == "unb_proj":
+            trans_feat_s, trans_feat_t, pred_feat_s = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
+            logit_s = pred_feat_s
+
+            loss_kd = []
+            for i in range(15):
+                # print(i)
+                # try:
+                trans_feat_s, trans_feat_t, _ = module_list[i+1](featt_s[i+2], featt_t[i], cls_t, return_logits=False)
+                loss_kd += [criterion_kd(trans_feat_s, trans_feat_t)]
+                # torch.cat((loss_kd, criterion_kd(trans_feat_s, trans_feat_t)))
+                    # print(i)
+                    # print(f'     worked: {featt_s[i].shape}, {featt_t[i].shape}')
+                # except e:
+                #     print(i)
+                #     print(f'     {featt_s[i].shape}, {featt_t[i].shape}')
+                
+            loss_kd = torch.mean(torch.FloatTensor(loss_kd))
+
             
         else:
             raise NotImplementedError(opt.distill)
-        # exit()
         
         loss = opt.cls * loss_cls + opt.div * loss_div + opt.beta * loss_kd
         losses.update(loss.item(), images.size(0))
-
-        #Set loss to zero where teacher made a wrong prediction
-        # if opt.use_labels:
-        #     output = torch.argmax(model_t(images), dim=1)
-        #     bool_tensor = labels == output
-        #     print(loss)
-        #     loss = torch.where(bool_tensor == True, loss, 0)
-        #     print(loss)
 
         # ===================Metrics=====================
         metrics = accuracy(logit_s, labels, topk=(1, 5))
@@ -321,7 +337,7 @@ def validate_distill(val_loader, module_list, criterion, opt):
                 labels = labels.cuda(opt.gpu if opt.multiprocessing_distributed else 0, non_blocking=True)
 
             # compute output
-            if opt.distill == 'simkd':
+            if opt.distill == 'simkd' or opt.distill == 'simkd_mp':
                 feat_s, _ = model_s(images, is_feat=True)
                 feat_t, _ = model_t(images, is_feat=True)
                 feat_t = [f.detach() for f in feat_t]

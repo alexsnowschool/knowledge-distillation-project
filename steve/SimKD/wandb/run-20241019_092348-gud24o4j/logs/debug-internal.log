@@ -1,0 +1,18 @@
+{"time":"2024-10-19T09:23:48.7976634+02:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-10-19T09:23:48.7976634+02:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241019_092348-gud24o4j\\logs\\debug-core.log"}
+{"time":"2024-10-19T09:23:48.798177+02:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-10-19T09:23:48.798177+02:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241019_092348-gud24o4j\\logs\\debug-core.log"}
+{"time":"2024-10-19T09:23:48.8007537+02:00","level":"INFO","msg":"created new stream","id":"gud24o4j"}
+{"time":"2024-10-19T09:23:48.8007537+02:00","level":"INFO","msg":"stream: started","id":"gud24o4j"}
+{"time":"2024-10-19T09:23:48.8007537+02:00","level":"INFO","msg":"sender: started","stream_id":{"value":"gud24o4j"}}
+{"time":"2024-10-19T09:23:48.8007537+02:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"gud24o4j"}}
+{"time":"2024-10-19T09:23:48.8007537+02:00","level":"INFO","msg":"handler: started","stream_id":{"value":"gud24o4j"}}
+{"time":"2024-10-19T09:23:49.0651956+02:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-19T09:23:49.0662206+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-19T20:41:53.7868952+02:00","level":"INFO","msg":"stream: closing","id":"gud24o4j"}
+{"time":"2024-10-19T20:41:53.7868952+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-19T20:41:53.7868952+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-19T20:41:54.8785086+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"gud24o4j"}}
+{"time":"2024-10-19T20:41:54.8785086+02:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"gud24o4j"}}
+{"time":"2024-10-19T20:41:54.8785086+02:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"gud24o4j"}}
+{"time":"2024-10-19T20:41:54.8785086+02:00","level":"INFO","msg":"stream: closed","id":"gud24o4j"}
