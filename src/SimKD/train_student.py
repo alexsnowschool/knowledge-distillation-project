@@ -194,8 +194,8 @@ def parse_option():
         opt.learning_rate = 0.01
 
     # set the path of model and tensorboard
-    opt.model_path = "./save_cluster_cosine_sim/students/models"
-    opt.tb_path = "./save_cluster_cosine_sim/students/tensorboard"
+    opt.model_path = "../../experiment_artifacts/saved_model_artifacts/students/models"
+    opt.tb_path = "../../experiment_artifacts/saved_model_artifacts/students/tensorboard"
     lr_decay_epochs_str = opt.lr_decay_epochs.replace(",", "_")
     iterations = opt.lr_decay_epochs.split(",")
     opt.lr_decay_epochs = list([])
