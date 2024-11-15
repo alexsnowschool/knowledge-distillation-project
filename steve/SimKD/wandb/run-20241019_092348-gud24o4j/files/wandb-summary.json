@@ -1,1 +1,0 @@
-{"_step":239,"test_acc":74.96,"_timestamp":1.7293633137768505e+09,"_wandb":{"runtime":40684},"test_loss":1.1665918014526366,"test_acc_top5":93.26,"train_loss":0.0939582256269455,"_runtime":40684.9797005,"train_acc":95.606}
