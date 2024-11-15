@@ -1,0 +1,25 @@
+{"time":"2024-11-09T12:53:43.6235399+01:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-11-09T12:53:43.6235399+01:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241109_125343-xtpke9nv\\logs\\debug-core.log"}
+{"time":"2024-11-09T12:53:43.6240416+01:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-11-09T12:53:43.6240416+01:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241109_125343-xtpke9nv\\logs\\debug-core.log"}
+{"time":"2024-11-09T12:53:43.6277102+01:00","level":"INFO","msg":"created new stream","id":"xtpke9nv"}
+{"time":"2024-11-09T12:53:43.6280555+01:00","level":"INFO","msg":"stream: started","id":"xtpke9nv"}
+{"time":"2024-11-09T12:53:43.6280555+01:00","level":"INFO","msg":"handler: started","stream_id":{"value":"xtpke9nv"}}
+{"time":"2024-11-09T12:53:43.6280555+01:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"xtpke9nv"}}
+{"time":"2024-11-09T12:53:43.6280555+01:00","level":"INFO","msg":"sender: started","stream_id":{"value":"xtpke9nv"}}
+{"time":"2024-11-09T12:53:43.9382783+01:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-11-09T12:53:43.9396236+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-09T13:05:19.597038+01:00","level":"INFO","msg":"api: retrying HTTP error","status":500,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_use_labels/xtpke9nv/file_stream"}
+{"time":"2024-11-09T14:17:19.5960344+01:00","level":"INFO","msg":"api: retrying HTTP error","status":500,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_use_labels/xtpke9nv/file_stream"}
+{"time":"2024-11-09T14:17:26.8955488+01:00","level":"INFO","msg":"api: retrying HTTP error","status":500,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_use_labels/xtpke9nv/file_stream"}
+{"time":"2024-11-09T14:17:49.1648623+01:00","level":"INFO","msg":"api: retrying HTTP request, no error or response"}
+{"time":"2024-11-09T14:18:21.5628856+01:00","level":"INFO","msg":"api: retrying HTTP request, no error or response"}
+{"time":"2024-11-09T14:18:26.3952598+01:00","level":"INFO","msg":"api: retrying HTTP error","status":500,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_use_labels/xtpke9nv/file_stream"}
+{"time":"2024-11-09T14:18:40.0684703+01:00","level":"INFO","msg":"api: retrying HTTP error","status":500,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_use_labels/xtpke9nv/file_stream"}
+{"time":"2024-11-09T22:06:53.1488099+01:00","level":"INFO","msg":"stream: closing","id":"xtpke9nv"}
+{"time":"2024-11-09T22:06:53.1488099+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-09T22:06:53.1488099+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-09T22:06:54.4054331+01:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"xtpke9nv"}}
+{"time":"2024-11-09T22:06:54.4054331+01:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"xtpke9nv"}}
+{"time":"2024-11-09T22:06:54.4054331+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"xtpke9nv"}}
+{"time":"2024-11-09T22:06:54.4054331+01:00","level":"INFO","msg":"stream: closed","id":"xtpke9nv"}

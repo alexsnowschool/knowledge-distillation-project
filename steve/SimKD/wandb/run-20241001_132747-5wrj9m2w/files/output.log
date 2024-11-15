@@ -1,0 +1,38 @@
+Use GPU: 0 for training
+==> loading teacher model
+==> done
+6 0.5
+Downloading https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz to ../data/cifar-100-python.tar.gz
+100.0%
+Extracting ../data/cifar-100-python.tar.gz to ../data/
+Files already downloaded and verified
+Test: [0/313]	GPU: 0	Time: 30.476	Loss 0.9604	Acc@1 81.250	Acc@5 87.500
+Test: [200/313]	GPU: 0	Time: 31.836	Loss 1.0121	Acc@1 76.150	Acc@5 93.532
+teacher accuracy:  76.3
+==> training...
+Epoch: [1][0/782]	GPU 0	Time: 64.138	Loss 16.3415	Acc@1 1.562	Acc@5 7.812
+Epoch: [1][200/782]	GPU 0	Time: 72.522	Loss 17.4330	Acc@1 1.073	Acc@5 4.859
+Epoch: [1][400/782]	GPU 0	Time: 78.263	Loss 16.8196	Acc@1 0.904	Acc@5 4.567
+Epoch: [1][600/782]	GPU 0	Time: 83.972	Loss 16.3648	Acc@1 0.928	Acc@5 4.542
+ * Epoch 1, GPU 0, Acc@1 0.926, Acc@5 4.490, Time 116.47
+GPU 0 validating
+Using GPU: True
+GPU: NVIDIA GeForce GTX 1070
+Test: [0/313]	GPU: 0	Time: 28.977	Loss 3.6704	Acc@1 9.375	Acc@5 34.375
+Test: [200/313]	GPU: 0	Time: 30.435	Loss 3.7826	Acc@1 12.220	Acc@5 37.205
+ ** Acc@1 12.340, Acc@5 36.900
+saving the best model!
+==> training...
+Epoch: [2][0/782]	GPU 0	Time: 62.453	Loss 14.3208	Acc@1 0.000	Acc@5 3.125
+Epoch: [2][200/782]	GPU 0	Time: 68.602	Loss 14.6009	Acc@1 0.801	Acc@5 4.353
+Epoch: [2][400/782]	GPU 0	Time: 74.677	Loss 14.4843	Acc@1 0.725	Acc@5 4.341
+Epoch: [2][600/782]	GPU 0	Time: 80.966	Loss 14.3509	Acc@1 0.814	Acc@5 4.326
+ * Epoch 2, GPU 0, Acc@1 0.808, Acc@5 4.290, Time 113.03
+GPU 0 validating
+Using GPU: True
+GPU: NVIDIA GeForce GTX 1070
+Test: [0/313]	GPU: 0	Time: 30.746	Loss 3.8906	Acc@1 15.625	Acc@5 37.500
+Test: [200/313]	GPU: 0	Time: 32.307	Loss 3.6696	Acc@1 16.402	Acc@5 44.341
+ ** Acc@1 16.970, Acc@5 44.760
+saving the best model!
+best accuracy: 16.97

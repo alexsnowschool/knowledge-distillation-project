@@ -1,0 +1,11 @@
+{"time":"2024-10-14T16:41:26.8211648+02:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-10-14T16:41:26.8211648+02:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241014_164126-357lf82g\\logs\\debug-core.log"}
+{"time":"2024-10-14T16:41:26.8211648+02:00","level":"INFO","msg":"using version","core version":"0.18.1"}
+{"time":"2024-10-14T16:41:26.8211648+02:00","level":"INFO","msg":"created symlink","path":"D:\\Uni\\student-research-project\\steve\\SimKD\\wandb\\run-20241014_164126-357lf82g\\logs\\debug-core.log"}
+{"time":"2024-10-14T16:41:26.8242289+02:00","level":"INFO","msg":"created new stream","id":"357lf82g"}
+{"time":"2024-10-14T16:41:26.8242289+02:00","level":"INFO","msg":"stream: started","id":"357lf82g"}
+{"time":"2024-10-14T16:41:26.8242289+02:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"357lf82g"}}
+{"time":"2024-10-14T16:41:26.8242289+02:00","level":"INFO","msg":"sender: started","stream_id":{"value":"357lf82g"}}
+{"time":"2024-10-14T16:41:26.8242289+02:00","level":"INFO","msg":"handler: started","stream_id":{"value":"357lf82g"}}
+{"time":"2024-10-14T16:41:27.1091818+02:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T16:41:27.1102261+02:00","level":"INFO","msg":"Starting system monitor"}

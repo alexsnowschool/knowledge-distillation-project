@@ -1,0 +1,23 @@
+{"time":"2024-10-04T14:22:46.0032268+02:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-04T14:22:46.0032268+02:00","level":"INFO","msg":"created symlink","path":"C:\\Users\\Steffen\\Desktop\\Uni\\Master\\student-research-project\\steve\\SimKD\\wandb\\run-20241004_142245-9ld66bkg\\logs\\debug-core.log"}
+{"time":"2024-10-04T14:22:46.0290422+02:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-04T14:22:46.1224087+02:00","level":"INFO","msg":"created new stream","id":"9ld66bkg"}
+{"time":"2024-10-04T14:22:46.1224087+02:00","level":"INFO","msg":"stream: started","id":"9ld66bkg"}
+{"time":"2024-10-04T14:22:46.1224087+02:00","level":"INFO","msg":"handler: started","stream_id":{"value":"9ld66bkg"}}
+{"time":"2024-10-04T14:22:46.1251999+02:00","level":"INFO","msg":"sender: started","stream_id":{"value":"9ld66bkg"}}
+{"time":"2024-10-04T14:22:46.1251999+02:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"9ld66bkg"}}
+{"time":"2024-10-04T14:22:46.4616448+02:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-04T14:22:46.4632215+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-04T18:40:11.410973+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2024-10-04T19:17:29.3223185+02:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/steffenrober-stiftung-universit-t-hildesheim/SRP_MP/9ld66bkg/file_stream"}
+{"time":"2024-10-04T19:35:10.2060279+02:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/graphql"}
+{"time":"2024-10-04T22:34:48.3143464+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2024-10-05T01:57:51.3768041+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 192.168.178.29:49487->35.186.228.49:443: wsarecv: Eine vorhandene Verbindung wurde vom Remotehost geschlossen."}
+{"time":"2024-10-05T02:43:31.973876+02:00","level":"INFO","msg":"stream: closing","id":"9ld66bkg"}
+{"time":"2024-10-05T02:43:31.973876+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-05T02:43:31.973876+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-05T02:43:32.8698207+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-05T02:43:33.0627933+02:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"9ld66bkg"}}
+{"time":"2024-10-05T02:43:33.0627933+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"9ld66bkg"}}
+{"time":"2024-10-05T02:43:33.0627933+02:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"9ld66bkg"}}
+{"time":"2024-10-05T02:43:33.0627933+02:00","level":"INFO","msg":"stream: closed","id":"9ld66bkg"}
