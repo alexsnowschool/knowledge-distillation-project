@@ -65,11 +65,7 @@ def train_vanilla(epoch, train_loader, model, criterion, optimizer, opt):
 
 def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, opt):
     """one epoch distillation"""
-    # set modules as train()
-    # print(module_list[0])
-    # print(module_list[1])
-    # print(module_list[0])
-    # exit()
+
     for module in module_list:
         module.train()
     # set teacher as eval()
@@ -119,7 +115,6 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             
         #Reusing the classifier here!!!!!!!!!!!!!
         cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
-        # print(f'cls_t: {cls_t}')
         
         # cls + kl div
         loss_cls = criterion_cls(logit_s, labels)
@@ -162,19 +157,16 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             
             logit_s = pred_feat_s
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
-        #multiple projectors
+        #multiple (two) projectors
         elif opt.distill == "simkd_mp":
-            # print('usual projector:')
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
             logit_s = pred_feat_s #use logits from last layers ########################################## Using model output logits (Not as in original code)
             loss_kd_1 = criterion_kd(trans_feat_s, trans_feat_t)
             
-
-            # print('second projector:')
             trans_feat_s_2, trans_feat_t_2, _ = module_list[2](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
             loss_kd_2 = criterion_kd(trans_feat_s_2, trans_feat_t_2)
 
-            # loss_kd = (loss_kd_1 + loss_kd_2) / 2
+            
             loss_kd = loss_kd_1 * opt.mp_ratio + loss_kd_2 * (1 - opt.mp_ratio)
 
         elif (opt.distill == 'simkd') and opt.use_labels:
@@ -195,24 +187,15 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
         
         elif opt.distill == "unb_proj":
-            trans_feat_s, trans_feat_t, pred_feat_s = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
+            _, _, pred_feat_s = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
             logit_s = pred_feat_s
 
-            loss_kd = []
+            loss_kd_list = []
             for i in range(15):
-                # print(i)
-                # try:
-                trans_feat_s, trans_feat_t, _ = module_list[i+1](featt_s[i+2], featt_t[i], cls_t, return_logits=False)
-                loss_kd += [criterion_kd(trans_feat_s, trans_feat_t)]
-                # torch.cat((loss_kd, criterion_kd(trans_feat_s, trans_feat_t)))
-                    # print(i)
-                    # print(f'     worked: {featt_s[i].shape}, {featt_t[i].shape}')
-                # except e:
-                #     print(i)
-                #     print(f'     {featt_s[i].shape}, {featt_t[i].shape}')
+                trans_feat_s, trans_feat_t, _ = module_list[i+1](featt_s[i+2], featt_t[i], cls_t, return_logits=False)#+1 because 0 is student model // +2 because we skip the first 2 student features layers
+                loss_kd_list.append(criterion_kd(trans_feat_s, trans_feat_t))
                 
-            loss_kd = torch.mean(torch.FloatTensor(loss_kd))
-
+            loss_kd = torch.stack(loss_kd_list, 0).mean()
             
         else:
             raise NotImplementedError(opt.distill)
@@ -337,12 +320,12 @@ def validate_distill(val_loader, module_list, criterion, opt):
                 labels = labels.cuda(opt.gpu if opt.multiprocessing_distributed else 0, non_blocking=True)
 
             # compute output
-            if opt.distill == 'simkd' or opt.distill == 'simkd_mp':
-                feat_s, _ = model_s(images, is_feat=True)
-                feat_t, _ = model_t(images, is_feat=True)
+            if opt.distill == 'simkd' or opt.distill == 'simkd_mp' or 'unb_proj':
+                feat_s, _, _ = model_s(images, is_feat=True)
+                feat_t, _, _ = model_t(images, is_feat=True)
                 feat_t = [f.detach() for f in feat_t]
                 cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
-                _, _, output = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+                _, _, output = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
             else:
                 output = model_s(images)
             loss = criterion(output, labels)
