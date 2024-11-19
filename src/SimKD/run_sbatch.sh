@@ -3,7 +3,7 @@
 #SBATCH --output=simkd%j.log
 #SBATCH --error=simkd%j.err
 #SBATCH --mail-user=hlaing@uni-hildesheim.de
-#SBATCH --partition=STUD
+#SBATCH --partition=TEST
 #SBATCH --gres=gpu:1
 
 cd /home/hlaing/new/kd-srp/src/SimKD       # navigate to the directory if necessary

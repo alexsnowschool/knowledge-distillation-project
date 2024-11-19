@@ -21,7 +21,7 @@ def get_data_folder():
     """
     return the path to store the data
     """
-    data_folder = '../data/'
+    data_folder = '../../data/'
 
     if not os.path.isdir(data_folder):
         os.makedirs(data_folder)
@@ -93,8 +93,9 @@ def get_cifar100_dataloaders(batch_size=128, num_workers=8, is_instance=False):
                                      transform=train_transform)
         n_data = len(train_set)
     else:
+        print(f"data folder is: {data_folder}")
         train_set = datasets.CIFAR100(root=data_folder,
-                                      download=True,
+                                      download=False,
                                       train=True,
                                       transform=train_transform)
     train_loader = DataLoader(train_set,
