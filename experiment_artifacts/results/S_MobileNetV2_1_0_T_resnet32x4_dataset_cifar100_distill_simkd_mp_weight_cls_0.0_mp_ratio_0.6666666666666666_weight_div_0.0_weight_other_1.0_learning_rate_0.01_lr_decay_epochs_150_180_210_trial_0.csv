@@ -1,1 +1,5 @@
 trail,learning_rate,student_architecture,teacher_architecture,distill,epoch,train_acc,train_loss,test_acc,test_loss,test_acc_top5
+0,0.01,MobileNetV2_1_0,resnet32x4,simkd_mp,1,1.040,0.383938,1.070,4.624083,5.210000
+0,0.01,MobileNetV2_1_0,resnet32x4,simkd_mp,2,1.146,0.344264,1.130,4.612591,5.270000
+0,0.01,MobileNetV2_1_0,resnet32x4,simkd_mp,3,1.408,0.340650,1.830,4.577570,7.240000
+0,0.01,MobileNetV2_1_0,resnet32x4,simkd_mp,4,1.888,0.337775,2.360,4.496243,10.380000

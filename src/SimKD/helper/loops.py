@@ -159,11 +159,11 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
         #multiple (two) projectors
         elif opt.distill == "simkd_mp":
-            trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+            trans_feat_s, trans_feat_t, pred_feat_s = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
             logit_s = pred_feat_s #use logits from last layers ########################################## Using model output logits (Not as in original code)
             loss_kd_1 = criterion_kd(trans_feat_s, trans_feat_t)
             
-            trans_feat_s_2, trans_feat_t_2, _ = module_list[2](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
+            trans_feat_s_2, trans_feat_t_2, _ = module_list[-3](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
             loss_kd_2 = criterion_kd(trans_feat_s_2, trans_feat_t_2)
 
             

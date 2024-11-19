@@ -50,7 +50,7 @@ def parse_option():
     parser.add_argument("--print_freq", type=int, default=200, help="print frequency")
     parser.add_argument("--batch_size", type=int, default=64, help="batch_size")
     parser.add_argument(
-        "--num_workers", type=int, default=8, help="num of workers to use"
+        "--num_workers", type=int, default=4, help="num of workers to use"
     )
     parser.add_argument(
         "--epochs", type=int, default=240, help="number of training epochs"
@@ -393,6 +393,13 @@ def main_worker(gpu, ngpus_per_node, opt):
 
     #multiple projectors
     elif opt.distill == "simkd_mp":
+        #Second to last Projector  
+        s_n = feat_s[-3].shape[1]
+        t_n = feat_t[-3].shape[1]
+        model_simkd_2 = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
+        module_list.append(model_simkd_2)
+        trainable_list.append(model_simkd_2)
+
         #Last Projector (original)
         s_n = feat_s[-2].shape[1]
         t_n = feat_t[-2].shape[1]
@@ -401,13 +408,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         module_list.append(model_simkd)
         trainable_list.append(model_simkd)
 
-        #Second to last Projector  
-        s_n = feat_s[-3].shape[1]
-        t_n = feat_t[-3].shape[1]
-        model_simkd_2 = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
-        module_list.append(model_simkd_2)
-        trainable_list.append(model_simkd_2)
-
+      
     elif opt.distill == "unb_proj":
         # s_n = feat_s[-2].shape[1]
         # t_n = feat_t[-2].shape[1]
@@ -577,7 +578,7 @@ def main_worker(gpu, ngpus_per_node, opt):
                 f.write(
                     # trail,learning_rate,student_architecture,teacher_architecture,distil
                     "{},{},{},{},{},{},{:.3f},{:.6f},{:.3f},{:.6f},{:.6f}\n".format(
-                        opt.trail,
+                        opt.trial,
                         opt.learning_rate,
                         opt.model_s,
                         teacher_architecture,
