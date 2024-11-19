@@ -186,26 +186,29 @@ def parse_option():
     parser.add_argument(
         "--use_labels", action="store_true", help="Use True labels. Student will only learn from teacher, if the teacher made the correct prediction"
     )
+    # parser.add_argument(
+    #     "SimKD_loss"
+    # )
 
     opt = parser.parse_args()
 
-    wandb.init(
-        # set the wandb project where this run will be logged
-        project="SRP_unbiased_projectors",
-        # name=f'use_labels: {opt.use_labels}; LR: {opt.learning_rate}; Trial: {opt.trial}; Student: {opt.model_s}; Teacher: {get_teacher_name(opt.path_t)}',
-        name=f'LR: {opt.learning_rate}; Trial: {opt.trial}',
-        # name = 'Test',
-        # track hyperparameters and run metadata
-        config={
-        "learning_rate": opt.learning_rate,
-        "student_architecture": opt.model_s,
-        "teacher_architecture": get_teacher_name(opt.path_t),
-        "distill": opt.distill,
-        "epochs": opt.epochs,
-        "mp_ratio": opt.mp_ratio,
-        "trial": opt.trial
-        }
-    )
+    # wandb.init(
+    #     # set the wandb project where this run will be logged
+    #     project="SRP_unbiased_projectors",
+    #     # name=f'use_labels: {opt.use_labels}; LR: {opt.learning_rate}; Trial: {opt.trial}; Student: {opt.model_s}; Teacher: {get_teacher_name(opt.path_t)}',
+    #     name=f'LR: {opt.learning_rate} | Trial: {opt.trial}',
+    #     # name = 'Test',
+    #     # track hyperparameters and run metadata
+    #     config={
+    #     "learning_rate": opt.learning_rate,
+    #     "student_architecture": opt.model_s,
+    #     "teacher_architecture": get_teacher_name(opt.path_t),
+    #     "distill": opt.distill,
+    #     "epochs": opt.epochs,
+    #     "mp_ratio": opt.mp_ratio,
+    #     "trial": opt.trial
+    #     }
+    # )
 
     # tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
     # experiment_name = os.environ.get("MLFLOW_EXPERIMENT_NAME")
@@ -437,6 +440,13 @@ def main_worker(gpu, ngpus_per_node, opt):
 
     #multiple projectors
     elif opt.distill == "simkd_mp":
+        #Second to last Projector  
+        s_n = feat_s[-3].shape[1]
+        t_n = feat_t[-3].shape[1]
+        model_simkd_2 = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
+        module_list.append(model_simkd_2)
+        trainable_list.append(model_simkd_2)
+
         #Last Projector (original)
         s_n = feat_s[-2].shape[1]
         t_n = feat_t[-2].shape[1]
@@ -445,12 +455,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         module_list.append(model_simkd)
         trainable_list.append(model_simkd)
 
-        #Second to last Projector  
-        s_n = feat_s[-3].shape[1]
-        t_n = feat_t[-3].shape[1]
-        model_simkd_2 = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
-        module_list.append(model_simkd_2)
-        trainable_list.append(model_simkd_2)
+        
 
     elif opt.distill == "unb_proj":
         # s_n = feat_s[-2].shape[1]
@@ -635,13 +640,13 @@ def main_worker(gpu, ngpus_per_node, opt):
             logger.log_value("test_acc_top5", test_acc_top5, epoch)
 
             # log with weights and biases
-            wandb.log({
-                    "train_acc": train_acc,
-                    "train_loss": train_loss,
-                    "test_acc": test_acc,
-                    "test_loss": test_loss,
-                    "test_acc_top5": test_acc_top5
-                })
+            # wandb.log({
+            #         "train_acc": train_acc,
+            #         "train_loss": train_loss,
+            #         "test_acc": test_acc,
+            #         "test_loss": test_loss,
+            #         "test_acc_top5": test_acc_top5
+            #     })
  
 
             # save the best model
