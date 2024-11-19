@@ -44,5 +44,5 @@
     "ngpus_per_node": 1,
     "gpu": 0,
     "Total params": 1.23354,
-    "Total time": 0.020671687192387052
+    "Total time": 0.03043837865193685
 }
