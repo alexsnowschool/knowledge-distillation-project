@@ -185,6 +185,7 @@ class SRRL(nn.Module):
 
         return trans_feat_s, pred_feat_s
 
+###############################Projector
 class SimKD(nn.Module):
     """CVPR-2022: Knowledge Distillation with the Reused Teacher Classifier"""
     def __init__(self, *, s_n, t_n, factor=2): 
@@ -212,10 +213,11 @@ class SimKD(nn.Module):
             nn.ReLU(inplace=True),
             ))
         
-    def forward(self, feat_s, feat_t, cls_t):
+    def forward(self, feat_s, feat_t, cls_t, return_logits=True):
         
         # Spatial Dimension Alignment
         s_H, t_H = feat_s.shape[2], feat_t.shape[2]
+        # print(f"s_H: {s_H}, t_H: {t_H}")
         if s_H > t_H:
             source = F.adaptive_avg_pool2d(feat_s, (t_H, t_H))
             target = feat_t
@@ -224,13 +226,22 @@ class SimKD(nn.Module):
             target = F.adaptive_avg_pool2d(feat_t, (s_H, s_H))
         
         trans_feat_t=target
+        # print(f"trans_feat_t: {trans_feat_t.shape}")
         
         # Channel Alignment
+        # print(f"source: {source.shape}")
         trans_feat_s = getattr(self, 'transfer')(source)
 
         # Prediction via Teacher Classifier
-        temp_feat = self.avg_pool(trans_feat_s)
-        temp_feat = temp_feat.view(temp_feat.size(0), -1)
-        pred_feat_s = cls_t(temp_feat)
+        if return_logits:
+            # print(f"trans_feat_s: {trans_feat_s.shape}")
+            temp_feat = self.avg_pool(trans_feat_s)
+            # print(f"temp_feat1: {temp_feat.shape}")
+            temp_feat = temp_feat.view(temp_feat.size(0), -1)
+            # print(f"temp_feat.size(0): {temp_feat.size(0)}")
+            # print(f"temp_feat2: {temp_feat.shape}")
+            pred_feat_s = cls_t(temp_feat)
+        else:
+            pred_feat_s = None
         
         return trans_feat_s, trans_feat_t, pred_feat_s

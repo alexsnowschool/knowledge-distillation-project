@@ -49,6 +49,9 @@ class BasicBlock(nn.Module):
         self.stride = stride
 
     def forward(self, x):
+        feat = x[1]
+        x = x[0]
+
         residual = x
 
         out = self.conv1(x)
@@ -62,8 +65,9 @@ class BasicBlock(nn.Module):
             residual = self.downsample(x)
 
         out += residual
+        feat += [out]
         out = self.relu(out)
-        return out
+        return [out, feat]
 
 class Bottleneck(nn.Module):
     expansion = 4
@@ -168,12 +172,15 @@ class ResNet(nn.Module):
         x = self.relu(x)    # 32x32
         f0 = x
 
-        x = self.layer1(x)  # 32x32
-        f1 = x
+        feat = []
+        x = self.layer1([x, feat])  # 32x32
+        f1 = x[0]
         x = self.layer2(x)  # 16x16
-        f2 = x
+        f2 = x[0]
         x = self.layer3(x)  # 8x8
-        f3 = x
+        f3 = x[0]
+        feat = x[1]
+        x = x[0]
 
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
@@ -181,7 +188,7 @@ class ResNet(nn.Module):
         x = self.fc(x)
 
         if is_feat:
-            return [f0, f1, f2, f3, f4], x
+            return [f0, f1, f2, f3, f4], feat, x
         else:
             return x
 

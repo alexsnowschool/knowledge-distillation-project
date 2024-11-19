@@ -1,0 +1,1 @@
+trail,learning_rate,student_architecture,teacher_architecture,distill,epoch,train_acc,train_loss,test_acc,test_loss,test_acc_top5

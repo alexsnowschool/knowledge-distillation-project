@@ -5,6 +5,7 @@ the general training framework
 from __future__ import print_function
 
 import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import re
 import argparse
 import time
@@ -23,7 +24,7 @@ from models.util import ConvReg, SelfA, SRRL, SimKD
 
 from dataset.cifar100 import get_cifar100_dataloaders, get_cifar100_dataloaders_sample
 from dataset.imagenet import get_imagenet_dataloader, get_dataloader_sample
-from dataset.imagenet_dali import get_dali_data_loader
+# from dataset.imagenet_dali import get_dali_data_loader    ####dali doesnt work on Windows 10
 
 from helper.loops import train_distill as train, validate_vanilla, validate_distill
 from helper.util import save_dict_to_json, reduce_tensor, adjust_learning_rate
@@ -37,10 +38,6 @@ from distiller_zoo import (
     VIDLoss,
     SemCKDLoss,
 )
-
-from dotenv import load_dotenv
-
-load_dotenv()
 
 split_symbol = "~" if os.name == "nt" else "_"
 
@@ -116,6 +113,8 @@ def parse_option():
             "semckd",
             "srrl",
             "simkd",
+            "simkd_mp",
+            "unb_proj"
         ],
     )
     parser.add_argument(
@@ -172,17 +171,14 @@ def parse_option():
     parser.add_argument(
         "--skip-validation", action="store_true", help="Skip validation of teacher"
     )
+    parser.add_argument(
+        "--mp_ratio", default=2/3, type=float, help="Ratio of how much the last projectors loss is weighted"
+    )
+    parser.add_argument(
+        "--use_labels", action="store_true", help="Use True labels. Student will only learn from teacher, if the teacher made the correct prediction"
+    )
 
     opt = parser.parse_args()
-    # set different learning rates for these MobileNet/ShuffleNet models
-    if opt.model_s in [
-        "MobileNetV2",
-        "MobileNetV2_1_0",
-        "ShuffleV1",
-        "ShuffleV2",
-        "ShuffleV2_1_5",
-    ]:
-        opt.learning_rate = 0.01
 
     # set the path of model and tensorboard
     opt.model_path = "../../experiment_artifacts/saved_model_artifacts/students/models"
@@ -200,6 +196,7 @@ def parse_option():
             "S",
             "{}_T",
             "{}_dataset_{}_distill_{}_weight_cls",
+            "{}_mp_ratio",
             "{}_weight_div",
             "{}_weight_other",
             "{}_learning_rate",
@@ -213,6 +210,7 @@ def parse_option():
         opt.dataset,
         opt.distill,
         opt.cls,
+        opt.mp_ratio,
         opt.div,
         opt.beta,
         opt.learning_rate,
@@ -332,8 +330,8 @@ def main_worker(gpu, ngpus_per_node, opt):
 
     model_t.eval()
     model_s.eval()
-    feat_t, _ = model_t(data, is_feat=True)
-    feat_s, _ = model_s(data, is_feat=True)
+    feat_t, featt_t, _ = model_t(data, is_feat=True)
+    feat_s, featt_s, _ = model_s(data, is_feat=True)
 
     module_list = nn.ModuleList([])
     module_list.append(model_s)
@@ -388,10 +386,38 @@ def main_worker(gpu, ngpus_per_node, opt):
     elif opt.distill == "simkd":
         s_n = feat_s[-2].shape[1]
         t_n = feat_t[-2].shape[1]
-        model_simkd = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)
+        model_simkd = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
         criterion_kd = nn.MSELoss()
         module_list.append(model_simkd)
         trainable_list.append(model_simkd)
+
+    #multiple projectors
+    elif opt.distill == "simkd_mp":
+        #Last Projector (original)
+        s_n = feat_s[-2].shape[1]
+        t_n = feat_t[-2].shape[1]
+        model_simkd = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
+        criterion_kd = nn.MSELoss()
+        module_list.append(model_simkd)
+        trainable_list.append(model_simkd)
+
+        #Second to last Projector  
+        s_n = feat_s[-3].shape[1]
+        t_n = feat_t[-3].shape[1]
+        model_simkd_2 = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
+        module_list.append(model_simkd_2)
+        trainable_list.append(model_simkd_2)
+
+    elif opt.distill == "unb_proj":
+        # s_n = feat_s[-2].shape[1]
+        # t_n = feat_t[-2].shape[1]
+        # deb1 = featt_t[0].shape[1]
+        # deb2 = featt_s[3].shape[1]
+        for t, s in zip(featt_t, featt_s[2:]):
+            model_simkd = SimKD(s_n=s.shape[1], t_n=t.shape[1], factor=opt.factor)
+            module_list.append(model_simkd)
+            trainable_list.append(model_simkd)
+            criterion_kd = nn.MSELoss()
     else:
         raise NotImplementedError(opt.distill)
 
@@ -441,6 +467,7 @@ def main_worker(gpu, ngpus_per_node, opt):
                 num_workers=opt.num_workers,
                 k=opt.nce_k,
                 mode=opt.mode,
+                percent=1
             )
         else:
             train_loader, val_loader = get_cifar100_dataloaders(
@@ -492,7 +519,9 @@ def main_worker(gpu, ngpus_per_node, opt):
     # create a csv file to store the training information
     if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
         with open(result_file_path, "w") as f:
-            f.write("epoch,train_acc,train_loss,test_acc,test_loss\n")
+            f.write(
+                "trail,learning_rate,student_architecture,teacher_architecture,distill,epoch,train_acc,train_loss,test_acc,test_loss,test_acc_top5\n"
+            )
 
     # routine
     for epoch in range(1, opt.epochs + 1):
@@ -542,47 +571,48 @@ def main_worker(gpu, ngpus_per_node, opt):
             logger.log_value("test_acc", test_acc, epoch)
             logger.log_value("test_loss", test_loss, epoch)
             logger.log_value("test_acc_top5", test_acc_top5, epoch)
+            teacher_architecture = get_teacher_name(opt.path_t)
             # write the results to csv
             with open(result_file_path, "a") as f:
                 f.write(
-                    "{},{:.3f},{:.6f},{:.3f},{:.6f}\n".format(
-                        epoch, train_acc, train_loss, test_acc, test_loss
+                    # trail,learning_rate,student_architecture,teacher_architecture,distil
+                    "{},{},{},{},{},{},{:.3f},{:.6f},{:.3f},{:.6f},{:.6f}\n".format(
+                        opt.trail,
+                        opt.learning_rate,
+                        opt.model_s,
+                        teacher_architecture,
+                        opt.distill,
+                        epoch,
+                        train_acc,
+                        train_loss,
+                        test_acc,
+                        test_loss,
+                        test_acc_top5
                     )
                 )
             # save the best model
             if test_acc > best_acc:
                 best_acc = test_acc
                 state = {
-                        "epoch": epoch,
-                        "model": model_s.state_dict(),
-                        "best_acc": best_acc,
-                    }
+                    "epoch": epoch,
+                    "model": model_s.state_dict(),
+                    "best_acc": best_acc,
+                }
             if opt.distill == "simkd":
-                    state["proj"] = trainable_list[-1].state_dict()
-            save_file = os.path.join(
-                    opt.save_folder, "{}_best.pth".format(opt.model_s)
-                )
+                state["proj"] = trainable_list[-1].state_dict()
+            save_file = os.path.join(opt.save_folder, "{}_best.pth".format(opt.model_s))
 
             test_merics = {
-                    "test_loss": test_loss,
-                    "test_acc": test_acc,
-                    "test_acc_top5": test_acc_top5,
-                    "epoch": epoch,
-                }
-            
-            params_json_path = os.path.join(
-                    opt.save_folder, "test_best_metrics.json"
-                )
+                "test_loss": test_loss,
+                "test_acc": test_acc,
+                "test_acc_top5": test_acc_top5,
+                "epoch": epoch,
+            }
+
+            params_json_path = os.path.join(opt.save_folder, "test_best_metrics.json")
             save_dict_to_json(test_merics, params_json_path)
             print("saving the best model!")
             torch.save(state, save_file)
-
-            # save the parameters
-            save_state = {k: v for k, v in opt._get_kwargs()}
-            params_json_path = os.path.join(opt.save_folder, "parameters.json")
-            save_dict_to_json(save_state, params_json_path)
-
-        if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
             # This best accuracy is only for printing purpose.
             print("best accuracy:", best_acc)
 

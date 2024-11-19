@@ -234,4 +234,5 @@ pyrightconfig.json
 *.err
 steve/*
 data/*
+data_old/*
 

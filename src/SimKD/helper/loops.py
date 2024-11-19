@@ -4,8 +4,10 @@ from cProfile import label
 import sys
 import time
 import torch
-import mlflow
+# import mlflow
 from .util import AverageMeter, accuracy, reduce_tensor
+
+import numpy as np
 
 def train_vanilla(epoch, train_loader, model, criterion, optimizer, opt):
     """vanilla training"""
@@ -63,7 +65,7 @@ def train_vanilla(epoch, train_loader, model, criterion, optimizer, opt):
 
 def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, opt):
     """one epoch distillation"""
-    # set modules as train()
+
     for module in module_list:
         module.train()
     # set teacher as eval()
@@ -105,11 +107,13 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
                 contrast_idx = contrast_idx.cuda()
 
         # ===================forward=====================
-        feat_s, logit_s = model_s(images, is_feat=True)
+        feat_s, featt_s, logit_s = model_s(images, is_feat=True)
         with torch.no_grad():
-            feat_t, logit_t = model_t(images, is_feat=True)
+            feat_t, featt_t, logit_t = model_t(images, is_feat=True)
             feat_t = [f.detach() for f in feat_t]
-
+            featt_t = [f.detach() for f in featt_t]
+            
+        #Reusing the classifier here!!!!!!!!!!!!!
         cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
         
         # cls + kl div
@@ -148,13 +152,54 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
         elif opt.distill == 'srrl':
             trans_feat_s, pred_feat_s = module_list[1](feat_s[-1], cls_t)
             loss_kd = criterion_kd(trans_feat_s, feat_t[-1]) + criterion_kd(pred_feat_s, logit_t)
-        elif opt.distill == 'simkd':
+        elif (opt.distill == 'simkd') and not opt.use_labels:
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+            
             logit_s = pred_feat_s
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
+        #multiple (two) projectors
+        elif opt.distill == "simkd_mp":
+            trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+            logit_s = pred_feat_s #use logits from last layers ########################################## Using model output logits (Not as in original code)
+            loss_kd_1 = criterion_kd(trans_feat_s, trans_feat_t)
+            
+            trans_feat_s_2, trans_feat_t_2, _ = module_list[2](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
+            loss_kd_2 = criterion_kd(trans_feat_s_2, trans_feat_t_2)
+
+            
+            loss_kd = loss_kd_1 * opt.mp_ratio + loss_kd_2 * (1 - opt.mp_ratio)
+
+        elif (opt.distill == 'simkd') and opt.use_labels:
+            trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+            logit_s = pred_feat_s
+
+            #Set loss to zero where teacher made a wrong prediction
+            output = torch.argmax(model_t(images), dim=1)
+            bool_tensor = labels == output
+
+            #clone is necessary to avoid in-place operation which would lose the gradient for backprop
+            temp = trans_feat_s.clone()
+            temp[bool_tensor==False] = 0
+            trans_feat_s = temp
+            
+            trans_feat_t[bool_tensor==False] = 0
+
+            loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
+        
+        elif opt.distill == "unb_proj":
+            _, _, pred_feat_s = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
+            logit_s = pred_feat_s
+
+            loss_kd_list = []
+            for i in range(15):
+                trans_feat_s, trans_feat_t, _ = module_list[i+1](featt_s[i+2], featt_t[i], cls_t, return_logits=False)#+1 because 0 is student model // +2 because we skip the first 2 student features layers
+                loss_kd_list.append(criterion_kd(trans_feat_s, trans_feat_t))
+                
+            loss_kd = torch.stack(loss_kd_list, 0).mean()
+            
         else:
             raise NotImplementedError(opt.distill)
-
+        
         loss = opt.cls * loss_cls + opt.div * loss_div + opt.beta * loss_kd
         losses.update(loss.item(), images.size(0))
 
@@ -275,12 +320,12 @@ def validate_distill(val_loader, module_list, criterion, opt):
                 labels = labels.cuda(opt.gpu if opt.multiprocessing_distributed else 0, non_blocking=True)
 
             # compute output
-            if opt.distill == 'simkd':
-                feat_s, _ = model_s(images, is_feat=True)
-                feat_t, _ = model_t(images, is_feat=True)
+            if opt.distill == 'simkd' or opt.distill == 'simkd_mp' or 'unb_proj':
+                feat_s, _, _ = model_s(images, is_feat=True)
+                feat_t, _, _ = model_t(images, is_feat=True)
                 feat_t = [f.detach() for f in feat_t]
                 cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
-                _, _, output = module_list[1](feat_s[-2], feat_t[-2], cls_t)
+                _, _, output = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
             else:
                 output = model_s(images)
             loss = criterion(output, labels)

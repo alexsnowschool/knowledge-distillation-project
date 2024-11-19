@@ -54,11 +54,17 @@ class InvertedResidual(nn.Module):
         self.names = ['0', '1', '2', '3', '4', '5', '6', '7']
 
     def forward(self, x):
+        feat = x[1]
+        x = x[0]
+        
         t = x
+
         if self.use_res_connect:
-            return t + self.conv(x)
+            feat += [t + self.conv(x)]
+            return [t + self.conv(x), feat]
         else:
-            return self.conv(x)
+            feat += [self.conv(x)]
+            return [self.conv(x), feat]
 
 
 class MobileNetV2(nn.Module):
@@ -127,19 +133,21 @@ class MobileNetV2(nn.Module):
         out = self.conv1(x)
         f0 = out
 
-        out = self.blocks[0](out)
+        feat = []
+        out = self.blocks[0]([out, feat])
         out = self.blocks[1](out)
-        f1 = out
+        f1 = out[0]
         out = self.blocks[2](out)
-        f2 = out
+        f2 = out[0]
         out = self.blocks[3](out)
         out = self.blocks[4](out)
-        f3 = out
+        f3 = out[0]
         out = self.blocks[5](out)
         out = self.blocks[6](out)
-        f4 = out
+        f4 = out[0]
+        feat = out[1]
 
-        out = self.conv2(out)
+        out = self.conv2(out[0])
 
         if not self.remove_avg:
             out = self.avgpool(out)
@@ -148,9 +156,39 @@ class MobileNetV2(nn.Module):
         out = self.classifier(out)
 
         if is_feat:
-            return [f0, f1, f2, f3, f4, f5], out
+            return [f0, f1, f2, f3, f4, f5], feat, out
         else:
             return out
+
+    # def forward(self, x, is_feat=False, preact=False):
+
+    #     out = self.conv1(x)
+    #     f0 = out
+        
+    #     out = self.blocks[0](out)
+    #     out = self.blocks[1](out)
+    #     f1 = out
+    #     out = self.blocks[2](out)
+    #     f2 = out
+    #     out = self.blocks[3](out)
+    #     out = self.blocks[4](out)
+    #     f3 = out
+    #     out = self.blocks[5](out)
+    #     out = self.blocks[6](out)
+    #     f4 = out
+
+    #     out = self.conv2(out)
+
+    #     if not self.remove_avg:
+    #         out = self.avgpool(out)
+    #     out = out.view(out.size(0), -1)
+    #     f5 = out
+    #     out = self.classifier(out)
+
+    #     if is_feat:
+    #         return [f0, f1, f2, f3, f4, f5], out
+    #     else:
+    #         return out
 
     def _initialize_weights(self):
         for m in self.modules():
