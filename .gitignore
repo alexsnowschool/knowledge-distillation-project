@@ -233,4 +233,5 @@ pyrightconfig.json
 *.log
 *.err
 steve/*
+data/*
 
