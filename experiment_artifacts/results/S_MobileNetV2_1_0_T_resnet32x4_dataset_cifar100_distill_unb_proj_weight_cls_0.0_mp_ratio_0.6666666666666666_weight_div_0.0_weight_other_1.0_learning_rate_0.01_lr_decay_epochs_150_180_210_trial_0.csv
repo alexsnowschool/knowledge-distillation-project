@@ -1,7 +1,0 @@
-trail,learning_rate,student_architecture,teacher_architecture,distill,epoch,train_acc,train_loss,test_acc,test_loss,test_acc_top5
-0,0.01,MobileNetV2_1_0,resnet32x4,unb_proj,1,1.080,0.227885,1.020,4.636730,5.180000
-0,0.01,MobileNetV2_1_0,resnet32x4,unb_proj,2,0.988,0.085988,1.010,4.630384,5.010000
-0,0.01,MobileNetV2_1_0,resnet32x4,unb_proj,3,1.000,0.074108,1.000,4.627294,5.020000
-0,0.01,MobileNetV2_1_0,resnet32x4,unb_proj,4,1.006,0.067536,1.000,4.624943,5.060000
-0,0.01,MobileNetV2_1_0,resnet32x4,unb_proj,5,1.016,0.062747,0.980,4.627195,5.010000
-0,0.01,MobileNetV2_1_0,resnet32x4,unb_proj,6,1.022,0.059615,1.000,4.625204,5.010000
