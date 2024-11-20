@@ -320,12 +320,14 @@ def validate_distill(val_loader, module_list, criterion, opt):
                 labels = labels.cuda(opt.gpu if opt.multiprocessing_distributed else 0, non_blocking=True)
 
             # compute output
-            if opt.distill == 'simkd' or opt.distill == 'simkd_mp' or 'unb_proj':
+            if opt.distill == 'simkd' or opt.distill == 'simkd_mp' or  opt.distill == 'unb_proj':
                 feat_s, _, _ = model_s(images, is_feat=True)
                 feat_t, _, _ = model_t(images, is_feat=True)
                 feat_t = [f.detach() for f in feat_t]
                 cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
                 _, _, output = module_list[-2](feat_s[-2], feat_t[-2], cls_t)
+            if opt.distill == 'kd' or opt.distill == "similarity":
+                output = model_s(images)
             else:
                 output = model_s(images)
             loss = criterion(output, labels)

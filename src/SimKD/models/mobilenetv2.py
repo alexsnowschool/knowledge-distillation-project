@@ -160,35 +160,35 @@ class MobileNetV2(nn.Module):
         else:
             return out
 
-    # def forward(self, x, is_feat=False, preact=False):
+    def forward_original(self, x, is_feat=False, preact=False):
 
-    #     out = self.conv1(x)
-    #     f0 = out
+        out = self.conv1(x)
+        f0 = out
         
-    #     out = self.blocks[0](out)
-    #     out = self.blocks[1](out)
-    #     f1 = out
-    #     out = self.blocks[2](out)
-    #     f2 = out
-    #     out = self.blocks[3](out)
-    #     out = self.blocks[4](out)
-    #     f3 = out
-    #     out = self.blocks[5](out)
-    #     out = self.blocks[6](out)
-    #     f4 = out
+        out = self.blocks[0](out)
+        out = self.blocks[1](out)
+        f1 = out
+        out = self.blocks[2](out)
+        f2 = out
+        out = self.blocks[3](out)
+        out = self.blocks[4](out)
+        f3 = out
+        out = self.blocks[5](out)
+        out = self.blocks[6](out)
+        f4 = out
 
-    #     out = self.conv2(out)
+        out = self.conv2(out)
 
-    #     if not self.remove_avg:
-    #         out = self.avgpool(out)
-    #     out = out.view(out.size(0), -1)
-    #     f5 = out
-    #     out = self.classifier(out)
+        if not self.remove_avg:
+            out = self.avgpool(out)
+        out = out.view(out.size(0), -1)
+        f5 = out
+        out = self.classifier(out)
 
-    #     if is_feat:
-    #         return [f0, f1, f2, f3, f4, f5], out
-    #     else:
-    #         return out
+        if is_feat:
+            return [f0, f1, f2, f3, f4, f5], out
+        else:
+            return out
 
     def _initialize_weights(self):
         for m in self.modules():
