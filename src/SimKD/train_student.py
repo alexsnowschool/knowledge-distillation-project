@@ -181,8 +181,8 @@ def parse_option():
     opt = parser.parse_args()
 
     # set the path of model and tensorboard
-    opt.model_path = "../../experiment_artifacts/saved_model_artifacts/students/models"
-    opt.tb_path = "../../experiment_artifacts/saved_model_artifacts/students/tensorboard"
+    opt.model_path = "../../experiment_artifacts/saved_models_final_presentation/students/models"
+    opt.tb_path = "../../experiment_artifacts/saved_models_final_presentation/students/tensorboard"
     lr_decay_epochs_str = opt.lr_decay_epochs.replace(",", "_")
     iterations = opt.lr_decay_epochs.split(",")
     opt.lr_decay_epochs = list([])
@@ -196,7 +196,7 @@ def parse_option():
             "S",
             "{}_T",
             "{}_dataset_{}_distill_{}_weight_cls",
-            "{}_mp_ratio",
+            "{}_use_labels",
             "{}_weight_div",
             "{}_weight_other",
             "{}_learning_rate",
@@ -210,7 +210,7 @@ def parse_option():
         opt.dataset,
         opt.distill,
         opt.cls,
-        opt.mp_ratio,
+        opt.use_labels,
         opt.div,
         opt.beta,
         opt.learning_rate,
@@ -516,7 +516,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         print("Skipping teacher validation.")
 
     run_name = opt.model_name
-    result_file_path = f"../../experiment_artifacts/results/{run_name}.csv"
+    result_file_path = f"../../experiment_artifacts/results/final_presentation/{run_name}.csv"
     # create a csv file to store the training information
     if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
         with open(result_file_path, "w") as f:
