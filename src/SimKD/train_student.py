@@ -178,7 +178,7 @@ def parse_option():
         "--use_labels", action="store_true", help="Use True labels. Student will only learn from teacher, if the teacher made the correct prediction"
     )
     parser.add_argument(
-        "--loss", type=str, default=None, choices=['cos_sim', 'l2', 'KL']
+        "--loss", type=str, default="cos_sim", choices=["cos_sim", "l2", "KL"]
     )
 
     opt = parser.parse_args()
@@ -204,6 +204,7 @@ def parse_option():
             "{}_weight_other",
             "{}_learning_rate",
             "{}_lr_decay_epochs",
+            "{}_loss",
             "{}_trial_{}",
         ]
     )
@@ -218,7 +219,9 @@ def parse_option():
         opt.beta,
         opt.learning_rate,
         lr_decay_epochs_str,
+        opt.loss,
         opt.trial,
+       
     )
 
     if opt.dali is not None:
@@ -531,7 +534,7 @@ def main_worker(gpu, ngpus_per_node, opt):
     if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
         with open(result_file_path, "w") as f:
             f.write(
-                "trail,learning_rate,student_architecture,teacher_architecture,distill,epoch,train_acc,train_loss,test_acc,test_loss,test_acc_top5\n"
+                "trail,learning_rate,student_architecture,teacher_architecture,distill,epoch,train_acc,train_loss,test_acc,test_loss,test_acc_top5,loss\n"
             )
 
     # routine
@@ -587,7 +590,7 @@ def main_worker(gpu, ngpus_per_node, opt):
             with open(result_file_path, "a") as f:
                 f.write(
                     # trail,learning_rate,student_architecture,teacher_architecture,distil
-                    "{},{},{},{},{},{},{:.3f},{:.6f},{:.3f},{:.6f},{:.6f}\n".format(
+                    "{},{},{},{},{},{},{:.3f},{:.6f},{:.3f},{:.6f},{:.6f},{}\n".format(
                         opt.trial,
                         opt.learning_rate,
                         opt.model_s,
@@ -598,7 +601,8 @@ def main_worker(gpu, ngpus_per_node, opt):
                         train_loss,
                         test_acc,
                         test_loss,
-                        test_acc_top5
+                        test_acc_top5,
+                        opt.loss,
                     )
                 )
             # save the best model
