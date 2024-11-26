@@ -50,7 +50,7 @@ def parse_option():
     parser.add_argument("--print_freq", type=int, default=200, help="print frequency")
     parser.add_argument("--batch_size", type=int, default=64, help="batch_size")
     parser.add_argument(
-        "--num_workers", type=int, default=4, help="num of workers to use"
+        "--num_workers", type=int, default=8, help="num of workers to use"
     )
     parser.add_argument(
         "--epochs", type=int, default=240, help="number of training epochs"
@@ -178,10 +178,12 @@ def parse_option():
         "--use_labels", action="store_true", help="Use True labels. Student will only learn from teacher, if the teacher made the correct prediction"
     )
     parser.add_argument(
-        "--loss", type=str, default="cos_sim", choices=["cos_sim", "l2", "KL"]
+        "--loss", type=str, default=None, choices=['cos_sim', 'l2', 'KL']
     )
 
     opt = parser.parse_args()
+
+    
 
     # set the path of model and tensorboard
     opt.model_path = "../../experiment_artifacts/saved_models_final_presentation_v2/students/models"
@@ -423,23 +425,22 @@ def main_worker(gpu, ngpus_per_node, opt):
             module_list.append(model_simkd)
             trainable_list.append(model_simkd)
             criterion_kd = nn.MSELoss()
-
-    elif opt.loss is not None:
+    else:
+        raise NotImplementedError(opt.distill)
+    
+    if opt.loss is not None:
         if opt.loss == 'cos_sim':
             # criterion_kd = nn.CosineEmbeddingLoss()
             criterion_kd = nn.CosineSimilarity(dim=1)
         elif opt.loss == 'l2':
             criterion_kd = nn.MSELoss()
         elif opt.loss == 'KL':
-            criterion_kd = nn.KLDivLoss(reduction='batchmean')
-    else:
-        raise NotImplementedError(opt.distill)
+            criterion_kd = nn.KLDivLoss(reduction='batchmean') 
+
 
     criterion_list = nn.ModuleList([])
-    criterion_list.append(criterion_cls)  # classification loss
-    criterion_list.append(
-        criterion_div
-    )  # KL divergence loss, original knowledge distillation
+    criterion_list.append(criterion_cls)  # classification loss (cross-entropy)
+    criterion_list.append(criterion_div)  # KL divergence loss, original knowledge distillation
     criterion_list.append(criterion_kd)  # other knowledge distillation loss
 
     module_list.append(model_t)
@@ -481,7 +482,7 @@ def main_worker(gpu, ngpus_per_node, opt):
                 num_workers=opt.num_workers,
                 k=opt.nce_k,
                 mode=opt.mode,
-                percent=1
+                percent=1 # 1 = load 100% of the data ############################################################
             )
         else:
             train_loader, val_loader = get_cifar100_dataloaders(
@@ -507,8 +508,8 @@ def main_worker(gpu, ngpus_per_node, opt):
                     num_workers=opt.num_workers,
                     multiprocessing_distributed=opt.multiprocessing_distributed,
                 )
-        else:
-            train_loader, val_loader = get_dali_data_loader(opt)
+        # else:
+            # train_loader, val_loader = get_dali_data_loader(opt)
     else:
         raise NotImplementedError(opt.dataset)
 
@@ -528,6 +529,7 @@ def main_worker(gpu, ngpus_per_node, opt):
     else:
         print("Skipping teacher validation.")
 
+
     run_name = opt.model_name
     result_file_path = f"../../experiment_artifacts/results/final_presentation_v2/{run_name}.csv"
     # create a csv file to store the training information
@@ -536,7 +538,6 @@ def main_worker(gpu, ngpus_per_node, opt):
             f.write(
                 "trail,learning_rate,student_architecture,teacher_architecture,distill,epoch,train_acc,train_loss,test_acc,test_loss,test_acc_top5,loss\n"
             )
-
     # routine
     for epoch in range(1, opt.epochs + 1):
         torch.cuda.empty_cache()
@@ -550,6 +551,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         train_acc, train_acc_top5, train_loss = train(
             epoch, train_loader, module_list, criterion_list, optimizer, opt
         )
+        
         time2 = time.time()
         if opt.multiprocessing_distributed:
             metrics = torch.tensor([train_acc, train_acc_top5, train_loss]).cuda(
@@ -586,7 +588,6 @@ def main_worker(gpu, ngpus_per_node, opt):
             logger.log_value("test_loss", test_loss, epoch)
             logger.log_value("test_acc_top5", test_acc_top5, epoch)
             teacher_architecture = get_teacher_name(opt.path_t)
-            # write the results to csv
             with open(result_file_path, "a") as f:
                 f.write(
                     # trail,learning_rate,student_architecture,teacher_architecture,distil
@@ -605,40 +606,10 @@ def main_worker(gpu, ngpus_per_node, opt):
                         opt.loss,
                     )
                 )
-            # save the best model
-            if test_acc > best_acc:
-                best_acc = test_acc
-                state = {
-                    "epoch": epoch,
-                    "model": model_s.state_dict(),
-                    "best_acc": best_acc,
-                }
-            if opt.distill == "simkd":
-                state["proj"] = trainable_list[-1].state_dict()
-            save_file = os.path.join(opt.save_folder, "{}_best.pth".format(opt.model_s))
 
-            test_merics = {
-                "test_loss": test_loss,
-                "test_acc": test_acc,
-                "test_acc_top5": test_acc_top5,
-                "epoch": epoch,
-            }
-
-            params_json_path = os.path.join(opt.save_folder, "test_best_metrics.json")
-            save_dict_to_json(test_merics, params_json_path)
-            print("saving the best model!")
-            torch.save(state, save_file)
-            # This best accuracy is only for printing purpose.
-            print("best accuracy:", best_acc)
-
-            # save parameters
-            save_state = {k: v for k, v in opt._get_kwargs()}
-            # No. parameters(M)
-            num_params = sum(p.numel() for p in model_s.parameters()) / 1000000.0
-            save_state["Total params"] = num_params
-            save_state["Total time"] = (time.time() - total_time) / 3600.0
-            params_json_path = os.path.join(opt.save_folder, "parameters.json")
-            save_dict_to_json(save_state, params_json_path)
+    if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
+        # This best accuracy is only for printing purpose.
+        print("best accuracy:", best_acc)
 
 
 if __name__ == "__main__":

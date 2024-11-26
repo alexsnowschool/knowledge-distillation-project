@@ -5,30 +5,17 @@
 # Losses [Cosine Similarity, KL-Divergence]
 commands=(
 # unb_proj with labels
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1 --trial 0 --use_labels"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.05 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1  --trial 0 --use_labels"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.001 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1  --trial 0 --use_labels"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1 --trial 0 --use_labels --loss KL"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1  --trial 0 --use_labels --loss  l2"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 1  --trial 0 --use_labels "
 
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 1 --use_labels"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.05 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 1 --use_labels"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.001 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 1 --use_labels"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 1 --trial 1 --use_labels --loss  KL"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 1 --trial 1 --use_labels --loss  l2"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 1 --trial 1 "
 
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 2 --use_labels"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.05 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 2 --use_labels"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.001 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 2 --use_labels"
-
-# unb_proj without labels
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1 --trial 0"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.05 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1  --trial 0"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.001 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1  --trial 0"
-
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0  -c 0 -d 0 -b 1 --trial 1"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.05 --distill unb_proj --model_s MobileNetV2_1_0  -c 0 -d 0 -b 1 --trial 1"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.001 --distill unb_proj --model_s MobileNetV2_1_0  -c 0 -d 0 -b 1 --trial 1"
-
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0  -c 0 -d 0 -b 1 --trial 2"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.05 --distill unb_proj --model_s MobileNetV2_1_0  -c 0 -d 0 -b 1 --trial 2"
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.001 --distill unb_proj --model_s MobileNetV2_1_0  -c 0 -d 0 -b 1 --trial 2"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 2 --use_labels --loss  KL"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 2 --use_labels --loss  l2"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 1 -d 1 -b 0 --trial 2 "
 )
 
 # Loop over the commands array

@@ -173,7 +173,7 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             trans_feat_s_2, trans_feat_t_2, _ = module_list[-3](feat_s[-3], feat_t[-3], cls_t, return_logits=False)
             loss_kd_2 = criterion_kd(trans_feat_s_2, trans_feat_t_2)
 
-            
+
             loss_kd = loss_kd_1 * opt.mp_ratio + loss_kd_2 * (1 - opt.mp_ratio)
 
         elif (opt.distill == 'simkd') and opt.use_labels:
