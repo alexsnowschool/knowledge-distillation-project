@@ -107,12 +107,20 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
                 contrast_idx = contrast_idx.cuda()
 
         # ===================forward=====================
-        feat_s, featt_s, logit_s = model_s(images, is_feat=True)
-        with torch.no_grad():
-            feat_t, featt_t, logit_t = model_t(images, is_feat=True)
-            feat_t = [f.detach() for f in feat_t]
-            featt_t = [f.detach() for f in featt_t]
-            
+        if opt.model_s == 'MobileNetV2_Original':
+            feat_s, logit_s = model_s(images, is_feat=True)
+                    
+            with torch.no_grad():
+                feat_t, featt_t, logit_t = model_t(images, is_feat=True)
+                featt_t = [f.detach() for f in featt_t]
+                feat_t = [f.detach() for f in feat_t]
+        else:
+            feat_s, featt_s, logit_s = model_s(images, is_feat=True)
+            with torch.no_grad():
+                feat_t, featt_t, logit_t = model_t(images, is_feat=True)
+                feat_t = [f.detach() for f in feat_t]
+                featt_t = [f.detach() for f in featt_t]
+                
         #Reusing the classifier here!!!!!!!!!!!!!
         cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]
         
@@ -154,7 +162,6 @@ def train_distill(epoch, train_loader, module_list, criterion_list, optimizer, o
             loss_kd = criterion_kd(trans_feat_s, feat_t[-1]) + criterion_kd(pred_feat_s, logit_t)
         elif (opt.distill == 'simkd') and not opt.use_labels:
             trans_feat_s, trans_feat_t, pred_feat_s = module_list[1](feat_s[-2], feat_t[-2], cls_t)
-            
             logit_s = pred_feat_s
             loss_kd = criterion_kd(trans_feat_s, trans_feat_t)
         #multiple (two) projectors
@@ -321,7 +328,10 @@ def validate_distill(val_loader, module_list, criterion, opt):
 
             # compute output
             if opt.distill == 'simkd' or opt.distill == 'simkd_mp' or  opt.distill == 'unb_proj':
-                feat_s, _, _ = model_s(images, is_feat=True)
+                if opt.model_s == 'MobileNetV2_Original':
+                    feat_s, _ = model_s(images, is_feat=True)
+                else:
+                    feat_s, _, _ = model_s(images, is_feat=True)
                 feat_t, _, _ = model_t(images, is_feat=True)
                 feat_t = [f.detach() for f in feat_t]
                 cls_t = model_t.module.get_feat_modules()[-1] if opt.multiprocessing_distributed else model_t.get_feat_modules()[-1]

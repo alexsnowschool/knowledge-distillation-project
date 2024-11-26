@@ -177,12 +177,15 @@ def parse_option():
     parser.add_argument(
         "--use_labels", action="store_true", help="Use True labels. Student will only learn from teacher, if the teacher made the correct prediction"
     )
+    parser.add_argument(
+        "--loss", type=str, default=None, choices=['cos_sim', 'l2', 'KL']
+    )
 
     opt = parser.parse_args()
 
     # set the path of model and tensorboard
-    opt.model_path = "../../experiment_artifacts/saved_models_final_presentation/students/models"
-    opt.tb_path = "../../experiment_artifacts/saved_models_final_presentation/students/tensorboard"
+    opt.model_path = "../../experiment_artifacts/saved_models_final_presentation_v2/students/models"
+    opt.tb_path = "../../experiment_artifacts/saved_models_final_presentation_v2/students/tensorboard"
     lr_decay_epochs_str = opt.lr_decay_epochs.replace(",", "_")
     iterations = opt.lr_decay_epochs.split(",")
     opt.lr_decay_epochs = list([])
@@ -331,7 +334,10 @@ def main_worker(gpu, ngpus_per_node, opt):
     model_t.eval()
     model_s.eval()
     feat_t, featt_t, _ = model_t(data, is_feat=True)
-    feat_s, featt_s, _ = model_s(data, is_feat=True)
+    if opt.model_s == "MobileNetV2_Original":
+         feat_s, _ = model_s(data, is_feat=True)
+    else:
+        feat_s, featt_s, _ = model_s(data, is_feat=True)
 
     module_list = nn.ModuleList([])
     module_list.append(model_s)
@@ -408,17 +414,21 @@ def main_worker(gpu, ngpus_per_node, opt):
         module_list.append(model_simkd)
         trainable_list.append(model_simkd)
 
-      
     elif opt.distill == "unb_proj":
-        # s_n = feat_s[-2].shape[1]
-        # t_n = feat_t[-2].shape[1]
-        # deb1 = featt_t[0].shape[1]
-        # deb2 = featt_s[3].shape[1]
         for t, s in zip(featt_t, featt_s[2:]):
             model_simkd = SimKD(s_n=s.shape[1], t_n=t.shape[1], factor=opt.factor)
             module_list.append(model_simkd)
             trainable_list.append(model_simkd)
             criterion_kd = nn.MSELoss()
+
+    elif opt.loss is not None:
+        if opt.loss == 'cos_sim':
+            # criterion_kd = nn.CosineEmbeddingLoss()
+            criterion_kd = nn.CosineSimilarity(dim=1)
+        elif opt.loss == 'l2':
+            criterion_kd = nn.MSELoss()
+        elif opt.loss == 'KL':
+            criterion_kd = nn.KLDivLoss(reduction='batchmean')
     else:
         raise NotImplementedError(opt.distill)
 
@@ -516,7 +526,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         print("Skipping teacher validation.")
 
     run_name = opt.model_name
-    result_file_path = f"../../experiment_artifacts/results/final_presentation/{run_name}.csv"
+    result_file_path = f"../../experiment_artifacts/results/final_presentation_v2/{run_name}.csv"
     # create a csv file to store the training information
     if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
         with open(result_file_path, "w") as f:
