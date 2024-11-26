@@ -186,9 +186,9 @@ def parse_option():
     parser.add_argument(
         "--use_labels", action="store_true", help="Use True labels. Student will only learn from teacher, if the teacher made the correct prediction"
     )
-    # parser.add_argument(
-    #     "SimKD_loss"
-    # )
+    parser.add_argument(
+        "--loss", type=str, default=None, choices=['cos_sim', 'l2', 'KL']
+    )
 
     opt = parser.parse_args()
 
@@ -458,20 +458,21 @@ def main_worker(gpu, ngpus_per_node, opt):
         
 
     elif opt.distill == "unb_proj":
-        # s_n = feat_s[-2].shape[1]
-        # t_n = feat_t[-2].shape[1]
-        # deb1 = featt_t[0].shape[1]
-        # deb2 = featt_s[3].shape[1]
         for t, s in zip(featt_t, featt_s[2:]):
             model_simkd = SimKD(s_n=s.shape[1], t_n=t.shape[1], factor=opt.factor)
             module_list.append(model_simkd)
             trainable_list.append(model_simkd)
             criterion_kd = nn.MSELoss()
 
-    # if opt.loss == "MSE":
-    #     criterion_kd = nn.MSELoss()
-    # elif opt.loss == "KL":
-    #     ...
+    if opt.loss is not None:
+        if opt.loss == 'cos_sim':
+            # criterion_kd = nn.CosineEmbeddingLoss()
+            criterion_kd = nn.CosineSimilarity(dim=1)
+        elif opt.loss == 'l2':
+            criterion_kd = nn.MSELoss()
+        elif opt.loss == 'KL':
+            criterion_kd = nn.KLDivLoss(reduction='batchmean')
+
         
     else:
         raise NotImplementedError(opt.distill)

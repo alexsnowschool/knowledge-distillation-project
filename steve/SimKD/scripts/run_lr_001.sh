@@ -11,7 +11,7 @@
 # Losses [Cosine Similarity, KL-Divergence]
 commands=(
 
-"python train_student.py --path_t ./save/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1 --trial 0"
+# "python train_student.py --path_t ./save/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1 --trial 0"
 "python train_student.py --path_t ./save/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1 --trial 1"
 "python train_student.py --path_t ./save/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill unb_proj --model_s MobileNetV2_1_0 -c 0 -d 0 -b 1 --trial 2"
 
