@@ -5,10 +5,10 @@
 # Losses [Cosine Similarity, KL-Divergence]
 commands=(
 # simkd_mp  with different losses
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss  KL -c 0 -d 0 -b 1 --trial 0 --use_labels "
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss  KL -c 0 -d 0 -b 1 --trial 0 "
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss  KL -c 1 -d 1 -b 1 --trial 0"
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss  KL -c 1 -d 1 -b 1 --trial 0 --use_labels"
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss  KL -c 0 -d 0 -b 1 --trial 0 --use_labels "
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss  KL -c 0 -d 0 -b 1 --trial 0 "
 
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss l2 -c 0 -d 0 -b 1 --trial 0 --use_labels"
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd_mp --model_s MobileNetV2_1_0 --loss l2 -c 0 -d 0 -b 1 --trial 0"

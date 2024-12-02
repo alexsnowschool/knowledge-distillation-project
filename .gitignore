@@ -238,3 +238,5 @@ data_old/*
 *.csv
 saved_models_final_presentation/
 saved_models_final_presentation_v2/
+!experiment_artifacts/results/final_presentation_concatenated_results_v2.csv
+!experiment_artifacts/results/final_presentation_concatenated_results.csv

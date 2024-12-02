@@ -5,21 +5,29 @@
 # Losses [Cosine Similarity, KL-Divergence]
 commands=(
 ## simkd villina with different losses
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 0 -d 0 -b 1 --trial 0 "
+
+# "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 1 -d 1 -b 1 --trial 0 "
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss KL -c 1 -d 1 -b 1 --trial 0 "
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss l2 -c 1 -d 1 -b 1 --trial 0 "
+
+# "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 1 -d 1 -b 1 --trial 0 "
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss KL -c 1 -d 1 -b 0 --trial 0 "
+"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss l2 -c 1 -d 1 -b 0 --trial 0 "
+
+
+
+# "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 0 -d 0 -b 1 --trial 0 "
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss KL -c 0 -d 0 -b 1 --trial 0 "
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss l2 -c 0 -d 0 -b 1 --trial 0 "
 
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 0 -d 0 -b 1 --trial 1 "
+# "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 0 -d 0 -b 1 --trial 1 "
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss KL -c 0 -d 0 -b 1 --trial 1 "
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss l2 -c 0 -d 0 -b 1 --trial 1 "
 
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 0 -d 0 -b 1 --trial 2 "
+# "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 0 -d 0 -b 1 --trial 2 "
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss KL -c 0 -d 0 -b 1 --trial 2 "
 "python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss l2 -c 0 -d 0 -b 1 --trial 2 "
 
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss cos_sim -c 1 -d 1 -b 1 --trial 0 "
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss KL -c 1 -d 1 -b 1 --trial 0 "
-"python train_student.py --path_t ../../experiment_artifacts/saved_model_artifacts/teachers/models/resnet32x4_vanilla_cifar100/resnet32x4_best.pth --epochs 240 --learning_rate 0.01 --distill simkd --model_s MobileNetV2_Original --loss l2 -c 1 -d 1 -b 1 --trial 0 "
 
 )
 
