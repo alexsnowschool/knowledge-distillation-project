@@ -183,7 +183,44 @@ def parse_option():
 
     opt = parser.parse_args()
 
+<<<<<<< HEAD:src/SimKD/train_student.py
     
+=======
+    # wandb.init(
+    #     # set the wandb project where this run will be logged
+    #     project="SRP_unbiased_projectors",
+    #     # name=f'use_labels: {opt.use_labels}; LR: {opt.learning_rate}; Trial: {opt.trial}; Student: {opt.model_s}; Teacher: {get_teacher_name(opt.path_t)}',
+    #     name=f'LR: {opt.learning_rate} | Trial: {opt.trial}',
+    #     # name = 'Test',
+    #     # track hyperparameters and run metadata
+    #     config={
+    #     "learning_rate": opt.learning_rate,
+    #     "student_architecture": opt.model_s,
+    #     "teacher_architecture": get_teacher_name(opt.path_t),
+    #     "distill": opt.distill,
+    #     "epochs": opt.epochs,
+    #     "mp_ratio": opt.mp_ratio,
+    #     "trial": opt.trial
+    #     }
+    # )
+
+    # tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
+    # experiment_name = os.environ.get("MLFLOW_EXPERIMENT_NAME")
+    # mlflow.set_tracking_uri(tracking_uri)
+    # mlflow.create_experiment(experiment_name)
+    # mlflow.set_experiment(experiment_name)
+
+    # set different learning rates for these MobileNet/ShuffleNet models
+    #Why?
+    # if opt.model_s in [
+    #     "MobileNetV2",
+    #     "MobileNetV2_1_0",
+    #     "ShuffleV1",
+    #     "ShuffleV2",
+    #     "ShuffleV2_1_5",
+    # ]:
+    #     opt.learning_rate = 0.01
+>>>>>>> 448601276b8606cdbb3a3095e89ed610b6a75e76:steve/SimKD/train_student.py
 
     # set the path of model and tensorboard
     opt.model_path = "../../experiment_artifacts/saved_models_final_presentation_v2/students/models"
@@ -410,6 +447,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         model_simkd_2 = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
         module_list.append(model_simkd_2)
         trainable_list.append(model_simkd_2)
+<<<<<<< HEAD:src/SimKD/train_student.py
 
         #Last Projector (original)
         s_n = feat_s[-2].shape[1]
@@ -419,12 +457,39 @@ def main_worker(gpu, ngpus_per_node, opt):
         module_list.append(model_simkd)
         trainable_list.append(model_simkd)
 
+=======
+
+        #Last Projector (original)
+        s_n = feat_s[-2].shape[1]
+        t_n = feat_t[-2].shape[1]
+        model_simkd = SimKD(s_n=s_n, t_n=t_n, factor=opt.factor)############Projector!!!!
+        criterion_kd = nn.MSELoss()
+        module_list.append(model_simkd)
+        trainable_list.append(model_simkd)
+
+        
+
+>>>>>>> 448601276b8606cdbb3a3095e89ed610b6a75e76:steve/SimKD/train_student.py
     elif opt.distill == "unb_proj":
         for t, s in zip(featt_t, featt_s[2:]):
             model_simkd = SimKD(s_n=s.shape[1], t_n=t.shape[1], factor=opt.factor)
             module_list.append(model_simkd)
             trainable_list.append(model_simkd)
             criterion_kd = nn.MSELoss()
+<<<<<<< HEAD:src/SimKD/train_student.py
+=======
+
+    if opt.loss is not None:
+        if opt.loss == 'cos_sim':
+            # criterion_kd = nn.CosineEmbeddingLoss()
+            criterion_kd = nn.CosineSimilarity(dim=1)
+        elif opt.loss == 'l2':
+            criterion_kd = nn.MSELoss()
+        elif opt.loss == 'KL':
+            criterion_kd = nn.KLDivLoss(reduction='batchmean')
+
+        
+>>>>>>> 448601276b8606cdbb3a3095e89ed610b6a75e76:steve/SimKD/train_student.py
     else:
         raise NotImplementedError(opt.distill)
     
