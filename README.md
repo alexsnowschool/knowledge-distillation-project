@@ -36,12 +36,6 @@ The details on how to reproduce can be found [here](base-line-detail.md)
 
 ## Citation
 ```
-@inproceedings{chen2022simkd,
-  title={Knowledge Distillation with the Reused Teacher Classifier},
-  author={},
-  year={2024}
-}
-```
 @misc{kd2024srp,
   author       = {Wut Hlaing and Roeber S. and Kumar A. and Abin B. and and Brhau A.},
   title        = {Knowledge Distillation in Encoder},
@@ -50,3 +44,4 @@ The details on how to reproduce can be found [here](base-line-detail.md)
   journal      = {GitHub repository},
   howpublished = {\url{https://github.com/alexsnowschool/knowledge-distillation-project}},
 }
+```
