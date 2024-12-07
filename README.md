@@ -38,18 +38,15 @@ The details on how to reproduce can be found [here](base-line-detail.md)
 ```
 @inproceedings{chen2022simkd,
   title={Knowledge Distillation with the Reused Teacher Classifier},
-  author={Chen, Defang and Mei, Jian-Ping and Zhang, Hailin and Wang, Can and Feng, Yan and Chen, Chun},
-
-  year={2022}
+  author={},
+  year={2024}
 }
 ```
-```
-@inproceedings{chen2021cross,
-  author    = {Defang Chen and Jian{-}Ping Mei and Yuan Zhang and Can Wang and Zhe Wang and Yan Feng and Chun Chen},
-  title     = {Cross-Layer Distillation with Semantic Calibration},
-  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
-  pages     = {7028--7036},
-  year      = {2021},
+@misc{kd2024srp,
+  author       = {Wut Hlaing and Roeber S. and Kumar A. and Abin B. and and Brhau A.},
+  title        = {Knowledge Distillation in Encoder},
+  year         = {2024},
+  publisher    = {GitHub},
+  journal      = {GitHub repository},
+  howpublished = {\url{https://github.com/alexsnowschool/knowledge-distillation-project}},
 }
-```
-
