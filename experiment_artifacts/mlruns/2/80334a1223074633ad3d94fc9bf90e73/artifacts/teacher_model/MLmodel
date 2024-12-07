@@ -1,0 +1,21 @@
+artifact_path: teacher_model
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.10.12
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 1.11.0+cu102
+mlflow_version: 2.12.2
+model_size_bytes: 9139769
+model_uuid: df6c3596e89646b999ad2cfea00cbbb6
+run_id: 80334a1223074633ad3d94fc9bf90e73
+utc_time_created: '2024-05-16 23:41:21.188097'

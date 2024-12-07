@@ -229,5 +229,14 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,python
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-alex/data/
-/steve/data
+*.out
+*.log
+*.err
+steve/*
+data/*
+data_old/*
+*.csv
+saved_models_final_presentation/
+saved_models_final_presentation_v2/
+!experiment_artifacts/results/final_presentation_concatenated_results_v2.csv
+!experiment_artifacts/results/final_presentation_concatenated_results.csv
